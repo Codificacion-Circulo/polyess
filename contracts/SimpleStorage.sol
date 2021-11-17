@@ -8,9 +8,8 @@ contract SimpleStorage {
   function set(uint x) public {
     storedData = x;
   }
-  function setbal(uint _bal) public view returns(uint bal){
+  function setbal(uint _bal) public {
     bal=_bal;
-    return bal;
   }
 
   function get() public view returns (uint) {
