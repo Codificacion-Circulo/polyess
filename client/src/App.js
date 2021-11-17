@@ -54,7 +54,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
+        <h1>Good to Go Far!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example</h2>
         <p>
