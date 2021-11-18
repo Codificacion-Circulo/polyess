@@ -23,7 +23,7 @@ function Footer(props) {
 
 
 
-                    <a className="mx-2" style={{ color: "#6e5494" }} href="#!" role="button"><i class="fab fa-github fa-lg"></i ></a>
+                    <a className="mx-2" style={{ color: "#6e5494" }} href="#!" role="button"><i class="fab fa-github fa-lg"></i></a>
                    
                    
 
