@@ -38,7 +38,7 @@ function Footer(props) {
 
             <div className="text-center p-3 text-dark" style={{ backgroundColor: "#e3f2fd" }}>
                 © 2021 Copyright:
-                <a style={{ textDecoration: "none" }} className="text-dark mx-2" href="https://codificacion.org/">Codificacion.org</a>
+                <a style={{ textDecoration: "none" }} className="text-dark mx-2" href="https://codificacion.org/">Polyess</a>
             </div>
 
         </footer>
