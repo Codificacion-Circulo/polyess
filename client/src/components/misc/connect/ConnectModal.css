@@ -1,0 +1,108 @@
+
+
+  
+  .actions {
+    text-align: right;
+  }
+  
+  .actions button {
+    cursor: pointer;
+    border: 2px solid #FF77CD;
+border-radius: 23px;
+color:#FF77CD;
+background:transparent;
+font-family:Roboto;
+font-size:27px;
+    padding: 0.5rem 2rem;
+    margin-left: 1rem;
+  }
+  
+  .actions button:hover,
+  .actions button:active {
+    color: #ff0000;
+  }
+
+.modal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+.modal_btn{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+  .modal_btn button{
+    cursor: pointer;
+    border: 2px solid #FF77CD;
+border-radius: 23px;
+color:white;
+background:transparent;
+font-family:Roboto;
+font-size:27px;
+    padding: 0.5rem 3.7rem;
+    height:4rem;
+    width:100%;
+    margin:1rem 2rem;
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content:space-between;
+  }
+  
+  .modal_btn img{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .modal button:hover,
+  .modal button:active {
+    color: #ff0000;
+  }
+
+  .Head{
+    color: #ffff00;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 2px solid white;
+  }
+
+  .Headspan{
+    color: #3fbce8;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  span, a {
+    color: white;
+  }
+
+
+.button--alt{
+  position:absolute;
+  bottom:5%;
+  right:5%;
+}
+
+
+.button--alt2{
+  position:absolute;
+  bottom:5%;
+  left:5%;
+
+}
+
+.button--alt2 button{
+  cursor: pointer;
+  border: 2px solid #FF77CD;
+border-radius: 23px;
+color:#FF77CD;
+background:transparent;
+font-family:Roboto;
+font-size:27px;
+  padding: 0.5rem 2rem;
+  margin-left: 1rem;
+}
