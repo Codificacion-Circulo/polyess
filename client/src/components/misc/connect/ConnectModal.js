@@ -71,7 +71,8 @@ function ConnectModal(props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>{props.title}</Modal.Title>
+          {!!error && <Modal.Title>{getErrorMessage(error)}
+        </Modal.Title>}
           </Modal.Header>
           <Modal.Body>
                     
@@ -86,8 +87,9 @@ function ConnectModal(props) {
            {activating && (<LoadingSpinner/>)}
            <div className={classes.modal_btn}>
             <button
-              disabled={disabled}
+              // disabled={disabled}
               key={name}
+              className="btn btn-primary"
               onClick={() => {
                 setActivatingConnector(currentConnector)
                 activate(connectorsByName[name])
@@ -100,9 +102,9 @@ function ConnectModal(props) {
                   </span>
                 )}
               {name}
-              {name==='MetaMask' && (<img src={meta} alt=""/>)}
+              {/* {name==='MetaMask' && (<img src={meta} alt=""/>)}
             {name==='WalletConnect' && (<img src={wltcnct} alt=""/>)}
-            {name==='Network' && (<img src={net} alt=""/>)}
+            {name==='Network' && (<img src={net} alt=""/>)} */}
               
             </button>
     </div>
@@ -111,7 +113,7 @@ function ConnectModal(props) {
           )
         })}
       
-      <div className={classes['button--alt2']}>
+      <div className="btn btn-secondary">
         {(active || error) && (
           <button
             onClick={() => {
@@ -124,7 +126,7 @@ function ConnectModal(props) {
       </div>
 
   
-      <div className={classes.modal_btn}>
+      <div className="btn btn-secondary">
         {/* {!!(library && account) && (
           <button
             onClick={() => {
@@ -161,11 +163,6 @@ function ConnectModal(props) {
             Kill WalletConnect Session
           </button>
         )}
-      </div>
-      <div className={classes.actions}>
-        <button className={classes['button--alt']} onClick={props.onClose}>
-          Close
-        </button>
       </div>
 
 

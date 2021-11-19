@@ -1,4 +1,4 @@
-
+/* 
 
   
   .actions {
@@ -105,4 +105,8 @@ font-family:Roboto;
 font-size:27px;
   padding: 0.5rem 2rem;
   margin-left: 1rem;
+} */
+
+.modal{
+  z-index: 2000000;
 }
