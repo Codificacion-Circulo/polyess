@@ -43,7 +43,7 @@ function Header(props) {
     return (
       <Fragment>
       {modal && <LoadingSpinner />}
-      {modal && (<ConnectModal title='Message Submitted!' onClose={closeModalHandler} open={modal} />)}
+      {modal && (<ConnectModal title='Message Submitted!' onClose={closeModalHandler} open={modal} tried={triedEager}/>)}
         <Navbar sticky="top" style={{backgroundColor:" #e3f2fd"}} expand="lg">
         <Container>
         <Navbar.Brand href="/home">

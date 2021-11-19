@@ -81,13 +81,14 @@ function ConnectModal(props) {
           const activating = currentConnector === activatingConnector
           const connected = currentConnector === connector
           const disabled = !triedEager || !!activatingConnector || connected || !!error
+          console.log(disabled);
 
           return (
            <div className={classes.modal}>
            {activating && (<LoadingSpinner/>)}
            <div className={classes.modal_btn}>
             <button
-              // disabled={disabled}
+              disabled={disabled}
               key={name}
               className="btn btn-primary"
               onClick={() => {
@@ -113,9 +114,14 @@ function ConnectModal(props) {
           )
         })}
       
-      <div className="btn btn-secondary">
+     
+
+
+          </Modal.Body>
+          <Modal.Footer>
+          <div>
         {(active || error) && (
-          <button
+          <button className="btn btn-primary"
             onClick={() => {
               deactivate()
             }}
@@ -126,7 +132,7 @@ function ConnectModal(props) {
       </div>
 
   
-      <div className="btn btn-secondary">
+      <div>
         {/* {!!(library && account) && (
           <button
             onClick={() => {
@@ -145,7 +151,7 @@ function ConnectModal(props) {
           </button>
         )} */}
         {!!(connector === connectorsByName[ConnectorNames.Network] && chainId) && (
-          <button
+          <button className="btn btn-primary"
             onClick={() => {
               ;(connector).changeChainId(chainId === 1 ? 4 : 1)
             }}
@@ -154,7 +160,7 @@ function ConnectModal(props) {
           </button>
         )}
         {connector === connectorsByName[ConnectorNames.WalletConnect] && (
-          <button
+          <button className="btn btn-primary"
           
             onClick={() => {
               ;(connector).close()
@@ -164,10 +170,6 @@ function ConnectModal(props) {
           </button>
         )}
       </div>
-
-
-          </Modal.Body>
-          <Modal.Footer>
             <Button variant="secondary" onClick={props.onClose}>
               Close
             </Button>
