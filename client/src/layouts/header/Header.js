@@ -1,7 +1,7 @@
 import {Fragment,useState,useEffect} from "react"
 import './Header.css'
 import logo from "../../logo.svg";
-import {Navbar,Container,Nav} from 'react-bootstrap';
+import {Navbar,Container,Nav,Toast,ToastContainer} from 'react-bootstrap';
 import ConnectModal from '../../components/misc/connect/ConnectModal'
 import LoadingSpinner from '../../components/misc/LoadingSpinner/LoadingSpinner'
 import { useWeb3React, UnsupportedChainIdError} from '@web3-react/core'
@@ -31,7 +31,8 @@ function getErrorMessage(error) {
 
 
 function Header(props) {
-  const { account,error } = useWeb3React()
+  const context = useWeb3React()
+    const { connector, library, chainId, account, activate, deactivate, active, error } = context
   const triedEager = useEagerConnect()
   const [modal, setModal] = useState(false);
   const closeModalHandler = (props) => {
@@ -66,7 +67,7 @@ function Header(props) {
               <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/profile">Profile</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/faq">Faq</Nav.Link>
               <button onClick={openModalHandler} className="btn btn-primary">{account === null
-          ? 'Netwrok Connected'
+          ? 'Network Connected'
           : account
           ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
           : 'No Wallet Attached!!'}</button>
@@ -75,6 +76,19 @@ function Header(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {error&& 
+        <ToastContainer className="p-3" position= 'middle-end'>
+      <Toast show={true} onClose={deactivate} className="d-inline-block m-1" bg='danger' key='Danger'>
+    <Toast.Header>
+      <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+      <strong className="me-auto">Wallet Error</strong>
+      <small>11 mins ago</small>
+    </Toast.Header>
+    <Toast.Body>
+      {getErrorMessage(error)}
+    </Toast.Body>
+  </Toast>
+  </ToastContainer>}
       </Fragment>
     )
 }

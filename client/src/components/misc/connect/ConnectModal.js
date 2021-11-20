@@ -103,7 +103,7 @@ function ConnectModal(props) {
                   </span>
                 )}
               {name}
-              {/* {name==='MetaMask' && (<img src={meta} alt=""/>)}
+              {/* {name==='MetaMask' && (<img className="w-25" src={meta} alt=""/>)}
             {name==='WalletConnect' && (<img src={wltcnct} alt=""/>)}
             {name==='Network' && (<img src={net} alt=""/>)} */}
               
