@@ -3,7 +3,6 @@ import './Header.css'
 import logo from "../../logo.svg";
 import {Navbar,Container,Nav,Toast,ToastContainer} from 'react-bootstrap';
 import ConnectModal from '../../components/misc/connect/ConnectModal'
-import LoadingSpinner from '../../components/misc/LoadingSpinner/LoadingSpinner'
 import { useWeb3React, UnsupportedChainIdError} from '@web3-react/core'
 import { useEagerConnect } from '../../library/hooks'
 import {
@@ -14,15 +13,24 @@ import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } fro
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
-    return 'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.'
+    return {
+      title:"Metmask Not Found",
+      msg:'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.'
+    }
   } else if (error instanceof UnsupportedChainIdError) {
-    return "You're connected to an unsupported network."
+    return {
+      title:"Unsupported Network",
+      msg:"You're connected to an unsupported network."
+    }
   } else if (
     error instanceof UserRejectedRequestErrorInjected ||
     error instanceof UserRejectedRequestErrorWalletConnect ||
     error instanceof UserRejectedRequestErrorFrame
   ) {
-    return 'Please authorize this website to access your Ethereum account.'
+    return {
+      title:"Wallet Connect Request Rejected",
+      msg:'Please authorize this website to access your Ethereum account.'
+    }
   } else {
     console.error(error)
     return 'An unknown error occurred. Check the console for more details.'
@@ -43,8 +51,7 @@ function Header(props) {
   }
     return (
       <Fragment>
-      {modal && <LoadingSpinner />}
-      {modal && (<ConnectModal title='Message Submitted!' onClose={closeModalHandler} open={modal} tried={triedEager}/>)}
+      {modal && (<ConnectModal onClose={closeModalHandler} open={modal} tried={triedEager}/>)}
         <Navbar sticky="top" style={{backgroundColor:" #e3f2fd"}} expand="lg">
         <Container>
         <Navbar.Brand href="/home">
@@ -70,7 +77,7 @@ function Header(props) {
           ? 'Network Connected'
           : account
           ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
-          : 'No Wallet Attached!!'}</button>
+          : 'Connect'}</button>
 
             </Nav>
           </Navbar.Collapse>
@@ -81,11 +88,11 @@ function Header(props) {
       <Toast show={true} onClose={deactivate} className="d-inline-block m-1" bg='danger' key='Danger'>
     <Toast.Header>
       <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-      <strong className="me-auto">Wallet Error</strong>
-      <small>11 mins ago</small>
+      <strong className="me-auto">{getErrorMessage(error).title}</strong>
+      <small>Just Now</small>
     </Toast.Header>
     <Toast.Body>
-      {getErrorMessage(error)}
+      {getErrorMessage(error).msg}
     </Toast.Body>
   </Toast>
   </ToastContainer>}

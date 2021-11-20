@@ -14,6 +14,9 @@ import classes from './ConnectModal.css';
 import meta from '../../../assets/connectModal/metamask.svg'
 import wltcnct from '../../../assets/connectModal/walletconnect.svg'
 import net from '../../../assets/connectModal/network.svg'
+import { AbstractConnector } from '@web3-react/abstract-connector'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+
 
 const ConnectorNames = {
     Injected : 'MetaMask',
@@ -27,7 +30,7 @@ const ConnectorNames = {
     [ConnectorNames.WalletConnect]: walletconnect
   }
   
-  function getErrorMessage(error) {
+  function getErrorMessage(error,deactivate) {
     if (error instanceof NoEthereumProviderError) {
       return 'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.'
     } else if (error instanceof UnsupportedChainIdError) {
@@ -71,7 +74,7 @@ function ConnectModal(props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-          {!!error && <Modal.Title>{getErrorMessage(error)}
+          {!!error && <Modal.Title>{getErrorMessage(error,deactivate)}
         </Modal.Title>}
           </Modal.Header>
           <Modal.Body>
@@ -82,34 +85,35 @@ function ConnectModal(props) {
           const connected = currentConnector === connector
           const disabled = !triedEager || !!activatingConnector || connected || !!error
           console.log(disabled);
-
+          if (activating==true &&connected==true &&!error) {
+            props.onClose()
+          }
           return (
-           <div className={classes.modal}>
+           <Fragment>
            {activating && (<LoadingSpinner/>)}
-           <div className={classes.modal_btn}>
+           
             <button
               disabled={disabled}
               key={name}
-              className="btn btn-primary"
+              className="btn btn-primary d-flex"
               onClick={() => {
                 setActivatingConnector(currentConnector)
                 activate(connectorsByName[name])
               }}
             >
-
 {connected && (
                   <span role="img" aria-label="check">
                     ✅
                   </span>
                 )}
               {name}
-              {/* {name==='MetaMask' && (<img className="w-25" src={meta} alt=""/>)}
-            {name==='WalletConnect' && (<img src={wltcnct} alt=""/>)}
-            {name==='Network' && (<img src={net} alt=""/>)} */}
-              
+              {/* {name==='MetaMask' && (<img className={{width: '5%'}} src={meta} alt=""/>)}
+            {name==='WalletConnect' && (<img className={{width: '5%'}} src={wltcnct} alt=""/>)}
+            {name==='Network' && (<img className={{width: '5%'}} src={net} alt=""/>)}
+               */}
             </button>
-    </div>
-           </div>
+
+           </Fragment>
            
           )
         })}
@@ -119,37 +123,18 @@ function ConnectModal(props) {
 
           </Modal.Body>
           <Modal.Footer>
-          <div>
+
         {(active || error) && (
-          <button className="btn btn-primary"
+          <Button variant="secondary"
             onClick={() => {
               deactivate()
             }}
           >
-            Deactivate
-          </button>
+            Deactivate</Button>
         )}
-      </div>
 
   
       <div>
-        {/* {!!(library && account) && (
-          <button
-            onClick={() => {
-              library
-                .getSigner(account)
-                .signMessage('👋')
-                .then((signature) => {
-                  window.alert(`Success!\n\n${signature}`)
-                })
-                .catch((error) => {
-                  window.alert('Failure!' + (error && error.message ? `\n\n${error.message}` : ''))
-                })
-            }}
-          >
-            Sign Message
-          </button>
-        )} */}
         {!!(connector === connectorsByName[ConnectorNames.Network] && chainId) && (
           <button className="btn btn-primary"
             onClick={() => {
@@ -173,7 +158,6 @@ function ConnectModal(props) {
             <Button variant="secondary" onClick={props.onClose}>
               Close
             </Button>
-            {/* <Button variant="primary">Understood</Button> */}
           </Modal.Footer>
         </Modal>
     )
