@@ -11,6 +11,19 @@ import {
 } from '@web3-react/injected-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
+
+const changeNetwork = async () => {
+  if (window.ethereum) {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x1' }],
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
     return {
@@ -18,6 +31,7 @@ function getErrorMessage(error) {
       msg:'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.'
     }
   } else if (error instanceof UnsupportedChainIdError) {
+    changeNetwork()
     return {
       title:"Unsupported Network",
       msg:"You're connected to an unsupported network."

@@ -14,9 +14,6 @@ import classes from './ConnectModal.css';
 import meta from '../../../assets/connectModal/metamask.svg'
 import wltcnct from '../../../assets/connectModal/walletconnect.svg'
 import net from '../../../assets/connectModal/network.svg'
-import { AbstractConnector } from '@web3-react/abstract-connector'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-
 
 const ConnectorNames = {
     Injected : 'MetaMask',
