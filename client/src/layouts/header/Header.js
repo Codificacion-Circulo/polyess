@@ -47,7 +47,9 @@ function getErrorMessage(error) {
     }
   } else {
     console.error(error)
-    return 'An unknown error occurred. Check the console for more details.'
+    return {
+      title:'Unknown Error',
+      msg:'An unknown error occurred. Check the console for more details.'}
   }
 }
 
@@ -99,7 +101,7 @@ function Header(props) {
       </Navbar>
       {error&& 
         <ToastContainer className="p-3" position= 'middle-end'>
-      <Toast show={true} onClose={deactivate} className="d-inline-block m-1" bg='danger' key='Danger'>
+      <Toast show={true} onClose={()=>{deactivate();openModalHandler()}} className="d-inline-block m-1" bg='danger' key='Danger'>
     <Toast.Header>
       <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
       <strong className="me-auto">{getErrorMessage(error).title}</strong>

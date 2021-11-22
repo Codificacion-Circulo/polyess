@@ -34,7 +34,7 @@ const connectorsByName = {
   // [ConnectorNames.Ledger]: ledger
 }
 
-function getErrorMessage(error, deactivate) {
+function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
     return 'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.'
   } else if (error instanceof UnsupportedChainIdError) {
@@ -76,9 +76,11 @@ function ConnectModal(props) {
       onHide={props.onClose}
       backdrop="static"
       keyboard={false}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
     >
       <Modal.Header closeButton>
-        {!!error && <Modal.Title>{getErrorMessage(error, deactivate)}
+        {!!error && <Modal.Title id="contained-modal-title-vcenter">{getErrorMessage(error)}
         </Modal.Title>}
       </Modal.Header>
       <Modal.Body>
@@ -89,7 +91,7 @@ function ConnectModal(props) {
           const connected = currentConnector === connector
           const disabled = !triedEager || !!activatingConnector || connected || !!error
           console.log(disabled);
-          if (activating == true && connected == true && !error) {
+          if ((activating == true&&connected == true)||error) {
             props.onClose()
           }
           return (

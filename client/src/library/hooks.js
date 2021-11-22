@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { injected } from './connector'
+import { injected,network } from './connector'
 
 
 
@@ -10,6 +10,7 @@ export function useEagerConnect() {
     const [tried, setTried] = useState(false)
 
     useEffect(() => {
+        activate(network)
         injected.isAuthorized().then((isAuthorized) => {
             if (isAuthorized) {
                 activate(injected, undefined, true).catch(() => {
