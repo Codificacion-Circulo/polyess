@@ -6,7 +6,7 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 
 
 
-// const POLLING_INTERVAL = 12000
+const POLLING_INTERVAL = 12000
 var RPC_URLS = {
     1: 'https://mainnet.infura.io/v3/84842078b09946638c03157f83405213',
     4: 'https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213'
@@ -26,11 +26,14 @@ export const network = new NetworkConnector({
   })
 
 
-  export const walletconnect = new WalletConnectConnector({
-    rpc: { 1: RPC_URLS[1] },
-    qrcode: true
-  })
-  
+
+export const walletconnect = new WalletConnectConnector({
+  rpc: { 1: RPC_URLS[1] },
+  bridge: 'https://bridge.walletconnect.org',
+  qrcode: true,
+  pollingInterval: POLLING_INTERVAL
+})
+
 
   export const walletlink = new WalletLinkConnector({
     url: RPC_URLS[1],
