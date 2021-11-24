@@ -1,6 +1,6 @@
 import React from 'react'
 import JoinGame from './joingame'
-import ChessGame from '../chess/ui/chessgame'
+import ChessGame from '../../components/game/chessUI/chessgame'
 
 
 /**

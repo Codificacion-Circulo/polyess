@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import uuid from 'uuid/v4'
-import { ColorContext } from '../context/colorcontext' 
+import { ColorContext } from '../../store/colorcontext' 
 const socket  = require('../connection/socket').socket
 
 /**
