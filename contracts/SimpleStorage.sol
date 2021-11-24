@@ -434,7 +434,7 @@ contract polyhess is ERC1155 {
     }
 
     function mintNFT( uint256 amount)public {
-        require(tokencounter>=75, "All NFTs are minted");
+        require(tokencounter<=75, "All NFTs are minted");
         require(amount>=NFT_Price, "Price of NFT more than given");
         require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
         safeTransferFrom(msg.sender, owner, 0, amount,"");
