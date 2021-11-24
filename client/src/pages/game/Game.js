@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Chessboard from "chessboardjsx";
-import StockFish from "../../integration/Stockfish";
+// import StockFish from "../../integration/Stockfish";
+import WithMoveValidation from "../../integration/WithMoveValidations";
 
 class Demo extends Component {
   render() {
     return (
       <div style={boardsContainer}>
-        <StockFish>
+       <WithMoveValidation />
+        {/* <StockFish>
           {({ position, onDrop }) => (
             <Chessboard
               id="stockfish"
@@ -17,7 +19,7 @@ class Demo extends Component {
               orientation="black"
             />
           )}
-        </StockFish>
+        </StockFish> */}
       </div>
     );
   }
