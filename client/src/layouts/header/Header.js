@@ -69,7 +69,7 @@ function Header(props) {
   return (
     <Fragment>
       {modal && (<ConnectModal onClose={closeModalHandler} open={modal} tried={triedEager} />)}
-      <Navbar sticky="top" style={{ backgroundColor: " #e3f2fd" }} expand="lg">
+      <Navbar sticky="top" style={{ background: "none" }} expand="lg">
         <Container>
           <Navbar.Brand href="/home">
             <img
@@ -84,12 +84,12 @@ function Header(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="justify-content-center">
-              <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/">Home</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/game">Play</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/leaderboard">Leaderboard</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/market">Marketplace</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/profile">Profile</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center text-dark" href="/faq">Faq</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/">Home</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/game">Play</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/leaderboard">Leaderboard</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/market">Marketplace</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/faq">Faq</Nav.Link>
               <button onClick={openModalHandler} className="btn btn-primary">{account === null
                 ? 'Network Connected'
                 : account
