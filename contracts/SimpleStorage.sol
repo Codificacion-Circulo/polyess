@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// SPDX-License-Identifier: MIT
 
 pragma solidity >=0.6.0 <0.8.0;
 
@@ -417,18 +416,31 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 contract polyhess is ERC1155 {
     uint8 winner;
      address owner;
+     uint tokencounter;
+     uint maxnft=75;
+     uint NFT_Price=100000;
+
     constructor() public ERC1155("https://game.example/api/item/{id}.json") {
         owner = msg.sender;
         _mint (owner, 0, 10**20, "");
+        tokencounter = 1;
     }
 
-    function mint(address account, uint256 id, uint256 amount, bytes memory data)
+    function minttoken(uint256 Amount)
         public
     {
-        require( id >0, "You can't mint this token");
-        _mint(msg.sender, id, 1, "");
+        require( msg.sender==owner, "You can't mint this token");
+        _mint(msg.sender, 0, Amount, "");
     }
 
+    function mintNFT( uint256 amount)public {
+        require(tokencounter>=75, "All NFTs are minted");
+        require(amount>=NFT_Price, "Price of NFT more than given");
+        require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
+        safeTransferFrom(msg.sender, owner, 0, amount,"");
+        _mint(msg.sender, tokencounter, 1,"");
+        tokencounter=tokencounter+1;
+    }
 
     function win(uint8 _status ) public returns(uint){
         winner =_status;
@@ -489,5 +501,6 @@ contract polyhess is ERC1155 {
             safeTransferFrom(owner, p2, 0, 50, "0x00");
         }
     }
+
 
 }
