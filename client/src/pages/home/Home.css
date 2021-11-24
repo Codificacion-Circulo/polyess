@@ -1,0 +1,114 @@
+/* utility classes  */
+.transAll {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Home Section  */
+.homeContainer {
+  margin: 2rem 5rem;
+  height: 50vh;
+}
+
+.homeContent {
+  margin: 1rem 2rem;
+  margin-top: 8rem;
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.homeContentHeading h1 {
+    font-size: 3rem;
+}
+
+.homeContentHeading h1 span {
+    color: #d1996d;
+}
+
+.homeContentHeading {
+    margin-bottom: 1rem;
+}
+
+.homeContentButton button {
+  background: linear-gradient(135deg, #ba8964 0, #d1ac90 100%);
+  /* box-shadow: 0 10px 45px -10px rgb(186 137 100 / 15%),
+    0 0 20px -10px rgb(186 137 100 / 35%),
+    0 10px 30px -10px rgb(186 137 100 / 25%); */
+  color: #0a0a0a;
+  outline: none;
+  border: none;
+  font-size: 2rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 0.2rem 1rem;
+}
+
+.homeContentButton button:hover {
+    box-shadow: 0px 7px 10px #a87a57;
+    /* transform: translateY(-5px); */
+}
+
+/* Game Modes Section  */
+.modesContainer {
+    margin: 2rem 0;
+    padding: 0 8rem;
+}
+
+.modesContentHeading h1{
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.modesColumns {
+    border: 2px solid red;
+    margin: 0 1rem;
+    border-radius: 1.5rem;
+}
+
+.modesColumns:hover {
+    border: 2px solid #fff;
+}
+
+/* Nft MarketPlace  */
+.nftContainer {
+    padding: 0 8rem;
+}
+
+.nftContentHeading h1 {
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+/* Stake Section  */
+.stakeContainer {
+    padding: 0 8rem;
+}
+
+.stakeContentHeading h1 {
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+/* Token Section  */
+.tokenContainer {
+    padding: 0 8rem;
+}
+
+.tokenContentHeading h1 {
+    color: #fff;
+    margin-bottom: 2rem;    
+}
+
+/* WhyUs Container */
+.whyUsContainer {
+    padding: 0 8rem;
+}
+
+.whyUsTitle h1 {
+    color: #fff;
+}
+
+.whyUsContentHeading h1 {
+    color: #fff;
+}
