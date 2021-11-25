@@ -9,6 +9,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/introspection/ERC165.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/math/SafeMath.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Address.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Strings.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/access/Ownable.sol";
 
 /**
  *
@@ -413,23 +415,34 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     }
 }
 
-contract polyhess is ERC1155 {
+contract polyhess is ERC1155, Ownable {
     uint8 winner;
-     address owner;
+     address _owner;
      uint tokencounter;
      uint maxnft=75;
      uint NFT_Price=100000;
+    mapping (uint256 => string) private _uris;
 
     constructor() public ERC1155("https://game.example/api/item/{id}.json") {
-        owner = msg.sender;
-        _mint (owner, 0, 10**20, "");
+        _owner = msg.sender;
+        _mint (_owner, 0, 10**20, "");
         tokencounter = 1;
+    }
+
+    function uri(uint256 tokenId) override public view returns (string memory) {
+        return(_uris[tokenId]);
+    }
+
+    function setTokenUri(uint256 tokenId, string memory uri) public onlyOwner {
+        require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
+        _uris[tokenId] = uri;
     }
 
     function minttoken(uint256 Amount)
         public
+        onlyOwner
     {
-        require( msg.sender==owner, "You can't mint this token");
+        require( msg.sender==_owner, "You can't mint this token");
         _mint(msg.sender, 0, Amount, "");
     }
 
@@ -437,7 +450,7 @@ contract polyhess is ERC1155 {
         require(tokencounter<=75, "All NFTs are minted");
         require(amount>=NFT_Price, "Price of NFT more than given");
         require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
-        safeTransferFrom(msg.sender, owner, 0, amount,"");
+        safeTransferFrom(msg.sender, _owner, 0, amount,"");
         _mint(msg.sender, tokencounter, 1,"");
         tokencounter=tokencounter+1;
     }
@@ -451,39 +464,39 @@ contract polyhess is ERC1155 {
     function Token_staking(address p1, address p2, uint am1, uint am2) public {
         require(am1>99&&am2>99, "Stake amouunt more than 100");
         require( am1== am2,"Both have not staked similar amount");
-        safeTransferFrom(p1, owner, 0, am1, "0x00");
-        safeTransferFrom(p1, owner, 0, am1, "0x00");
+        safeTransferFrom(p1, _owner, 0, am1, "0x00");
+        safeTransferFrom(p1, _owner, 0, am1, "0x00");
         uint gstatus = win(winner);
         require(winner>=0&&winner<3, "Wrong status provided");
          if(gstatus==1){
-            safeTransferFrom(owner, p1, 0, am1, "0x00");
+            safeTransferFrom(_owner, p1, 0, am1, "0x00");
         }
         else if(gstatus==2){
-            safeTransferFrom(owner, p2, 0, am1, "0x00");
+            safeTransferFrom(_owner, p2, 0, am1, "0x00");
         }
         else if (gstatus==0){
-            safeTransferFrom(owner, p1, 0, am1, "0x00");
-            safeTransferFrom(owner, p2, 0, am1, "0x00");
+            safeTransferFrom(_owner, p1, 0, am1, "0x00");
+            safeTransferFrom(_owner, p2, 0, am1, "0x00");
         }
         winner =0;
 
     }
     function NFT_staking(address p1, address p2, uint id1, uint id2) public {
-        safeTransferFrom(p1, owner, id1, 1, "0x00");
-        safeTransferFrom(p1, owner, id2, 1, "0x00");
+        safeTransferFrom(p1, _owner, id1, 1, "0x00");
+        safeTransferFrom(p1, _owner, id2, 1, "0x00");
         uint gstatus = win(winner);
         require(winner>=0&&winner<3, "Wrong status provided");
          if(gstatus==1){
-            safeTransferFrom(owner, p1, id2, 1, "0x00");
-            safeTransferFrom(owner, p1, id1, 1, "0x00");
+            safeTransferFrom(_owner, p1, id2, 1, "0x00");
+            safeTransferFrom(_owner, p1, id1, 1, "0x00");
         }
         else if(gstatus==2){
-            safeTransferFrom(owner, p1, id2, 1, "0x00");
-            safeTransferFrom(owner, p1, id1, 1, "0x00");
+            safeTransferFrom(_owner, p1, id2, 1, "0x00");
+            safeTransferFrom(_owner, p1, id1, 1, "0x00");
         }
         else if (gstatus==0){
-            safeTransferFrom(owner, p1, id1, 1, "0x00");
-            safeTransferFrom(owner, p2, id2, 1, "0x00");
+            safeTransferFrom(_owner, p1, id1, 1, "0x00");
+            safeTransferFrom(_owner, p2, id2, 1, "0x00");
         }
         winner =0;
 
@@ -491,14 +504,14 @@ contract polyhess is ERC1155 {
 
     function online_game(address p1, address p2, uint8 status) public {
         if(status==1){
-            safeTransferFrom(owner, p1, 0, 100, "0x00");
+            safeTransferFrom(_owner, p1, 0, 100, "0x00");
         }
         else if(status==2){
-            safeTransferFrom(owner, p2, 0, 100, "0x00");
+            safeTransferFrom(_owner, p2, 0, 100, "0x00");
         }
         else if (status==0){
-            safeTransferFrom(owner, p1, 0, 50, "0x00");
-            safeTransferFrom(owner, p2, 0, 50, "0x00");
+            safeTransferFrom(_owner, p1, 0, 50, "0x00");
+            safeTransferFrom(_owner, p2, 0, 50, "0x00");
         }
     }
 
