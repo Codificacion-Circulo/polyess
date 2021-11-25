@@ -9,6 +9,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/introspection/ERC165.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/math/SafeMath.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Address.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Strings.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/access/Ownable.sol";
 
 /**
  *
@@ -413,17 +415,27 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     }
 }
 
-contract polyhess is ERC1155 {
+contract polyhess is ERC1155, Ownable {
     uint8 winner;
      address owner;
      uint tokencounter;
      uint maxnft=75;
      uint NFT_Price=100000;
+    mapping (uint256 => string) private _uris;
 
     constructor() public ERC1155("https://game.example/api/item/{id}.json") {
         owner = msg.sender;
         _mint (owner, 0, 10**20, "");
         tokencounter = 1;
+    }
+
+    function uri(uint256 tokenId) override public view returns (string memory) {
+        return(_uris[tokenId]);
+    }
+
+    function setTokenUri(uint256 tokenId, string memory uri) public onlyOwner {
+        require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
+        _uris[tokenId] = uri;
     }
 
     function minttoken(uint256 Amount)
