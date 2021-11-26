@@ -481,6 +481,7 @@ contract polyhess is ERC1155, Ownable {
         winner =0;
 
     }
+    
     function NFT_staking(address p1, address p2, uint id1, uint id2) public {
         safeTransferFrom(p1, _owner, id1, 1, "0x00");
         safeTransferFrom(p1, _owner, id2, 1, "0x00");
