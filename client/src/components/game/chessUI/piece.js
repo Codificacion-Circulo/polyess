@@ -1,16 +1,16 @@
 import React from 'react'
-import Game from '../model/chess'
-import Square from '../model/square'
+import Game from '../../../integration/chess/chess'
+import Square from '../../../integration/chess/square'
 import { Stage, Layer } from 'react-konva';
-import Board from '../assets/chessBoard.png'
+import Board from '../../../assets/chessBoard.png'
 import useSound from 'use-sound'
-import chessMove from '../assets/moveSoundEffect.mp3'
+import chessMove from '../../../assets/game/moveSoundEffect.mp3'
 import Piece from './piece'
 import piecemap from './piecemap'
 import { useParams } from 'react-router-dom'
-import { ColorContext } from '../../context/colorcontext' 
-import VideoChatApp from '../../connection/videochat'
-const socket  = require('../../connection/socket').socket
+import { ColorContext } from '../../../store/colorcontext' 
+// import VideoChatApp from '../../connection/videochat'
+const socket  = require('../../../integration/connection/socket').socket
 
 
 class ChessGame extends React.Component {
