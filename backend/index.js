@@ -4,9 +4,9 @@ const socketio = require('socket.io')
 const gameLogic = require('./game-logic')
 const app = express()
 
-router.get('/',async (_,res)=>{
+app.get('/',async (_,res)=>{
     try{
-        res.send(<h1>Wait what? How did u found me?</h1>)
+        res.send('<h1>Wait what ?? How did u find me??</h1>')
     }catch(e){
         res.status(500).send()
     }
