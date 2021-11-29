@@ -313,12 +313,12 @@ const ChessGameWrapper = (props) => {
                 gameId={gameid}
                 color={color.didRedirect}
               />
-              <VideoChatApp
+              {/* <VideoChatApp
                 mySocketId={socket.id}
                 opponentSocketId={opponentSocketId}
                 myUserName={props.myUserName}
                 opponentUserName={opponentUserName}
-              />
+              /> */}
             </div>
             <h4> You: {props.myUserName} </h4>
           </div>
