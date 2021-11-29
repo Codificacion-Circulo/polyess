@@ -141,36 +141,7 @@ function ConnectModal(props) {
 
 
         <div>
-          {!!(connector === connectorsByName[ConnectorNames.Network] && chainId) && (
-            <button className="btn btn-primary"
-              onClick={() => {
-                ; (connector).changeChainId(chainId === 1 ? 4 : 1)
-              }}
-            >
-              Switch Networks
-            </button>
-          )}
-          {connector === connectorsByName[ConnectorNames.WalletConnect] && (
-            <button className="btn btn-primary"
-
-              onClick={() => {
-                ; (connector).close()
-              }}
-            >
-              Kill WalletConnect Session
-            </button>
-          )}
-
-          {connector === connectorsByName[ConnectorNames.WalletLink] && (
-            <button className="btn btn-primary"
-
-              onClick={() => {
-                ; (connector).close()
-              }}
-            >
-              Kill WalletLink Session
-            </button>
-          )}
+          
         </div>
         <Button variant="secondary" onClick={props.onClose}>
           Close
