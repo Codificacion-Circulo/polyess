@@ -305,9 +305,9 @@ const ChessGameWrapper = (props) => {
     return (
       <React.Fragment>
         {opponentDidJoinTheGame ? (
-          <div>
+          <div className="container">
             <h4> Opponent: {opponentUserName} </h4>
-            <div style={{ display: "flex" }}>
+            <div className="container mx-auto" style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
                 gameId={gameid}
