@@ -24,6 +24,8 @@ const changeNetwork = async () => {
     }
   }
 };
+
+
 function getErrorMessage(error) {
   if (error instanceof NoEthereumProviderError) {
     return {

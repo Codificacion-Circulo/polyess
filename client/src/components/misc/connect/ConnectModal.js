@@ -10,7 +10,7 @@ import {
   NoEthereumProviderError,
   UserRejectedRequestError as UserRejectedRequestErrorInjected
 } from '@web3-react/injected-connector'
-import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
+import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import classes from './ConnectModal.css';
@@ -94,6 +94,10 @@ function ConnectModal(props) {
           if ((activating == true&&connected == true)||error) {
             props.onClose()
           }
+          if (connector instanceof WalletConnectConnector) {
+      connector.walletConnectProvider = undefined
+    }
+
           return (
             <Fragment>
               {activating && (<LoadingSpinner />)}
@@ -138,7 +142,6 @@ function ConnectModal(props) {
           >
             Deactivate</Button>
         )}
-
 
         <div>
           
