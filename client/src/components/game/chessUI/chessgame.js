@@ -307,7 +307,7 @@ const ChessGameWrapper = (props) => {
         {opponentDidJoinTheGame ? (
           <div className="container">
             <h4> Opponent: {opponentUserName} </h4>
-            <div className="container mx-auto" style={{ display: "flex" }}>
+            <div style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
                 gameId={gameid}
