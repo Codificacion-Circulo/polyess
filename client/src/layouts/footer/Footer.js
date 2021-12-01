@@ -7,7 +7,7 @@ function Footer(props) {
             <div class="new_footer_top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-sm-4">
                             <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s" style={{visibility: "visible", animationDelay: "0.2s", animationName: "fadeInLeft"}}>
                                 <h3 class="f-title f_600 t_color f_size_18">Get in Touch</h3>
                                 <p>Don’t miss any updates of our new templates and extensions.!</p>
@@ -19,15 +19,15 @@ function Footer(props) {
                                 </form>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+                        {/* <div class="col-lg-3 col-md-6">
                             <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.4s" style={{visibility: "visible", animationDelay: "0.4s", "animationName": "fadeInLeft"}}>
                                 <h3 class="f-title f_600 t_color f_size_18">Download</h3>
                                 <ul class="list-unstyled f_list">
                                     <li><a href="#">Android App</a></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
+                        </div> */}
+                        <div class="col-sm-4">
                             <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.6s" style={{visibility: "visible", animationDelay: "0.6s", animationName: "fadeInLeft"}}>
                                 <h3 class="f-title f_600 t_color f_size_18">Help</h3>
                                 <ul class="list-unstyled f_list">
@@ -35,7 +35,7 @@ function Footer(props) {
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-sm-4">
                             <div class="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s" style={{visibility: "visible", animationDelay: "0.8s", animationName: "fadeInLeft"}}>
                                 <h3 class="f-title f_600 t_color f_size_18">Team Solutions</h3>
                                 <div class="f_social_icon">

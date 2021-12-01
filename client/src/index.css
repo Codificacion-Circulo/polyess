@@ -6,8 +6,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: #2c2b2b;
-  background: linear-gradient(55% 180% at 5% 100%, #ba896433 0,#0a0a0a00 75%,rgba(10,10,10,0) 100%); */
+  background: #2c2b2b;
+  background: #0f0f0f;
+  background: linear-gradient(55% 180% at 5% 100%, #ba896433 0,#0a0a0a00 75%,rgba(10,10,10,0) 100%);
   /* background: radial-gradient(55% 180% at 5% 100%,#ba896433 0,rgba(10,10,10,0) 75%,rgba(10,10,10,0) 100%); */
 }
 
