@@ -9,6 +9,7 @@ class Polyess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Polyess',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
