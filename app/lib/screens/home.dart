@@ -4,6 +4,9 @@ import 'package:polyess/screens/leaderboard_screen.dart';
 import 'package:polyess/screens/market_screen.dart';
 
 class Home extends StatefulWidget {
+
+
+
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -25,6 +28,7 @@ class _HomeState extends State<Home> {
     final _pageController = PageController();
     return SafeArea(
       child: Scaffold(
+
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
@@ -52,6 +56,7 @@ class _HomeState extends State<Home> {
             HomeScreen(),
             LeaderBoardSceen(),
             MarketPlaceScreen(),
+
           ],
         ),
       ),
