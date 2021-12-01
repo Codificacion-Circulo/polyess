@@ -1,11 +1,10 @@
 import io from 'socket.io-client'
 
-const URL = 'https://multiplayer-chess-game-app.herokuapp.com/' 
+const URL = 'https://polyess.herokuapp.com/' 
 
 const socket = io(URL)
 
 var mySocketId
-// register preliminary event listeners here:
 
 
 socket.on("createNewGame", statusUpdate => {

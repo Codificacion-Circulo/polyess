@@ -10,7 +10,7 @@ import {
   NoEthereumProviderError,
   UserRejectedRequestError as UserRejectedRequestErrorInjected
 } from '@web3-react/injected-connector'
-import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
+import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import classes from './ConnectModal.css';
@@ -28,7 +28,6 @@ const ConnectorNames = {
 Object.freeze(ConnectorNames)
 const connectorsByName = {
   [ConnectorNames.Injected]: injected,
-  [ConnectorNames.Network]: network,
   [ConnectorNames.WalletConnect]: walletconnect,
   [ConnectorNames.WalletLink]: walletlink,
   // [ConnectorNames.Ledger]: ledger
@@ -72,18 +71,19 @@ function ConnectModal(props) {
   useInactiveListener(!triedEager || !!activatingConnector)
   return (
     <Modal
+    size="sm"
       show={props.open}
       onHide={props.onClose}
       backdrop="static"
       keyboard={false}
-      aria-labelledby="contained-modal-title-vcenter"
+      aria-labelledby="example-modal-sizes-title-sm"
       centered
     >
       <Modal.Header closeButton>
-        {!!error && <Modal.Title id="contained-modal-title-vcenter">{getErrorMessage(error)}
+        {!!error && <Modal.Title id="example-modal-sizes-title-sm">{getErrorMessage(error)}
         </Modal.Title>}
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="d-flex justify-content-center flex-column">
 
         {Object.keys(connectorsByName).map((name) => {
           const currentConnector = connectorsByName[name]
@@ -94,6 +94,10 @@ function ConnectModal(props) {
           if ((activating == true&&connected == true)||error) {
             props.onClose()
           }
+          if (connector instanceof WalletConnectConnector) {
+      connector.walletConnectProvider = undefined
+    }
+
           return (
             <Fragment>
               {activating && (<LoadingSpinner />)}
@@ -101,7 +105,7 @@ function ConnectModal(props) {
               <button
                 disabled={disabled}
                 key={name}
-                className="btn btn-primary d-flex"
+                className="btn border border-primary my-2"
                 onClick={() => {
                   setActivatingConnector(currentConnector)
                   activate(connectorsByName[name])
@@ -109,7 +113,7 @@ function ConnectModal(props) {
               >
                 {connected && (
                   <span role="img" aria-label="check">
-                    ✅
+                    ✅ 
                   </span>
                 )}
                 {name}
@@ -128,53 +132,23 @@ function ConnectModal(props) {
 
 
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className="d-flex justify-content-center">
 
         {(active || error) && (
-          <Button variant="secondary"
+          <button className="btn border border-secondary mx-2"
             onClick={() => {
               deactivate()
             }}
           >
-            Deactivate</Button>
+            Deactivate</button>
         )}
 
-
         <div>
-          {!!(connector === connectorsByName[ConnectorNames.Network] && chainId) && (
-            <button className="btn btn-primary"
-              onClick={() => {
-                ; (connector).changeChainId(chainId === 1 ? 4 : 1)
-              }}
-            >
-              Switch Networks
-            </button>
-          )}
-          {connector === connectorsByName[ConnectorNames.WalletConnect] && (
-            <button className="btn btn-primary"
-
-              onClick={() => {
-                ; (connector).close()
-              }}
-            >
-              Kill WalletConnect Session
-            </button>
-          )}
-
-          {connector === connectorsByName[ConnectorNames.WalletLink] && (
-            <button className="btn btn-primary"
-
-              onClick={() => {
-                ; (connector).close()
-              }}
-            >
-              Kill WalletLink Session
-            </button>
-          )}
+          
         </div>
-        <Button variant="secondary" onClick={props.onClose}>
+        <button className="btn border border-secondary mx-2" onClick={props.onClose}>
           Close
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   )

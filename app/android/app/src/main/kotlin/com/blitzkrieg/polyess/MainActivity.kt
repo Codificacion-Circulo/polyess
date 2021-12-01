@@ -1,4 +1,4 @@
-package com.example.app
+package com.blitzkrieg.polyess
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,17 +1,18 @@
 import React from 'react'
-import Game from '../model/chess'
-import Square from '../model/square'
+import Game from '../../../integration/chess/chess'
+import Square from '../../../integration/chess/square'
 import { Stage, Layer } from 'react-konva';
-import Board from '../assets/chessBoard.png'
+import Board from '../../../assets/game/chessBoard.png'
 import useSound from 'use-sound'
-import chessMove from '../assets/moveSoundEffect.mp3'
+import chessMove from '../../../assets/game/moveSoundEffect.mp3'
 import Piece from './piece'
 import piecemap from './piecemap'
-import { useParams } from 'react-router-dom'
-import { ColorContext } from '../../context/colorcontext' 
-import VideoChatApp from '../../connection/videochat'
-const socket  = require('../../connection/socket').socket
+import TableDiv from '../table/Table'
 
+import { useParams } from 'react-router-dom'
+import { ColorContext } from '../../../store/colorcontext' 
+// import VideoChatApp from '../../connection/videochat'
+const socket  = require('../../../integration/connection/socket').socket
 
 class ChessGame extends React.Component {
 
@@ -232,19 +233,11 @@ class ChessGame extends React.Component {
 
 
 const ChessGameWrapper = (props) => {
-    /**
-     * player 1
-     *      - socketId 1
-     *      - socketId 2 ???
-     * player 2
-     *      - socketId 2
-     *      - socketId 1
-     */
 
 
 
     // get the gameId from the URL here and pass it to the chessGame component as a prop. 
-    const domainName = 'http://chesswithfriend.com'
+    const domainName = 'https://polyess.netlify.app'
     const color = React.useContext(ColorContext)
     const { gameid } = useParams()
     const [play] = useSound(chessMove);
@@ -305,7 +298,7 @@ const ChessGameWrapper = (props) => {
     return (
       <React.Fragment>
         {opponentDidJoinTheGame ? (
-          <div>
+          <div className="container">
             <h4> Opponent: {opponentUserName} </h4>
             <div style={{ display: "flex" }}>
               <ChessGame
@@ -313,12 +306,7 @@ const ChessGameWrapper = (props) => {
                 gameId={gameid}
                 color={color.didRedirect}
               />
-              <VideoChatApp
-                mySocketId={socket.id}
-                opponentSocketId={opponentSocketId}
-                myUserName={props.myUserName}
-                opponentUserName={opponentUserName}
-              />
+              <TableDiv/>
             </div>
             <h4> You: {props.myUserName} </h4>
           </div>
