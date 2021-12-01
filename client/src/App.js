@@ -12,6 +12,7 @@ import Profile from "./pages/profile/Profile"
 import Market from "./pages/market/Market"
 import Error from "./pages/error/Error"
 import LoadingSpinner from './components/misc/LoadingSpinner/LoadingSpinner'
+import Faqs from "./components/faqs/Faqs";
 
 
 
@@ -49,7 +50,7 @@ function App() {
               <Profile />
             </Route>
             <Route path="/faq" exact>
-              <Faq />
+              <Faqs />
             </Route>
             <Route path="*">
               <Error />

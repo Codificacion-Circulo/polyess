@@ -1,6 +1,6 @@
 .new_footer_area {
   background: #fbfbfd;
-  background: #000000;
+  background: #0f0f0f;
 }
 
 
@@ -194,4 +194,10 @@ background-size:100%;
 100% {
   left: 100%;
 }
+}
+
+@media only screen and (max-width: 577px) {
+  .f_widget {
+    margin: 1rem 1rem;
+  }
 }
