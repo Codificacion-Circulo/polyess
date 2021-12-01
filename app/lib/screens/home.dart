@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:polyess/models/style.dart';
 import 'package:polyess/screens/home_screen.dart';
 import 'package:polyess/screens/leaderboard_screen.dart';
 import 'package:polyess/screens/market_screen.dart';
 
 class Home extends StatefulWidget {
-
-
-
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +26,6 @@ class _HomeState extends State<Home> {
     final _pageController = PageController();
     return SafeArea(
       child: Scaffold(
-
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
@@ -45,10 +42,12 @@ class _HomeState extends State<Home> {
             ),
           ],
           selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
           currentIndex: _index,
           onTap: onTapped,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
+          backgroundColor: barColor,
         ),
         body: PageView(
           controller: _pageController,
@@ -56,7 +55,6 @@ class _HomeState extends State<Home> {
             HomeScreen(),
             LeaderBoardSceen(),
             MarketPlaceScreen(),
-
           ],
         ),
       ),

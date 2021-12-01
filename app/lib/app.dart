@@ -4,7 +4,7 @@ import 'package:polyess/models/style.dart';
 import 'package:polyess/screens/home.dart';
 
 class Polyess extends StatelessWidget {
-  const Polyess({ Key? key }) : super(key: key);
+  const Polyess({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +12,14 @@ class Polyess extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Polyess',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.interTextTheme().copyWith(
           bodyText1: textStyle1,
-        )
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: barColor,
+          elevation: 1,
+        ),
       ),
       home: Home(),
     );
