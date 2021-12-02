@@ -416,17 +416,39 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 }
 
 contract polyhess is ERC1155, Ownable {
-    uint8 winner;
+     uint8 winner;
      address _owner;
      uint tokencounter;
      uint maxnft=75;
-     uint NFT_Price=100000;
+     uint NFT_Price=10000;
     mapping (uint256 => string) private _uris;
 
-    constructor() public ERC1155("https://game.example/api/item/{id}.json") {
+    struct game {
+        address P1;
+        address P2;
+        uint amt;
+        uint nft_t1;
+        uint nft_t2;
+    }
+    mapping (uint=>game) public GameID;
+    uint gameID;
+
+    constructor() public ERC1155("") {
         _owner = msg.sender;
-        _mint (_owner, 0, 10**20, "");
+        _mint (address(this), 0, 10**20, "");
         tokencounter = 1;
+        gameID=0;
+    }
+    function buy_hess(uint ethamount)public payable{
+        require(ethamount == msg.value, " Not sufficient eth sent" );
+        uint amt = (msg.value)*500;
+        safeTransferFrom(address(this), msg.sender, 0, amt, "" );
+    }
+    function buy_eth(uint hesstoken)public payable{
+        require(hesstoken > 1000, " Not sufficient hesstoken sent" );
+        safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
+        uint amt = hesstoken/550;
+        ((msg.sender).transfer)(amt);
     }
 
     function uri(uint256 tokenId) override public view returns (string memory) {
@@ -437,13 +459,16 @@ contract polyhess is ERC1155, Ownable {
         require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
         _uris[tokenId] = uri;
     }
-
+    function NFT_tran(uint256 tokenId, address _to, address _from)public
+     {  require(msg.sender==_from, "You are not the owner of NFT");
+        require(balanceOf(_to, tokenId)==1, " Address does not own this NFT");
+        safeTransferFrom(_to, _from, tokenId, 1, "");
+    }
     function minttoken(uint256 Amount)
         public
-        onlyOwner
     {
         require( msg.sender==_owner, "You can't mint this token");
-        _mint(msg.sender, 0, Amount, "");
+        _mint(address(this), 0, Amount, "");
     }
 
     function mintNFT( uint256 amount)public {
@@ -455,66 +480,66 @@ contract polyhess is ERC1155, Ownable {
         tokencounter=tokencounter+1;
     }
 
-    function win(uint8 _status ) public returns(uint){
-        winner =_status;
-        return(winner);
-
+    function win_TokenStaking(uint256 _gameID, uint gstatus) public {
+        require(gstatus>0&&gstatus<3, "Wrong status provided");
+         if(gstatus==1){
+            safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
+        }
+        else if(gstatus==2){
+            safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
+        }
+        else if (gstatus==0){
+            safeTransferFrom(address(this), GameID[_gameID].P1, 0, GameID[_gameID].amt, "0x00");
+            safeTransferFrom(address(this), GameID[_gameID].P2, 0, GameID[_gameID].amt, "0x00");
+        }
+    }
+    function win_NFTStaking(uint256 _gameID, uint gstatus) public {
+        require(gstatus>0&&gstatus<3, "Wrong status provided");
+         if(gstatus==1){
+            safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
+            safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t2, 1, "0x00");
+        }
+        else if(gstatus==2){
+           safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t1, 1, "0x00");
+           safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
+        }
+        else if (gstatus==0){
+            safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
+            safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
+        }
     }
 
     function Token_staking(address p1, address p2, uint am1, uint am2) public {
         require(am1>99&&am2>99, "Stake amouunt more than 100");
         require( am1== am2,"Both have not staked similar amount");
-        safeTransferFrom(p1, _owner, 0, am1, "0x00");
-        safeTransferFrom(p1, _owner, 0, am1, "0x00");
-        uint gstatus = win(winner);
-        require(winner>=0&&winner<3, "Wrong status provided");
-         if(gstatus==1){
-            safeTransferFrom(_owner, p1, 0, am1, "0x00");
-        }
-        else if(gstatus==2){
-            safeTransferFrom(_owner, p2, 0, am1, "0x00");
-        }
-        else if (gstatus==0){
-            safeTransferFrom(_owner, p1, 0, am1, "0x00");
-            safeTransferFrom(_owner, p2, 0, am1, "0x00");
-        }
-        winner =0;
-
+        safeTransferFrom(p1, address(this), 0, am1, "0x00");
+        safeTransferFrom(p1, address(this), 0, am1, "0x00");
+        gameID= gameID+1;
+        GameID[gameID].P1 = p1;
+        GameID[gameID].P2 = p2;
+        GameID[gameID].amt = am1;
     }
-    
     function NFT_staking(address p1, address p2, uint id1, uint id2) public {
-        safeTransferFrom(p1, _owner, id1, 1, "0x00");
-        safeTransferFrom(p1, _owner, id2, 1, "0x00");
-        uint gstatus = win(winner);
-        require(winner>=0&&winner<3, "Wrong status provided");
-         if(gstatus==1){
-            safeTransferFrom(_owner, p1, id2, 1, "0x00");
-            safeTransferFrom(_owner, p1, id1, 1, "0x00");
-        }
-        else if(gstatus==2){
-            safeTransferFrom(_owner, p1, id2, 1, "0x00");
-            safeTransferFrom(_owner, p1, id1, 1, "0x00");
-        }
-        else if (gstatus==0){
-            safeTransferFrom(_owner, p1, id1, 1, "0x00");
-            safeTransferFrom(_owner, p2, id2, 1, "0x00");
-        }
-        winner =0;
-
+        safeTransferFrom(p1, address(this), id1, 1, "0x00");
+        safeTransferFrom(p1, address(this), id2, 1, "0x00");
+        gameID= gameID+1;
+        GameID[gameID].P1 = p1;
+        GameID[gameID].P2 = p2;
+        GameID[gameID].nft_t1 = id1;
+        GameID[gameID].nft_t2 = id2;
     }
 
     function online_game(address p1, address p2, uint8 status) public {
         if(status==1){
-            safeTransferFrom(_owner, p1, 0, 100, "0x00");
+            safeTransferFrom(address(this), p1, 0, 100, "0x00");
         }
         else if(status==2){
-            safeTransferFrom(_owner, p2, 0, 100, "0x00");
+            safeTransferFrom(address(this), p2, 0, 100, "0x00");
         }
         else if (status==0){
-            safeTransferFrom(_owner, p1, 0, 50, "0x00");
-            safeTransferFrom(_owner, p2, 0, 50, "0x00");
+            safeTransferFrom(address(this), p1, 0, 50, "0x00");
+            safeTransferFrom(address(this), p2, 0, 50, "0x00");
         }
     }
-
 
 }
