@@ -437,13 +437,15 @@ contract polyhess is ERC1155, Ownable {
         require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
         _uris[tokenId] = uri;
     }
-
+    function NFT_tran(uint256 tokenId, address _to, address _from)public {
+        require(balanceOf(_to, tokenId)==1, " Address does not own this NFT");
+        safeTransferFrom(_to, _from, tokenId, 1, "");
+    }
     function minttoken(uint256 Amount)
         public
-        onlyOwner
     {
         require( msg.sender==_owner, "You can't mint this token");
-        _mint(msg.sender, 0, Amount, "");
+        _mint(address(this), 0, Amount, "");
     }
 
     function mintNFT( uint256 amount)public {
@@ -464,40 +466,39 @@ contract polyhess is ERC1155, Ownable {
     function Token_staking(address p1, address p2, uint am1, uint am2) public {
         require(am1>99&&am2>99, "Stake amouunt more than 100");
         require( am1== am2,"Both have not staked similar amount");
-        safeTransferFrom(p1, _owner, 0, am1, "0x00");
-        safeTransferFrom(p1, _owner, 0, am1, "0x00");
+        safeTransferFrom(p1, address(this), 0, am1, "0x00");
+        safeTransferFrom(p1, address(this), 0, am1, "0x00");
         uint gstatus = win(winner);
         require(winner>=0&&winner<3, "Wrong status provided");
          if(gstatus==1){
-            safeTransferFrom(_owner, p1, 0, am1, "0x00");
+            safeTransferFrom(address(this), p1, 0, am1, "0x00");
         }
         else if(gstatus==2){
-            safeTransferFrom(_owner, p2, 0, am1, "0x00");
+            safeTransferFrom(address(this), p2, 0, am1, "0x00");
         }
         else if (gstatus==0){
-            safeTransferFrom(_owner, p1, 0, am1, "0x00");
-            safeTransferFrom(_owner, p2, 0, am1, "0x00");
+            safeTransferFrom(address(this), p1, 0, am1, "0x00");
+            safeTransferFrom(address(this), p2, 0, am1, "0x00");
         }
         winner =0;
 
     }
-    
     function NFT_staking(address p1, address p2, uint id1, uint id2) public {
-        safeTransferFrom(p1, _owner, id1, 1, "0x00");
-        safeTransferFrom(p1, _owner, id2, 1, "0x00");
+        safeTransferFrom(p1, address(this), id1, 1, "0x00");
+        safeTransferFrom(p1, address(this), id2, 1, "0x00");
         uint gstatus = win(winner);
         require(winner>=0&&winner<3, "Wrong status provided");
          if(gstatus==1){
-            safeTransferFrom(_owner, p1, id2, 1, "0x00");
-            safeTransferFrom(_owner, p1, id1, 1, "0x00");
+            safeTransferFrom(address(this), p1, id2, 1, "0x00");
+            safeTransferFrom(address(this), p1, id1, 1, "0x00");
         }
         else if(gstatus==2){
-            safeTransferFrom(_owner, p1, id2, 1, "0x00");
-            safeTransferFrom(_owner, p1, id1, 1, "0x00");
+            safeTransferFrom(address(this), p1, id2, 1, "0x00");
+            safeTransferFrom(address(this), p1, id1, 1, "0x00");
         }
         else if (gstatus==0){
-            safeTransferFrom(_owner, p1, id1, 1, "0x00");
-            safeTransferFrom(_owner, p2, id2, 1, "0x00");
+            safeTransferFrom(address(this), p1, id1, 1, "0x00");
+            safeTransferFrom(address(this), p2, id2, 1, "0x00");
         }
         winner =0;
 
@@ -505,14 +506,14 @@ contract polyhess is ERC1155, Ownable {
 
     function online_game(address p1, address p2, uint8 status) public {
         if(status==1){
-            safeTransferFrom(_owner, p1, 0, 100, "0x00");
+            safeTransferFrom(address(this), p1, 0, 100, "0x00");
         }
         else if(status==2){
-            safeTransferFrom(_owner, p2, 0, 100, "0x00");
+            safeTransferFrom(address(this), p2, 0, 100, "0x00");
         }
         else if (status==0){
-            safeTransferFrom(_owner, p1, 0, 50, "0x00");
-            safeTransferFrom(_owner, p2, 0, 50, "0x00");
+            safeTransferFrom(address(this), p1, 0, 50, "0x00");
+            safeTransferFrom(address(this), p2, 0, 50, "0x00");
         }
     }
 
