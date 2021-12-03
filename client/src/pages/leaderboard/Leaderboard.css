@@ -54,8 +54,8 @@
   .farm-leaderboard__content {
     background: linear-gradient(
       95.33deg,
-      rgba(146, 71, 219, 0.2) 0%,
-      rgba(11, 53, 153, 0.2) 103.1%
+      #52366d33 0%,
+      #0b359933 103.1%
     );
     max-width: 400px;
     border-radius: 10px;
