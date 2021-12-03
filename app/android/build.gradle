@@ -15,6 +15,13 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/trustwallet/wallet-core")
+            credentials {
+                username('bionicBUG')
+                password('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')
+            }
+        }
     }
 }
 
