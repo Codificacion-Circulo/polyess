@@ -5,7 +5,7 @@ import {Fragment,useState} from 'react'
 
 
  function ControlledTabs() {
-    const [key, setKey] = useState('home');
+    const [key, setKey] = useState('collection');
   
     return (
      <div className="container text-center">
@@ -15,10 +15,10 @@ import {Fragment,useState} from 'react'
         onSelect={(k) => setKey(k)}
         className="mb-3 justify-content-center"
       >
-        <Tab eventKey="home" title="Home">
+        <Tab eventKey="collection" title="NFT Collection">
           <h1>Change 1</h1>
         </Tab>
-        <Tab eventKey="contact" title="Contact">
+        <Tab eventKey="history" title="Game History">
           <h1>Change 2</h1>
         </Tab>
       </Tabs>
@@ -61,8 +61,8 @@ function Profile(props) {
                                         <p>4th april 1998</p>
                                     </div>
                                     <div class="media">
-                                        <label>Site</label>
-                                        <p>22 Yr</p>
+                                        <label>Joined</label>
+                                        <p>4th april 1998</p>
                                     </div>
                             
                                 </div>
