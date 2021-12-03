@@ -416,6 +416,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 }
 
 contract polyhess is ERC1155, Ownable {
+
      uint8 winner;
      address _owner;
      uint tokencounter;
@@ -433,42 +434,100 @@ contract polyhess is ERC1155, Ownable {
     mapping (uint=>game) public GameID;
     uint gameID;
 
+
+
     constructor() public ERC1155("") {
         _owner = msg.sender;
         _mint (address(this), 0, 10**20, "");
         tokencounter = 1;
         gameID=0;
     }
+
+    // Events
+      event Hess_Buy(
+        uint ethAMT,
+        address recipient
+        );
+      event ex_eth_hess(
+        uint ethAMT,
+        address recipient
+        );
+      event ex_NFT(
+        uint NFTid,
+        address To,
+        address From,
+        uint buy_price
+        );
+      event mint_NFT(
+        address TO;
+        uint NFTid;
+        uint amt
+        );
+      event mint_token(
+        uint AMT
+        );
+      event FTP(
+        address F1,
+        address F2,
+        address winner
+        );
+      event TOKEN_staking(
+        address F1,
+        address F2,
+        uint amt
+        );
+      event NFT_STAKE(
+        address F1,
+        address F2,
+        uint nftid1,
+        uint nftid2
+        );
+      event TOKEN_win(
+        address winner,
+        uint amt
+        );
+      event NFT_win(
+        address winner,
+        uint nftid1,
+        uint nftid2
+        );
+
+
+    // Functions
+      // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
         require(ethamount == msg.value, " Not sufficient eth sent" );
         uint amt = (msg.value)*500;
         safeTransferFrom(address(this), msg.sender, 0, amt, "" );
-    }
+        emit Hess_Buy(ethamount, msg.sender);
+      }
+      // To exchange tokens from ethereum
     function buy_eth(uint hesstoken)public payable{
         require(hesstoken > 1000, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
         uint amt = hesstoken/550;
         ((msg.sender).transfer)(amt);
-    }
-
+        emit ex_eth_hess(amt, msg.sender);
+      }
+     // To Set Token URIs
     function uri(uint256 tokenId) override public view returns (string memory) {
-        return(_uris[tokenId]);
-    }
-
+        return(_uris[tokenId]);}
     function setTokenUri(uint256 tokenId, string memory uri) public onlyOwner {
         require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
-        _uris[tokenId] = uri;
-    }
-    function NFT_tran(uint256 tokenId, address _to, address _from)public
-     {  require(msg.sender==_from, "You are not the owner of NFT");
+        _uris[tokenId] = uri;}
+
+    function NFT_tran(uint256 tokenId, address _to, address _from, uint amt)public{
+        require(msg.sender==_from, "You are not the owner of NFT");
+        require(balanceOf(_to, 0)=>amt, " Insufficent balance");
         require(balanceOf(_to, tokenId)==1, " Address does not own this NFT");
         safeTransferFrom(_to, _from, tokenId, 1, "");
-    }
-    function minttoken(uint256 Amount)
-        public
-    {
+        safeTransferFrom(_from, _to, 0, amt, "");
+        emit ex_NFT(tokenId, _to, _from, amt);
+      }
+    function minttoken(uint256 Amount) public {
         require( msg.sender==_owner, "You can't mint this token");
         _mint(address(this), 0, Amount, "");
+        emit mint_token(Amount);
     }
 
     function mintNFT( uint256 amount)public {
@@ -478,68 +537,89 @@ contract polyhess is ERC1155, Ownable {
         safeTransferFrom(msg.sender, _owner, 0, amount,"");
         _mint(msg.sender, tokencounter, 1,"");
         tokencounter=tokencounter+1;
+        emit mint_NFT(msg.sender, tokenId, amount);
     }
 
-    function win_TokenStaking(uint256 _gameID, uint gstatus) public {
-        require(gstatus>0&&gstatus<3, "Wrong status provided");
-         if(gstatus==1){
-            safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
-        }
-        else if(gstatus==2){
-            safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
-        }
-        else if (gstatus==0){
-            safeTransferFrom(address(this), GameID[_gameID].P1, 0, GameID[_gameID].amt, "0x00");
-            safeTransferFrom(address(this), GameID[_gameID].P2, 0, GameID[_gameID].amt, "0x00");
-        }
-    }
-    function win_NFTStaking(uint256 _gameID, uint gstatus) public {
-        require(gstatus>0&&gstatus<3, "Wrong status provided");
-         if(gstatus==1){
-            safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
-            safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t2, 1, "0x00");
-        }
-        else if(gstatus==2){
-           safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t1, 1, "0x00");
-           safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
-        }
-        else if (gstatus==0){
-            safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
-            safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
-        }
-    }
+      function online_game(address p1, address p2, uint8 status) public {
+          address WINNER;
+          if(status==1){
+              WINNER = p1
+              safeTransferFrom(address(this), p1, 0, 100, "0x00");
+          }
+          else if(status==2){
+              WINNER = p2;
+              safeTransferFrom(address(this), p2, 0, 100, "0x00");
+          }
+          else if (status==0){
+              WINNER = 0x0;
+              safeTransferFrom(address(this), p1, 0, 50, "0x00");
+              safeTransferFrom(address(this), p2, 0, 50, "0x00");
+          }
+          emit FTP(p1, p2, WINNER);
 
-    function Token_staking(address p1, address p2, uint am1, uint am2) public {
-        require(am1>99&&am2>99, "Stake amouunt more than 100");
-        require( am1== am2,"Both have not staked similar amount");
-        safeTransferFrom(p1, address(this), 0, am1, "0x00");
-        safeTransferFrom(p1, address(this), 0, am1, "0x00");
-        gameID= gameID+1;
-        GameID[gameID].P1 = p1;
-        GameID[gameID].P2 = p2;
-        GameID[gameID].amt = am1;
-    }
-    function NFT_staking(address p1, address p2, uint id1, uint id2) public {
-        safeTransferFrom(p1, address(this), id1, 1, "0x00");
-        safeTransferFrom(p1, address(this), id2, 1, "0x00");
-        gameID= gameID+1;
-        GameID[gameID].P1 = p1;
-        GameID[gameID].P2 = p2;
-        GameID[gameID].nft_t1 = id1;
-        GameID[gameID].nft_t2 = id2;
-    }
+      }
 
-    function online_game(address p1, address p2, uint8 status) public {
-        if(status==1){
-            safeTransferFrom(address(this), p1, 0, 100, "0x00");
-        }
-        else if(status==2){
-            safeTransferFrom(address(this), p2, 0, 100, "0x00");
-        }
-        else if (status==0){
-            safeTransferFrom(address(this), p1, 0, 50, "0x00");
-            safeTransferFrom(address(this), p2, 0, 50, "0x00");
-        }
-    }
+
+      function Token_staking(address p1, address p2, uint am1, uint am2) public {
+          require(am1>99&&am2>99, "Stake amouunt more than 100");
+          require( am1== am2,"Both have not staked similar amount");
+          safeTransferFrom(p1, address(this), 0, am1, "0x00");
+          safeTransferFrom(p1, address(this), 0, am1, "0x00");
+          gameID= gameID+1;
+          GameID[gameID].P1 = p1;
+          GameID[gameID].P2 = p2;
+          GameID[gameID].amt = am1;
+          emit TOKEN_staking( p1, p2, am1);
+      }
+      function win_TokenStaking(uint256 _gameID, uint gstatus) public {
+          require(gstatus>0&&gstatus<3, "Wrong status provided");
+          address WINNER;
+           if(gstatus==1){
+              WINNER = GameID[_gameID].P1;
+              safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
+          }
+          else if(gstatus==2){
+              WINNER = GameID[_gameID].P2;
+              safeTransferFrom(address(this), GameID[_gameID].P2, 0, (GameID[_gameID].amt)*2, "0x00");
+          }
+          else if (gstatus==0){
+              WINNER = 0x0;
+              safeTransferFrom(address(this), GameID[_gameID].P1, 0, GameID[_gameID].amt, "0x00");
+              safeTransferFrom(address(this), GameID[_gameID].P2, 0, GameID[_gameID].amt, "0x00");
+          }
+          emit TOKEN_win(WINNER, GameID[_gameID].amt);
+      }
+
+
+      function NFT_staking(address p1, address p2, uint id1, uint id2) public {
+          safeTransferFrom(p1, address(this), id1, 1, "0x00");
+          safeTransferFrom(p1, address(this), id2, 1, "0x00");
+          gameID= gameID+1;
+          GameID[gameID].P1 = p1;
+          GameID[gameID].P2 = p2;
+          GameID[gameID].nft_t1 = id1;
+          GameID[gameID].nft_t2 = id2;
+          emit NFT_STAKE( p1, p2, id1, id2);
+      }
+      function win_NFTStaking(uint256 _gameID, uint gstatus) public {
+          require(gstatus>0&&gstatus<3, "Wrong status provided");
+          address WINNER;
+           if(gstatus==1){
+              WINNER = GameID[_gameID].P1;
+              safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
+              safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t2, 1, "0x00");
+          }
+          else if(gstatus==2){
+             WINNER = GameID[_gameID].P2;
+             safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t1, 1, "0x00");
+             safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
+          }
+          else if (gstatus==0){
+              WINNER = 0x0;
+              safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
+              safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
+          }
+          emit NFT_win(WINNER, GameID[_gameID].nft_t1, GameID[_gameID].nft_t1);
+      }
 
 }
