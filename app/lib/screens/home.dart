@@ -5,7 +5,11 @@ import 'package:polyess/screens/leaderboard_screen.dart';
 import 'package:polyess/screens/market_screen.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key? key, required String addr})
+      : _addr = addr,
+        super(key: key);
+
+  final String _addr;
 
   @override
   _HomeState createState() => _HomeState();
@@ -52,7 +56,7 @@ class _HomeState extends State<Home> {
         body: PageView(
           controller: _pageController,
           children: [
-            HomeScreen(),
+            HomeScreen(addr: widget._addr),
             LeaderBoardSceen(),
             MarketPlaceScreen(),
           ],
