@@ -2,8 +2,13 @@
     padding: 100px 0;
     position: relative;
 }
-.gray-bg {
-    background-color: #f5f5f5;
+.profile{
+  background: linear-gradient(
+    95.33deg,
+    rgba(146, 71, 219, 0.2) 0%,
+    rgba(11, 53, 153, 0.2) 103.1%
+  );
+  border-radius: 14px;
 }
 img {
     max-width: 100%;
@@ -85,7 +90,11 @@ img {
 
 .about-section .counter {
   padding: 22px 20px;
-  background: #ffffff;
+  background: linear-gradient(
+    95.33deg,
+    rgba(146, 71, 219, 0.2) 0%,
+    rgba(11, 53, 153, 0.2) 103.1%
+  );
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
 }
@@ -112,7 +121,7 @@ mark {
     color: currentColor;
 }
 .theme-color {
-    color: #fc5356;
+    color: #ff9100;
 }
 .dark-color {
     color: #20247b;
