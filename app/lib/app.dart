@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:polyess/models/style.dart';
 import 'package:polyess/screens/auth_wrapper.dart';
-import 'package:polyess/screens/home.dart';
-import 'package:polyess/screens/wallet_connect.dart';
 
 class Polyess extends StatelessWidget {
   const Polyess({Key? key}) : super(key: key);

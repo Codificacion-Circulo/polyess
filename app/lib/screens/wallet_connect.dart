@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:polyess/screens/home.dart';
 import 'package:polyess/services/wallet_service.dart';
 
@@ -50,14 +49,8 @@ class WalletConnect extends StatelessWidget {
                   child: Text('Connect Wallet'),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  var address =
-                      await FlutterSecureStorage().read(key: 'savedAddr');
-                  print(address);
-                },
-                child: Text('test'),
-              )
+              
+              
             ],
           ),
         ),
