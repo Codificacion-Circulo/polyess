@@ -57,7 +57,7 @@ const Forgot = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="form-btn form-btn-primary">
           Send Email
         </button>
       </form>
