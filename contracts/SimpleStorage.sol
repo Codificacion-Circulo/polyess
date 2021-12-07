@@ -459,8 +459,8 @@ contract polyhess is ERC1155, Ownable {
         uint buy_price
         );
       event mint_NFT(
-        address TO;
-        uint NFTid;
+        address TO,
+        uint NFTid,
         uint amt
         );
       event mint_token(
@@ -496,16 +496,18 @@ contract polyhess is ERC1155, Ownable {
     // Functions
       // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
-        require(ethamount == msg.value, " Not sufficient eth sent" );
         uint amt = (msg.value)*500;
-        safeTransferFrom(address(this), msg.sender, 0, amt, "" );
+        setApprovalForAll(address(this),true);
         emit Hess_Buy(ethamount, msg.sender);
       }
       // To exchange tokens from ethereum
-    function buy_eth(uint hesstoken)public payable{
+
+    function exchange_eth(uint hesstoken)public payable{
         require(hesstoken > 1000, " Not sufficient hesstoken sent" );
+        setApprovalForAll(address(this),true);
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
-        uint amt = hesstoken/550;
+        uint amt = (hesstoken/550);
+
         ((msg.sender).transfer)(amt);
         emit ex_eth_hess(amt, msg.sender);
       }
@@ -516,9 +518,10 @@ contract polyhess is ERC1155, Ownable {
         require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
         _uris[tokenId] = uri;}
 
+
     function NFT_tran(uint256 tokenId, address _to, address _from, uint amt)public{
         require(msg.sender==_from, "You are not the owner of NFT");
-        require(balanceOf(_to, 0)=>amt, " Insufficent balance");
+        require(balanceOf(_to, 0)>=amt, " Insufficent balance");
         require(balanceOf(_to, tokenId)==1, " Address does not own this NFT");
         safeTransferFrom(_to, _from, tokenId, 1, "");
         safeTransferFrom(_from, _to, 0, amt, "");
@@ -534,24 +537,29 @@ contract polyhess is ERC1155, Ownable {
         require(tokencounter<=75, "All NFTs are minted");
         require(amount>=NFT_Price, "Price of NFT more than given");
         require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
+        setApprovalForAll(address(this),true);
         safeTransferFrom(msg.sender, _owner, 0, amount,"");
         _mint(msg.sender, tokencounter, 1,"");
         tokencounter=tokencounter+1;
-        emit mint_NFT(msg.sender, tokenId, amount);
+        emit mint_NFT(msg.sender, tokencounter, amount);
     }
 
       function online_game(address p1, address p2, uint8 status) public {
           address WINNER;
+
           if(status==1){
-              WINNER = p1
+              WINNER = p1;
+              setApprovalForAll(address(this),true);
               safeTransferFrom(address(this), p1, 0, 100, "0x00");
           }
           else if(status==2){
               WINNER = p2;
+              setApprovalForAll(address(this),true);
               safeTransferFrom(address(this), p2, 0, 100, "0x00");
           }
           else if (status==0){
-              WINNER = 0x0;
+              WINNER = 0x0000000000000000000000000000000000000000;
+              setApprovalForAll(address(this),true);
               safeTransferFrom(address(this), p1, 0, 50, "0x00");
               safeTransferFrom(address(this), p2, 0, 50, "0x00");
           }
@@ -563,6 +571,7 @@ contract polyhess is ERC1155, Ownable {
       function Token_staking(address p1, address p2, uint am1, uint am2) public {
           require(am1>99&&am2>99, "Stake amouunt more than 100");
           require( am1== am2,"Both have not staked similar amount");
+          setApprovalForAll(address(this),true);
           safeTransferFrom(p1, address(this), 0, am1, "0x00");
           safeTransferFrom(p1, address(this), 0, am1, "0x00");
           gameID= gameID+1;
@@ -576,14 +585,18 @@ contract polyhess is ERC1155, Ownable {
           address WINNER;
            if(gstatus==1){
               WINNER = GameID[_gameID].P1;
+              setApprovalForAll(address(this),true);
               safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
           }
           else if(gstatus==2){
               WINNER = GameID[_gameID].P2;
+              setApprovalForAll(address(this),true);
+
               safeTransferFrom(address(this), GameID[_gameID].P2, 0, (GameID[_gameID].amt)*2, "0x00");
           }
           else if (gstatus==0){
-              WINNER = 0x0;
+              WINNER = 0x0000000000000000000000000000000000000000;
+              setApprovalForAll(address(this),true);
               safeTransferFrom(address(this), GameID[_gameID].P1, 0, GameID[_gameID].amt, "0x00");
               safeTransferFrom(address(this), GameID[_gameID].P2, 0, GameID[_gameID].amt, "0x00");
           }
@@ -615,11 +628,15 @@ contract polyhess is ERC1155, Ownable {
              safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
           }
           else if (gstatus==0){
-              WINNER = 0x0;
+              WINNER = 0x0000000000000000000000000000000000000000;
               safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
               safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
           }
           emit NFT_win(WINNER, GameID[_gameID].nft_t1, GameID[_gameID].nft_t1);
+      }
+
+      function Get_My_MONEY() public onlyOwner payable{
+          ((msg.sender).transfer)(address(this).balance);
       }
 
 }
