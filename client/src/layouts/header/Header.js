@@ -71,7 +71,8 @@ function Header(props) {
   return (
     <Fragment>
       {modal && (<ConnectModal onClose={closeModalHandler} open={modal} tried={triedEager} />)}
-      <Navbar sticky="top" style={{ background: "none" }} expand="lg">
+      {/* <Navbar sticky="top" style={{ background: "#5e12a533" }} expand="lg"> */}
+      <Navbar sticky="top" style={{ background: "#760cda33" }} expand="lg">
         <Container>
           <Navbar.Brand href="/home">
             <img
@@ -93,7 +94,7 @@ function Header(props) {
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/faq">Faq</Nav.Link>
               <button onClick={openModalHandler} className="btn btn-primary">{account === null
-                ? 'Network Connected'
+                ? 'Connect'
                 : account
                   ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
                   : 'Connect'}</button>
