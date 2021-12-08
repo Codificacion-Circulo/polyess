@@ -150,10 +150,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         override
     {
         require(to != address(0), "ERC1155: transfer to the zero address");
-        require(
-            from == _msgSender() || isApprovedForAll(from, _msgSender()),
-            "ERC1155: caller is not owner nor approved"
-        );
+
 
         address operator = _msgSender();
 
@@ -496,8 +493,8 @@ contract polyhess is ERC1155, Ownable {
     // Functions
       // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
-        uint amt = (msg.value)*500;
-        setApprovalForAll(address(this),true);
+        uint amt = (msg.value)*5;
+        safeTransferFrom(address(this),msg.sender, 0, amt, "" );
         emit Hess_Buy(ethamount, msg.sender);
       }
       // To exchange tokens from ethereum
