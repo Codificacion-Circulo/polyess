@@ -11,6 +11,7 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Address.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Strings.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/access/Ownable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/token/ERC1155/ERC1155Holder.sol";
 
 /**
  *
@@ -20,7 +21,7 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contr
  *
  * _Available since v3.1._
  */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI, IERC1155Receiver, ERC1155Holder {
     using SafeMath for uint256;
     using Address for address;
 
@@ -463,11 +464,6 @@ contract polyhess is ERC1155, Ownable {
       event mint_token(
         uint AMT
         );
-      event FTP(
-        address F1,
-        address F2,
-        address winner
-        );
       event TOKEN_staking(
         address F1,
         address F2,
@@ -493,6 +489,7 @@ contract polyhess is ERC1155, Ownable {
     // Functions
       // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
+        require(msg.value>=ethamount,"Not enough token sent");
         uint amt = (msg.value)*5;
         safeTransferFrom(address(this),msg.sender, 0, amt, "" );
         emit Hess_Buy(ethamount, msg.sender);
@@ -501,7 +498,6 @@ contract polyhess is ERC1155, Ownable {
 
     function exchange_eth(uint hesstoken)public payable{
         require(hesstoken > 1000, " Not sufficient hesstoken sent" );
-        setApprovalForAll(address(this),true);
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
         uint amt = (hesstoken/550);
 
@@ -538,39 +534,17 @@ contract polyhess is ERC1155, Ownable {
         safeTransferFrom(msg.sender, _owner, 0, amount,"");
         _mint(msg.sender, tokencounter, 1,"");
         tokencounter=tokencounter+1;
-        emit mint_NFT(msg.sender, tokencounter, amount);
+        emit mint_NFT(msg.sender, tokencounter-1, amount);
     }
 
-      function online_game(address p1, address p2, uint8 status) public {
-          address WINNER;
-
-          if(status==1){
-              WINNER = p1;
-              setApprovalForAll(address(this),true);
-              safeTransferFrom(address(this), p1, 0, 100, "0x00");
-          }
-          else if(status==2){
-              WINNER = p2;
-              setApprovalForAll(address(this),true);
-              safeTransferFrom(address(this), p2, 0, 100, "0x00");
-          }
-          else if (status==0){
-              WINNER = 0x0000000000000000000000000000000000000000;
-              setApprovalForAll(address(this),true);
-              safeTransferFrom(address(this), p1, 0, 50, "0x00");
-              safeTransferFrom(address(this), p2, 0, 50, "0x00");
-          }
-          emit FTP(p1, p2, WINNER);
-
-      }
 
 
       function Token_staking(address p1, address p2, uint am1, uint am2) public {
           require(am1>99&&am2>99, "Stake amouunt more than 100");
           require( am1== am2,"Both have not staked similar amount");
-          setApprovalForAll(address(this),true);
+
           safeTransferFrom(p1, address(this), 0, am1, "0x00");
-          safeTransferFrom(p1, address(this), 0, am1, "0x00");
+          safeTransferFrom(p2, address(this), 0, am1, "0x00");
           gameID= gameID+1;
           GameID[gameID].P1 = p1;
           GameID[gameID].P2 = p2;
@@ -582,18 +556,18 @@ contract polyhess is ERC1155, Ownable {
           address WINNER;
            if(gstatus==1){
               WINNER = GameID[_gameID].P1;
-              setApprovalForAll(address(this),true);
+
               safeTransferFrom(address(this), GameID[_gameID].P1, 0, (GameID[_gameID].amt)*2, "0x00");
           }
           else if(gstatus==2){
               WINNER = GameID[_gameID].P2;
-              setApprovalForAll(address(this),true);
+
 
               safeTransferFrom(address(this), GameID[_gameID].P2, 0, (GameID[_gameID].amt)*2, "0x00");
           }
           else if (gstatus==0){
               WINNER = 0x0000000000000000000000000000000000000000;
-              setApprovalForAll(address(this),true);
+
               safeTransferFrom(address(this), GameID[_gameID].P1, 0, GameID[_gameID].amt, "0x00");
               safeTransferFrom(address(this), GameID[_gameID].P2, 0, GameID[_gameID].amt, "0x00");
           }
