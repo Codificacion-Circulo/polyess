@@ -2,16 +2,14 @@
 
 pragma solidity >=0.6.0 <0.8.0;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/token/ERC1155/IERC1155Receiver.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/token/ERC1155/IERC1155MetadataURI.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/token/ERC1155/IERC1155Receiver.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Context.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/introspection/ERC165.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/math/SafeMath.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Address.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/utils/Strings.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0/contracts/token/ERC1155/ERC1155Holder.sol";
+import "./dependencies/IERC1155Receiver.sol";
+import "./dependencies/IERC1155MetadataURI.sol";
+import "./dependencies/Context.sol";
+import "./dependencies/ERC165.sol";
+import "./dependencies/SafeMath.sol";
+import "./dependencies/Address.sol";
+import "./dependencies/ERC1155Holder.sol";
+import "./dependencies/Ownable.sol";
 
 /**
  *
@@ -520,8 +518,7 @@ contract polyhess is ERC1155, Ownable {
         safeTransferFrom(_from, _to, 0, amt, "");
         emit ex_NFT(tokenId, _to, _from, amt);
       }
-    function minttoken(uint256 Amount) public {
-        require( msg.sender==_owner, "You can't mint this token");
+    function minttoken(uint256 Amount) public  onlyOwner{
         _mint(address(this), 0, Amount, "");
         emit mint_token(Amount);
     }
@@ -606,7 +603,7 @@ contract polyhess is ERC1155, Ownable {
           emit NFT_win(WINNER, GameID[_gameID].nft_t1, GameID[_gameID].nft_t1);
       }
 
-      function Get_My_MONEY() public onlyOwner payable{
+      function Get_My_MONEY() public onlyOwner{
           ((msg.sender).transfer)(address(this).balance);
       }
 
