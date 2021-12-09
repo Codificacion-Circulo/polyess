@@ -9,18 +9,16 @@ function Market(props) {
         <Fragment>
              <div class="container text-center">
 
-<div class="logo">
-      <h1><b>NFT MarketPlace</b></h1>
+<div class="logo my-3">
+      <h1 className="text-light"><b>NFT MarketPlace</b></h1>
 </div>
 
-<h1>Pure CSS Profile Cards with Bootstrap</h1>
-
 </div>
 
 
 
 
-<div class="container">
+<div class="container market-container py-4">
 	<div class="row">
 		
 
@@ -40,64 +38,16 @@ function Market(props) {
                     <h3 className="text-white">INDIA</h3>
                         <p className="text-danger">COUNTRY</p>
                     </div>
+
+                    <div class="col-xs-4">
+                      <button className="btn btn-success">BUY</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="col-md-4">
-    <div class="profile-card-6"><img src={red} class="img img-responsive"/>
-        <div class="profile-name">JOHN
-            <br/>DOE</div>
-        <div class="profile-overview">
-            <div class="profile-overview">
-                <div class="row text-center">
-                    <div class="col-xs-4">
-                        <h3 className="text-light">969</h3>
-                        <p className="text-danger">Rank</p>
-                    </div>
-                    <div class="col-xs-4">
-                        <h3>50</h3>
-                        <p>Matches</p>
-                    </div>
-                    <div class="col-xs-4">
-                        <h3>35</h3>
-                        <p>Goals</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-		
-
-
-<div class="col-md-4">
-    <div class="profile-card-6"><img src={golden} class="img img-responsive"/>
-        <div class="profile-name">JOHN
-            <br/>DOE</div>
-        <div class="profile-overview">
-            <div class="profile-overview">
-                <div class="row text-center">
-                    <div class="col-xs-4">
-                        <h3 className="text-light">969</h3>
-                        <p className="text-danger">Rank</p>
-                    </div>
-                    <div class="col-xs-4">
-                        <h3>50</h3>
-                        <p>Matches</p>
-                    </div>
-                    <div class="col-xs-4">
-                        <h3>35</h3>
-                        <p>Goals</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 	</div>
 </div>
         </Fragment>
