@@ -52,22 +52,6 @@ const BASE_URI = process.env.BASE_URI
 
 
 
-// exports.getOneOrder = async (req, res, next) => {
-//     const _id = req.params.id
-//     if (!_id) {
-//         return next(new ErrorResponse("Invalid Params", 400));
-//     }
-//     try {
-//         const order = await Order.findOne({ assetId: _id })
-//         if (!order) {
-//             return next(new ErrorResponse("Order Not Found", 404));
-//         }
-//         res.send(order)
-//     } catch (e) {
-//         next(e)
-//     }
-// }
-
 exports.register = async (req, res, next) => {
     const {address, username } = req.body;
     try {
@@ -84,19 +68,29 @@ exports.register = async (req, res, next) => {
 
 
   exports.login = async (req, res, next) => {
+    const sort={}
     const { address, username } = req.body;
     if (!address) {
       return next(new ErrorResponse("Please provide an email and password", 400));
     }
+    if(req.query.sortBy){
+      const parts =req.query.sortBy.split(':')
+      sort[parts[0]]= part[1]==='desc'?-1:1
+  }
     try {
-      const user = await User.findOne({ address })
+      const user = await User.findOne({ address }).populate({
+        path:'nfts',
+        options:{
+            limit:parseInt(req.query.limit),
+            skip:parseInt(req.query.skip),
+            sort
+        }
+    }).exec();
+      nf=user.nfts
       if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
-      }
-      await user.populate({
-        path:'nfts',
-    }).execPopulate()
-      res.status(200).json({ success: true,user});
+      };
+      res.status(200).json({ success: true,user,nf});
     } catch (err) {
       next(err);
     }

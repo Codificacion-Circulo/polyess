@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Nft =require("./Nft")
 
 const UserSchema = new mongoose.Schema({
   address: {
