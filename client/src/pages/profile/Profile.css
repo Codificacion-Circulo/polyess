@@ -40,7 +40,6 @@ img {
 }
 .about-text p {
   font-size: 18px;
-  max-width: 450px;
 }
 .about-text p mark {
   font-weight: 600;
@@ -82,9 +81,13 @@ img {
   font-size: 15px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .about-avatar {
     margin-top: 30px;
+  }
+  .about-text {
+    justify-content: center;
+    text-align: center;
   }
 }
 
