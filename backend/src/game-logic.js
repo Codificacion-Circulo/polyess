@@ -101,6 +101,7 @@
      this.emit('createNewGame', {gameId: gameId, mySocketId: this.id});
  
      // Join the Room and wait for the other player
+     
      this.join(gameId)
  }
  
