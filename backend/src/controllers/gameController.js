@@ -24,7 +24,7 @@ exports.getAllGames = async (req, res, next) => {
   }
   try {
       const games = await Game.find(match)
-          .sort(srt || 'amount')
+          .sort(srt || 'gameId')
           .limit(Number(lim));
       if (!games) {
           return next(new ErrorResponse("Games Not Found", 404));
