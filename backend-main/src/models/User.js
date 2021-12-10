@@ -63,9 +63,6 @@ UserSchema.methods.draw = async function () {
   this.rank += 1.5;
 };
 
-
-
-
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
