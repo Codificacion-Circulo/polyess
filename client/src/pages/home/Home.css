@@ -1,6 +1,6 @@
 /* utility classes  */
 .transAll {
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Home Section  */
@@ -18,15 +18,15 @@
 }
 
 .homeContentHeading h1 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .homeContentHeading h1 span {
-    color: #d1996d;
+  color: #d1996d;
 }
 
 .homeContentHeading {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .homeContentButton button {
@@ -45,70 +45,121 @@
 }
 
 .homeContentButton button:hover {
-    box-shadow: 0px 7px 10px #a87a57;
-    /* transform: translateY(-5px); */
+  box-shadow: 0px 7px 10px #a87a57;
+  /* transform: translateY(-5px); */
 }
 
 /* Game Modes Section  */
 .modesContainer {
-    margin: 2rem 0;
-    padding: 0 8rem;
+  margin: 2rem auto;
 }
 
-.modesContentHeading h1{
-    color: #fff;
-    margin-bottom: 2rem;
+.modesContentHeading h1 {
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
 .modesColumns {
-    border: 2px solid red;
-    margin: 0 1rem;
-    border-radius: 1.5rem;
+  margin: 0 2rem;
 }
 
-.modesColumns:hover {
-    border: 2px solid #fff;
+.scene {
+  perspective: 600px;
+}
+.scene {
+  width: 200px;
+  min-width: 150px;
+  height: 350px;
+  margin: 22px;
+}
+.items {
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-shadow: 2px 2px #e02577;
+}
+.item {
+  position: absolute;
+  backface-visibility: hidden;
+}
+.back {
+  transform: rotateY(180deg);
+}
+.items-2 {
+  transform-origin: center right;
+  background-image: linear-gradient(
+    to bottom,
+    #051937,
+    #00466d,
+    #007aa1,
+    #00b1cc,
+    #12ebeb
+  );
+}
+.items-2:hover {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+.items-3 {
+  transform-origin: center left;
+  background-image: linear-gradient(
+    to top,
+    #520f60,
+    #3650a2,
+    #0086d0,
+    #00bae7,
+    #12ebeb
+  );
+}
+.items-3:hover {
+  transform: translateX(100%) rotateY(-180deg);
 }
 
 /* Nft MarketPlace  */
 .nftContainer {
-    padding: 0 8rem;
+  padding: 0 8rem;
 }
 
 .nftContentHeading h1 {
-    color: #fff;
-    margin-bottom: 2rem;
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
 /* Stake Section  */
 .stakeContainer {
-    padding: 0 8rem;
+  padding: 0 8rem;
 }
 
 .stakeContentHeading h1 {
-    color: #fff;
-    margin-bottom: 2rem;
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
 /* Token Section  */
 .tokenContainer {
-    padding: 0 8rem;
+  padding: 0 8rem;
 }
 
 .tokenContentHeading h1 {
-    color: #fff;
-    margin-bottom: 2rem;    
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
 /* WhyUs Container */
 .whyUsContainer {
-    padding: 0 8rem;
+  padding: 0 8rem;
 }
 
 .whyUsTitle h1 {
-    color: #fff;
+  color: #fff;
 }
 
 .whyUsContentHeading h1 {
-    color: #fff;
+  color: #fff;
 }

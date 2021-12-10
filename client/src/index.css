@@ -6,12 +6,71 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: #2c2b2b;
-  background: linear-gradient(55% 180% at 5% 100%, #ba896433 0,#0a0a0a00 75%,rgba(10,10,10,0) 100%); */
-  /* background: radial-gradient(55% 180% at 5% 100%,#ba896433 0,rgba(10,10,10,0) 75%,rgba(10,10,10,0) 100%); */
+  background: #0f0f0f;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.form-group,
+.form-group label,
+.form-group input {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+}
+
+.form-group input {
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background-color: #eee;
+  outline-width: 0;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  border-bottom: 3px solid coral;
+}
+
+.form-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+}
+
+.form-btn:hover {
+  opacity: 0.8;
+}
+
+.form-btn-primary {
+  background-color: coral;
+  color: #fff;
+}
+
+.error-message {
+  width: 100%;
+  display: inline-block;
+  padding: 5px;
+  background: red;
+  color: #fff;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.success-message {
+  width: 100%;
+  display: inline-block;
+  padding: 5px;
+  background: green;
+  color: #fff;
+  text-align: center;
+  margin: 0.5rem 0;
 }

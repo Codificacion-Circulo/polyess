@@ -7,11 +7,12 @@ import useSound from 'use-sound'
 import chessMove from '../../../assets/game/moveSoundEffect.mp3'
 import Piece from './piece'
 import piecemap from './piecemap'
+import TableDiv from '../table/Table'
+
 import { useParams } from 'react-router-dom'
 import { ColorContext } from '../../../store/colorcontext' 
 // import VideoChatApp from '../../connection/videochat'
 const socket  = require('../../../integration/connection/socket').socket
-
 
 class ChessGame extends React.Component {
 
@@ -232,14 +233,6 @@ class ChessGame extends React.Component {
 
 
 const ChessGameWrapper = (props) => {
-    /**
-     * player 1
-     *      - socketId 1
-     *      - socketId 2 ???
-     * player 2
-     *      - socketId 2
-     *      - socketId 1
-     */
 
 
 
@@ -307,18 +300,13 @@ const ChessGameWrapper = (props) => {
         {opponentDidJoinTheGame ? (
           <div className="container">
             <h4> Opponent: {opponentUserName} </h4>
-            <div className="container mx-auto" style={{ display: "flex" }}>
+            <div style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
                 gameId={gameid}
                 color={color.didRedirect}
               />
-              {/* <VideoChatApp
-                mySocketId={socket.id}
-                opponentSocketId={opponentSocketId}
-                myUserName={props.myUserName}
-                opponentUserName={opponentUserName}
-              /> */}
+              <TableDiv/>
             </div>
             <h4> You: {props.myUserName} </h4>
           </div>

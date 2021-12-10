@@ -5,7 +5,11 @@ import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import { Web3ReactProvider} from '@web3-react/core'
 import { Web3Provider } from '@ethersproject/providers'
 import Home from "./pages/home/Home"
-import Faq from "./pages/faq/Faq"
+import Register from "./components/auth/Register"
+import Login from "./components/auth/Login"
+import Forgot from "./components/auth/Forgot"
+import Reset from "./components/auth/Reset"
+import Faqs from "./components/faqs/Faqs"
 import Leaderboard from "./pages/leaderboard/Leaderboard"
 import Profile from "./pages/profile/Profile"
 import Market from "./pages/market/Market"
@@ -52,7 +56,19 @@ function App() {
         >
           <Switch>
             <Route path="/" exact>
-              <Home/>
+              <Home />
+            </Route>
+            <Route path="/register" exact>
+              <Register />
+            </Route>
+            <Route path="/login" exact>
+              <Login />
+            </Route>
+            <Route path="/forgot" exact>
+              <Forgot />
+            </Route>
+            <Route path="/reset" exact>
+              <Reset />
             </Route>
             <Route path = "/game" exact>
             <Onboard setUserName = {setUserName}/>
@@ -76,7 +92,7 @@ function App() {
               <Profile />
             </Route>
             <Route path="/faq" exact>
-              <Faq />
+              <Faqs />
             </Route>
             <Route path="*">
               <Error />
