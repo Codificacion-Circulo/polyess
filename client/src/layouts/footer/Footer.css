@@ -50,9 +50,6 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   text-decoration: none;
   outline: none;
 }
-
-
-
 .new_footer_top .f_widget.about-widget .f_list li a:hover {
   color: #5e2ced;
 }

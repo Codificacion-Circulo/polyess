@@ -12,7 +12,8 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #0087ca;
+  /* background-color: #0087ca; */
+  background-color: #06f87f;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }

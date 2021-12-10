@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect } from "react"
 import './Header.css'
-import logo from "../../logo.svg";
+import logo from "../../assets/header/logo.png"
 import { Navbar, Container, Nav, Toast, ToastContainer } from 'react-bootstrap';
 import ConnectModal from '../../components/misc/connect/ConnectModal'
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
@@ -11,6 +11,7 @@ import {
 } from '@web3-react/injected-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
+
 
 const changeNetwork = async () => {
   if (window.ethereum) {

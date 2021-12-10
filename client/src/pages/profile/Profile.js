@@ -36,42 +36,11 @@ function Profile(props) {
     return (
         <section class="section about-section" id="about">
             <div class="container p-4 my-4 profile">
-                <div class="row align-items-center flex-row-reverse">
+                <div class="row align-items-center flex-row-reverse justify-content-center text-center">
                     <div class="col-lg-6">
                         <div class="about-text go-to">
-                            <h3 class="text-light">Deepak Kumar</h3>
-                            <h6 class="theme-color lead">{userAddr}</h6>
-                            <p className="text-light">specializing in creating stylish, modern websites, web services and online stores. My passion is to design digital user experiences through the bold interface and meaningful interactions.</p>
-                            <div class="row about-list">
-   
-                                <div class="col-md-6">
-                                    <div class="media">
-                                        <label className="text-success">E-mail</label>
-                                        <p className="text-light">info@domain.com</p>
-                                    </div>
-                                    <div class="media">
-                                        <label className="text-success">Twitter</label>
-                                        <p className="text-light">820-885-3321</p>
-                                    </div>
-                            
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="media">
-                                        <label className="text-success">Insta</label>
-                                        <p className="text-light">4th april 1998</p>
-                                    </div>
-                                    <div class="media">
-                                        <label className="text-success">Joined</label>
-                                        <p className="text-light">4th april 1998</p>
-                                    </div>
-                            
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="about-avatar text-center">
-                            <img src="https://picsum.photos/id/237/400/400" className="ui-w-100 rounded-circle" title="" alt=""/>
+                            <h3 class="text-light">userName</h3>
+                            <h6 class="theme-color lead">{userAddr}userAddress</h6>
                         </div>
                     </div>
                 </div>

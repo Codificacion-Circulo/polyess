@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import homeBg from "../../assets/homePage/homeBg.jpeg";
+import homeBg from "../../assets/homePage/homeBg1";
 import { Container, Button, Row, Col } from "react-bootstrap";
 
 import "./Home.css";
@@ -55,7 +55,7 @@ function Home(props) {
               <h1>Nft Marketplace</h1>
             </div>
             <div className="col nftColumns nftContentImg d-flex justify-content-center">
-              ddsg
+              <img src={homeBg} alt="" srcset="" />
             </div>
           </div>
         </div>
