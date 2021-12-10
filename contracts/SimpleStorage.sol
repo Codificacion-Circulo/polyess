@@ -1183,7 +1183,7 @@ contract polyhess is ERC1155, Ownable {
      address _owner;
      uint tokencounter;
      uint maxnft=35;
-     uint NFT_Price=10000;
+     uint NFT_Price=10000000000; //0.01 eth
     mapping (uint256 => string) private _uris;
 
     struct game {
@@ -1260,16 +1260,16 @@ contract polyhess is ERC1155, Ownable {
       // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
         require(msg.value>=ethamount,"Not enough token sent");
-        uint amt = (msg.value)*5;
+        uint amt = (msg.value)/1000000;
         safeTransferFrom(address(this),msg.sender, 0, amt, "" );
         emit Hess_Buy(amt, msg.sender);
       }
       // To exchange tokens from ethereum
 
     function exchange_eth(uint hesstoken)public payable{
-        require(hesstoken > 10000, " Not sufficient hesstoken sent" );
+        require(hesstoken > 999999999, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
-        uint amt = (hesstoken/550);
+        uint amt = (hesstoken/11*10);
 
         ((msg.sender).transfer)(amt);
         emit ex_eth_hess(hesstoken, msg.sender);
@@ -1309,7 +1309,7 @@ contract polyhess is ERC1155, Ownable {
 
 
       function Token_staking(address p1, address p2, uint am1, uint am2) public {
-          require(am1>99&&am2>99, "Stake amouunt more than 100");
+          require(am1>9999999&&am2>9999999, "Stake amouunt more than 100");
           require( am1== am2,"Both have not staked similar amount");
 
           safeTransferFrom(p1, address(this), 0, am1, "0x00");
@@ -1364,20 +1364,23 @@ contract polyhess is ERC1155, Ownable {
               LOSER = GameID[_gameID].P2;
               safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
               safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t2, 1, "0x00");
+               emit NFT_win(WINNER, LOSER, GameID[_gameID].nft_t1, GameID[_gameID].nft_t2, _gameID);
           }
           else if(gstatus==2){
              WINNER = GameID[_gameID].P2;
                LOSER = GameID[_gameID].P1;
              safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t1, 1, "0x00");
              safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
+              emit NFT_win(WINNER, LOSER, GameID[_gameID].nft_t2, GameID[_gameID].nft_t1, _gameID);
           }
           else if (gstatus==0){
               WINNER = 0x0000000000000000000000000000000000000000;
               LOSER = 0x0000000000000000000000000000000000000000;
               safeTransferFrom(address(this), GameID[_gameID].P1, GameID[_gameID].nft_t1, 1, "0x00");
               safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
+               emit NFT_win(WINNER, LOSER, GameID[_gameID].nft_t1, GameID[_gameID].nft_t2, _gameID);
           }
-          emit NFT_win(WINNER, LOSER, GameID[_gameID].nft_t1, GameID[_gameID].nft_t1, _gameID);
+
       }
 
       function Get_My_MONEY() public onlyOwner{
