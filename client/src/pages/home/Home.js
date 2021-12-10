@@ -22,14 +22,29 @@ function Home(props) {
         </div>
       </div>
       <hr />
-      <div class="container-fluid d-flex flex-column modesContainer">
-        <div className="modesContentHeading">
+      <div class="container-fluid modesContainer d-flex flex-column">
+        <div className="modesContentHeading text-center">
           <h1>Our Gaming Modes!!!</h1>
         </div>
-        <div class="row">
-          <div class="col modesColumns transAll">Column</div>
-          <div class="col modesColumns transAll">Column</div>
-          <div class="col modesColumns transAll">Column</div>
+        <div class="row justify-content-center">
+            <div class="scene col modesColumns transAll">
+              <div class="items items-2">
+                <div class="item font">the</div>
+                <div class="item back">secret</div>
+              </div>
+            </div>
+            <div class="scene col modesColumns transAll">
+              <div class="items items-3">
+                <div class="item font">the</div>
+                <div class="item back">secret</div>
+              </div>
+            </div>
+            <div class="scene col modesColumns transAll">
+              <div class="items items-2">
+                <div class="item font">the</div>
+                <div class="item back">secret</div>
+              </div>
+            </div>
         </div>
       </div>
       <hr />
@@ -72,12 +87,16 @@ function Home(props) {
       <hr />
       <div className="container-fluid whyUsContainer">
         <div className="whyUsContent">
-          <div className="whyUsTitle d-flex justify-content-center"><h1>Why Us</h1></div>
+          <div className="whyUsTitle d-flex justify-content-center">
+            <h1>Why Us</h1>
+          </div>
           <div className="row">
             <div className="col whyUsColumns whyUsContentHeading">
               <h1>Decentralized</h1>
             </div>
-            <div className="col d-flex justify-content-center whyUsColumns whyUsContentImg">ddsg</div>
+            <div className="col d-flex justify-content-center whyUsColumns whyUsContentImg">
+              ddsg
+            </div>
           </div>
         </div>
       </div>
