@@ -1,9 +1,9 @@
 const Nft = require('../models/Nft')
 const Game=require('../models/Game')
 const ErrorResponse = require("../utils/errorResponse");
-const fetch = require('cross-fetch');
+// const fetch = require('cross-fetch');
 const User = require('../models/User');
-const BASE_URI = process.env.BASE_URI
+// const BASE_URI = process.env.BASE_URI
 
 
 
@@ -63,12 +63,15 @@ exports.postHessWin = async (req, res, next) => {
       if (!user1||!user0) {
             return next(new ErrorResponse("Users Not Found", 404));
         }
-      await Game.findOneAndUpdate({
+      const game=await Game.findOneAndUpdate({
           gameId:parseInt(data.args[3].hex)
       },{
           winner:user0._id,
           loser:user1._id
       })
+      if (!game) {
+        return next(new ErrorResponse("Game Not Found", 404));
+    }
       await user0.addToken(parseInt(data.args[2].hex))
           await user1.subToken(parseInt(data.args[2].hex))
           await user0.save();
@@ -97,12 +100,15 @@ exports.postNftWin = async (req, res, next) => {
       if (!user1||!user0) {
             return next(new ErrorResponse("Users Not Found", 404));
         }
-      await Game.findOneAndUpdate({
+      const game=await Game.findOneAndUpdate({
           gameId:parseInt(data.args[4].hex)
       },{
           winner:user0._id,
           loser:user1._id
       })
+      if (!game) {
+        return next(new ErrorResponse("Game Not Found", 404));
+    }
       await Nft.findOneAndUpdate({ assetId:parseInt(data.args[0].hex) }, {owner:user0._id});
       res.status(200).json({ sucess: true});
     } catch (err) {
