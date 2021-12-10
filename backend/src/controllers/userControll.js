@@ -1,8 +1,7 @@
-const Nft = require('../models/Nft')
 const ErrorResponse = require("../utils/errorResponse");
 const fetch = require('cross-fetch');
 const User = require('../models/User');
-const BASE_URI = process.env.BASE_URI
+const BASE_URI = process.env.BASE_URI;
 
 
 exports.getAllUsers = async (req, res, next) => {
@@ -42,7 +41,7 @@ exports.register = async (req, res, next) => {
         address,
         username
       });
-      res.status(200).json({ sucess: true, user});
+      res.send(user);
     } catch (err) {
       next(err);
     }
@@ -53,14 +52,14 @@ exports.register = async (req, res, next) => {
 
 
   exports.login = async (req, res, next) => {
-    const sort={}
+    const sort={};
     const { address, username } = req.body;
     if (!address) {
       return next(new ErrorResponse("Please provide valid login credentials", 400));
     }
     if(req.query.sortBy){
-      const parts =req.query.sortBy.split(':')
-      sort[parts[0]]= part[1]==='desc'?-1:1
+      const parts =req.query.sortBy.split(':');
+      sort[parts[0]]= part[1]==='desc'?-1:1;
   }
     try {
       const user = await User.findOne({ address })
@@ -89,12 +88,12 @@ exports.register = async (req, res, next) => {
     }
 })
     .exec();
-      const nfts=user.nfts
-      const win=user.win
-      const loose=user.loose
+      const nfts=user.nfts;
+      const win=user.win;
+      const loose=user.loose;
       if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
-      };
+      }
       res.status(200).json({ success: true,user,nfts,win,loose});
     } catch (err) {
       next(err);
@@ -110,14 +109,14 @@ exports.postHessBought = async (req, res, next) => {
     try {
     const user = await User.findOne({
         address:data.args[1]
-    })
+    });
     if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
       }
 
-        await user.addToken(parseInt(data.args[0].hex))
+        await user.addToken(parseInt(data.args[0].hex));
         await user.save();
-        res.status(200).json({ success: true, data: "Token Added" });
+        res.sendStatus(200);
     } catch (e) {
         next(e);
     }
@@ -133,14 +132,14 @@ exports.postHessMint = async (req, res, next) => {
   try {
   const user = await User.findOne({
       address:data.args[1]
-  })
+  });
   if (!user) {
       return next(new ErrorResponse("Invalid credentials", 401));
     }
 
-      await user.addToken(parseInt(data.args[0].hex))
+      await user.addToken(parseInt(data.args[0].hex));
       await user.save();
-      res.status(200).json({ success: true, data: "Token Added" });
+      res.sendStatus(200);
   } catch (e) {
       next(e);
   }
@@ -157,14 +156,13 @@ exports.postHessDestroyed = async (req, res, next) => {
     try {
     const user =await  User.findOne({
         address:data.args[1]
-    })
+    });
     if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
       }
-   
-        await user.subToken(parseInt(data.args[0].hex))
+        await user.subToken(parseInt(data.args[0].hex));
         await user.save();
-        res.status(200).json({ success: true, data: "Token Destroyed" });
+        res.sendStatus(200);
     } catch (e) {
         next(e);
     }

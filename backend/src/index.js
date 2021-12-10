@@ -1,20 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const TrackerState =require('./models/tracker_state')
+const TrackerState =require('./models/tracker_state');
 const connectDB = require('./db/mongoose');
 // const http = require('http')
 // const socketio = require('socket.io')
 // const gameLogic = require('./game-logic')
 const nftRoute=require('./route/NftRoute');
 const userRoute=require('./route/UserRoute');
-const gameRoute=require('./route/GameRoute')
-const processTokenEvents = require('./services/auctiontracker')
+const gameRoute=require('./route/GameRoute');
+const processTokenEvents = require('./services/auctiontracker');
 const errorHandler = require("./middleware/error");
 
 const connect=()=>{
     const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'))
+  db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', async () => {
     const result = await TrackerState.find({ contractAddress: process.env.CONTRACT_ADDRESS });
     if (!result.length) {
@@ -22,12 +22,12 @@ const connect=()=>{
     }
     const trackContractCallback = async () => {
         const lastBlockRecord = await TrackerState.find({ contractAddress: process.env.CONTRACT_ADDRESS });
-        await processTokenEvents(lastBlockRecord[0].lastBlockProcessed)
+        await processTokenEvents(lastBlockRecord[0].lastBlockProcessed);
         setTimeout(() => trackContractCallback(), 1000);
-    }
+    };
     await trackContractCallback();
-  })
-}
+  });
+};
 const app = express();
 connectDB();
 connect();
@@ -47,9 +47,9 @@ app.get('/', async (_, res) => {
         res.status(500).send();
     }
 });
-app.use(userRoute)
-app.use(nftRoute)
-app.use(gameRoute)
+app.use(userRoute);
+app.use(nftRoute);
+app.use(gameRoute);
 app.use(errorHandler);
 
 

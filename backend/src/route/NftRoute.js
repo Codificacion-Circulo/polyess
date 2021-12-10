@@ -6,6 +6,6 @@ const {
 } = require("../controllers/nftController");
 router.route('/nfts').get(getAllNfts);
 router.route("/nftMinted").post(postNftMinted);
-router.route('/nftTransfer').post(postNftExchange)
+router.route('/nftTransfer').post(postNftExchange);
 
 module.exports = router;

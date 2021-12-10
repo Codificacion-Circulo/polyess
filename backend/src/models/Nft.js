@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose')
+const { model, Schema } = require('mongoose');
 
 const nft = new Schema({
   assetId: {
@@ -6,7 +6,7 @@ const nft = new Schema({
   },
   price: {
     type: Number,
-    required:true,
+    required: true,
   },
   image: {
     type: String,
@@ -14,15 +14,15 @@ const nft = new Schema({
   attributes: {
     type: Array,
   },
-  owner:{
-    type:Schema.Types.ObjectId,
-    required:true,
-    unique:true,
-    ref:'User'
-}
+  owner: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    unique: true,
+    ref: 'User'
+  }
 
 });
 
-const Nft = model('Nft', nft)
+const Nft = model('Nft', nft);
 
-module.exports = Nft
+module.exports = Nft;

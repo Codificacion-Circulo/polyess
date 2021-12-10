@@ -1,66 +1,66 @@
 const mongoose = require("mongoose");
-const Nft =require("./Nft")
-const Game=require('./Game')
+const Nft = require("./Nft");
+const Game = require('./Game');
 const UserSchema = new mongoose.Schema({
   address: {
     type: String,
-    unique:true,
+    unique: true,
     required: [true, "Please provide id"],
-    trim:true
+    trim: true
   },
   username: {
     type: String,
-    unique:true,
+    unique: true,
     required: [true, "Please provide username"],
-    trim:true
+    trim: true
   },
   rank: {
     type: Number,
-    default:0
+    default: 0
   },
   token: {
     type: Number,
-    default:500000
+    default: 500000
   }
 });
 
-UserSchema.virtual('nfts',{
-  ref:'Nft',
-  localField:'_id',
-  foreignField:'owner'
-})
+UserSchema.virtual('nfts', {
+  ref: 'Nft',
+  localField: '_id',
+  foreignField: 'owner'
+});
 
-UserSchema.virtual('win',{
-  ref:'Game',
-  localField:'_id',
-  foreignField:'winner'
-})
-UserSchema.virtual('loose',{
-  ref:'Game',
-  localField:'_id',
-  foreignField:'loser'
-})
+UserSchema.virtual('win', {
+  ref: 'Game',
+  localField: '_id',
+  foreignField: 'winner'
+});
+UserSchema.virtual('loose', {
+  ref: 'Game',
+  localField: '_id',
+  foreignField: 'loser'
+});
 UserSchema.methods.addToken = async function (tkn) {
-  this.token+=tkn;
+  this.token += tkn;
 };
 
 UserSchema.methods.subToken = async function (tkn) {
-  this.token-=tkn;
+  this.token -= tkn;
 };
 
 
 UserSchema.methods.won = async function () {
-  this.rank+=2;
+  this.rank += 2;
 };
 
 
-UserSchema.methods.lost =async function () {
-  this.rank+=1;
+UserSchema.methods.lost = async function () {
+  this.rank += 1;
 };
 
 
 UserSchema.methods.draw = async function () {
-  this.rank+=1.5;
+  this.rank += 1.5;
 };
 
 
