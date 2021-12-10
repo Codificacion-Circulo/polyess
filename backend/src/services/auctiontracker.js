@@ -18,8 +18,6 @@ const token = loadOrderContract();
 
 const callAPI = async (endpoint, data) => {
   try {
-    // console.log(data)
-    // console.log(apiEndPoint + endpoint)
     await axios({
       method: 'post',
       url: apiEndPoint + endpoint,
