@@ -78,7 +78,6 @@ exports.register = async (req, res, next) => {
         path:'nfts',
         options:{
             limit:parseInt(req.query.limit),
-            skip:parseInt(req.query.skip),
             sort
         }
     })
@@ -86,7 +85,6 @@ exports.register = async (req, res, next) => {
       path:'win',
       options:{
           limit:parseInt(req.query.limit),
-          skip:parseInt(req.query.skip),
           sort
       }
   })
@@ -94,7 +92,6 @@ exports.register = async (req, res, next) => {
     path:'loose',
     options:{
         limit:parseInt(req.query.limit),
-        skip:parseInt(req.query.skip),
         sort
     }
 })
