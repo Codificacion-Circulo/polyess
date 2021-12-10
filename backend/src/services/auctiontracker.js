@@ -18,13 +18,13 @@ const token = loadOrderContract();
 
 const callAPI = async (endpoint, data) => {
   try {
-    console.log(endpoint)
+    // console.log(data)
     // console.log(apiEndPoint + endpoint)
-    // await axios({
-    //   method: 'post',
-    //   url: apiEndPoint + endpoint,
-    //   data,
-    // })
+    await axios({
+      method: 'post',
+      url: apiEndPoint + endpoint,
+      data,
+    })
   } catch(err) {
     // If bad request save to dead letter queue
     if (err && err.response && err.response.status === 400) {

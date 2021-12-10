@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Nft =require("./Nft")
-
+const Game=require('./Game')
 const UserSchema = new mongoose.Schema({
   address: {
     type: String,
@@ -30,6 +30,16 @@ UserSchema.virtual('nfts',{
   foreignField:'owner'
 })
 
+UserSchema.virtual('win',{
+  ref:'Game',
+  localField:'_id',
+  foreignField:'winner'
+})
+UserSchema.virtual('loose',{
+  ref:'Game',
+  localField:'_id',
+  foreignField:'loser'
+})
 UserSchema.methods.addToken = function (tkn) {
   this.token+=tkn;
 };

@@ -78,19 +78,39 @@ exports.register = async (req, res, next) => {
       sort[parts[0]]= part[1]==='desc'?-1:1
   }
     try {
-      const user = await User.findOne({ address }).populate({
+      const user = await User.findOne({ address })
+      .populate({
         path:'nfts',
         options:{
             limit:parseInt(req.query.limit),
             skip:parseInt(req.query.skip),
             sort
         }
-    }).exec();
-      nf=user.nfts
+    })
+    .populate({
+      path:'win',
+      options:{
+          limit:parseInt(req.query.limit),
+          skip:parseInt(req.query.skip),
+          sort
+      }
+  })
+  .populate({
+    path:'loose',
+    options:{
+        limit:parseInt(req.query.limit),
+        skip:parseInt(req.query.skip),
+        sort
+    }
+})
+    .exec();
+      const nfts=user.nfts
+      const win=user.win
+      const loose=user.loose
       if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
       };
-      res.status(200).json({ success: true,user,nf});
+      res.status(200).json({ success: true,user,nfts,win,loose});
     } catch (err) {
       next(err);
     }
@@ -102,7 +122,6 @@ exports.register = async (req, res, next) => {
 
 exports.postHessBought = async (req, res, next) => {
     const data  = req.body;
-    console.log(data.args[1])
     if (!data) {
         return next(new ErrorResponse("Invalid Parameters", 400));
     }
@@ -121,6 +140,30 @@ exports.postHessBought = async (req, res, next) => {
         next(e);
     }
 };
+
+
+
+exports.postHessMint = async (req, res, next) => {
+  const data  = req.body;
+  if (!data) {
+      return next(new ErrorResponse("Invalid Parameters", 400));
+  }
+  try {
+  const user = await User.findOne({
+      address:data.args[1]
+  })
+  if (!user) {
+      return next(new ErrorResponse("Invalid credentials", 401));
+    }
+
+      await user.addToken(parseInt(data.args[0].hex))
+      await user.save();
+      res.status(200).json({ success: true, data: "Token Added" });
+  } catch (e) {
+      next(e);
+  }
+};
+
 
 
 

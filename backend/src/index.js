@@ -8,6 +8,7 @@ const connectDB = require('./db/mongoose');
 // const gameLogic = require('./game-logic')
 const nftRoute=require('./route/NftRoute');
 const userRoute=require('./route/UserRoute');
+const gameRoute=require('./route/GameRoute')
 const processTokenEvents = require('./services/auctiontracker')
 const errorHandler = require("./middleware/error");
 
@@ -48,6 +49,7 @@ app.get('/', async (_, res) => {
 });
 app.use(userRoute)
 app.use(nftRoute)
+app.use(gameRoute)
 app.use(errorHandler);
 
 

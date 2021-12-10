@@ -45,11 +45,11 @@ exports.postNftMinted = async (req, res, next) => {
       const user1 = await User.findOne({
         address:data.args[2]
     })
-    if (!user1||user0) {
+    if (!user1||!user0) {
           return next(new ErrorResponse("Users Not Found", 404));
       }
       await Nft.findOneAndUpdate({ assetId:parseInt(data.args[0].hex) }, {price:parseInt(data.args[3].hex),
-        owner:data.args[1]});
+        owner:user0._id});
 
           await user1.addToken(parseInt(data.args[3].hex))
           await user0.subToken(parseInt(data.args[3].hex))
