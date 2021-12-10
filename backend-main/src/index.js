@@ -3,15 +3,11 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const TrackerState =require('./models/tracker_state');
 const connectDB = require('./db/mongoose');
-// const http = require('http')
-// const socketio = require('socket.io')
-// const gameLogic = require('./game-logic')
 const nftRoute=require('./route/NftRoute');
 const userRoute=require('./route/UserRoute');
 const gameRoute=require('./route/GameRoute');
 const processTokenEvents = require('./services/auctiontracker');
 const errorHandler = require("./middleware/error");
-
 const connect=()=>{
     const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
@@ -31,15 +27,8 @@ const connect=()=>{
 const app = express();
 connectDB();
 connect();
-// const server = http.createServer(app)
-// const io = socketio(server)
-// io.on('connection', client => {
-//     gameLogic.initializeGame(io, client)
-// })
 app.use(cors());
 app.use(express.json());
-
-
 app.get('/', async (_, res) => {
     try {
         res.send('<h1>Status:Online</h1>');
@@ -51,16 +40,11 @@ app.use(userRoute);
 app.use(nftRoute);
 app.use(gameRoute);
 app.use(errorHandler);
-
-
-
 const PORT = process.env.PORT;
-const serverr = app.listen(PORT, () =>
+const server = app.listen(PORT, () =>
     console.log(`Sever running on port ${PORT}`)
 );
-
-
 process.on("unhandledRejection", (err, promise) => {
     console.log(`Logged Error: ${err.message}`);
-    serverr.close(() => process.exit(1));
+    server.close(() => process.exit(1));
 });
