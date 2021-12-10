@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 
-const URL = 'https://polyess.herokuapp.com/' 
+// const URL = 'https://polyess.herokuapp.com/' 
+const URL = 'localhost/' 
 
 const socket = io(URL)
 
