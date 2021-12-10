@@ -3,7 +3,7 @@ const axios = require('axios');
 const TrackerState = require('../models/tracker_state');
 const EventDeadLetterQueue = require('../models/event_deadletter_queue');
 const TokenAbi = require('../abi/Token.json');
-const ALCHMEY_API=process.env.ALCHMEY_API;
+const ALCHMEY_API = process.env.ALCHMEY_API;
 const provider = new ethers.providers.JsonRpcProvider(ALCHMEY_API);
 const apiEndPoint = process.env.API_ENDPOINT;
 
@@ -12,10 +12,7 @@ const loadOrderContract = () => {
   let address = process.env.CONTRACT_ADDRESS;
   return new ethers.Contract(address, abi, provider);
 };
-
 const token = loadOrderContract();
-
-
 const callAPI = async (endpoint, data) => {
   try {
     await axios({
@@ -23,14 +20,12 @@ const callAPI = async (endpoint, data) => {
       url: apiEndPoint + endpoint,
       data,
     });
-  } catch(err) {
-    // If bad request save to dead letter queue
+  } catch (err) {
     if (err && err.response && err.response.status === 400) {
       console.warn(`[bad-request] add event to dead-letter-queue, txHash: ${data.transactionHash}`);
-      await EventDeadLetterQueue.create({contract: process.env.CONTRACT_ADDRESS, event: data});
+      await EventDeadLetterQueue.create({ contract: process.env.CONTRACT_ADDRESS, event: data });
       return;
     }
-    // If other reasons (server unreachable for example) throw and block;
     throw err;
   }
 };
@@ -38,9 +33,7 @@ const callAPI = async (endpoint, data) => {
 const processTokenEvents = async (startFromBlock) => {
   const currentBlock = await provider.getBlockNumber();
   let lastBlockProcessed = startFromBlock;
-
   console.info(`Tracking block: ${startFromBlock} - ${currentBlock}`);
-
   const handleHessBought = async (event) => {
     return callAPI('hessBought', event);
   };
@@ -50,32 +43,26 @@ const processTokenEvents = async (startFromBlock) => {
   const handleHessMinted = async (event) => {
     return callAPI('hessMinted', event);
   };
-
   const handleNftMinted = async (event) => {
     return callAPI('nftMinted', event);
   };
   const handleNftTransfer = async (event) => {
     return callAPI('nftTransfer', event);
   };
-  
   const handleHessStaked = async (event) => {
     return callAPI('hessStaked', event);
   };
   const handleNftStaked = async (event) => {
     return callAPI('nftStaked', event);
   };
-
   const handleHessWon = async (event) => {
     return callAPI('hessWon', event);
   };
   const handleNftWon = async (event) => {
     return callAPI('nftWon', event);
   };
- 
   async function handleEvents(events) {
-
     for (const event of events) {
-      // // Order lifecycle events
       if (event.event === "Hess_Buy") {
         console.log(`[HessBought] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
         await handleHessBought(event);
@@ -100,7 +87,6 @@ const processTokenEvents = async (startFromBlock) => {
         console.log(`[HessStaked] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
         await handleHessStaked(event);
       }
-     
       if (event.event === "NFT_STAKE") {
         console.log(`[nftStaked] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
         await handleNftStaked(event);
@@ -113,8 +99,6 @@ const processTokenEvents = async (startFromBlock) => {
         console.log(`[nftWon] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
         await handleNftWon(event);
       }
-    
-
       lastBlockProcessed = event.blockNumber + 1;
     }
   }
@@ -123,16 +107,12 @@ const processTokenEvents = async (startFromBlock) => {
     const pastEvents = await token.queryFilter('*', startFromBlock, currentBlock);
     const batches = pastEvents.reduce((batchArray, item, index) => {
       const chunkIndex = Math.floor(index / 10);
-
-      if(!batchArray[chunkIndex]) {
-        batchArray[chunkIndex] = []; // start a new chunk
+      if (!batchArray[chunkIndex]) {
+        batchArray[chunkIndex] = [];
       }
-
       batchArray[chunkIndex].push(item);
-
       return batchArray;
     }, []);
-
     batches.length && console.log(`Event batches to run ${batches.length}`);
     let runBatch = 0;
     await new Promise((resolve) => {
@@ -141,12 +121,10 @@ const processTokenEvents = async (startFromBlock) => {
           clearInterval(interval);
           return resolve();
         }
-
         await handleEvents(batches[runBatch]);
-        await TrackerState.updateOne({contractAddress: process.env.CONTRACT_ADDRESS}, {lastBlockProcessed});
+        await TrackerState.updateOne({ contractAddress: process.env.CONTRACT_ADDRESS }, { lastBlockProcessed });
         console.log(`[PastEvents] Proccesed batch ${runBatch + 1} of ${batches.length}`);
         console.log(`[PastEvents] LastBlockProcessed: ${lastBlockProcessed}`);
-
         runBatch += 1;
       }, 5000);
     });
@@ -154,5 +132,4 @@ const processTokenEvents = async (startFromBlock) => {
     console.error(err.message);
   }
 };
-
 module.exports = processTokenEvents;
