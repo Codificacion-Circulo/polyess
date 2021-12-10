@@ -7,7 +7,7 @@ const {
     postHessDestroyed,
     getAllUsers,
 } = require("../controllers/userControll");
-router.route("/all").get(getAllUsers)
+router.route("/users").get(getAllUsers)
 router.route("/login").get(login)
 router.route("/register").post(register)
 router.route("/hessBought").post(postHessBought);
