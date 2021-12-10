@@ -40,13 +40,30 @@ UserSchema.virtual('loose',{
   localField:'_id',
   foreignField:'loser'
 })
-UserSchema.methods.addToken = function (tkn) {
+UserSchema.methods.addToken = async function (tkn) {
   this.token+=tkn;
 };
 
 UserSchema.methods.subToken = async function (tkn) {
   this.token-=tkn;
 };
+
+
+UserSchema.methods.won = async function () {
+  this.rank+=2;
+};
+
+
+UserSchema.methods.lost =async function () {
+  this.rank+=1;
+};
+
+
+UserSchema.methods.draw = async function () {
+  this.rank+=1.5;
+};
+
+
 
 
 const User = mongoose.model("User", UserSchema);

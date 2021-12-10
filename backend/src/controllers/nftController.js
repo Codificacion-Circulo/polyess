@@ -5,6 +5,35 @@ const User = require('../models/User');
 const BASE_URI = process.env.BASE_URI
 
 
+exports.getAllNfts = async (req, res, next) => {
+  var srt = 0;
+  var lim = 0;
+  const match = {};
+  let params = new URLSearchParams(req.query);
+  if (req.query.sort) {
+      srt = req.query.sort;
+      params.delete('sort');
+  }
+  if (req.query.limit) {
+      lim = req.query.limit;
+      params.delete('limit');
+  }
+  for (const [key, value] of (params)) {
+      match[key] = value;
+  }
+  try {
+      const nfts = await Nft.find(match)
+          .sort(srt || 'price')
+          .limit(Number(lim));
+      if (!nfts) {
+          return next(new ErrorResponse("Nfts Not Found", 404));
+      }
+      res.send(nfts);
+  } catch (e) {
+      next(e);
+  }
+};
+
 
 
 exports.postNftMinted = async (req, res, next) => {

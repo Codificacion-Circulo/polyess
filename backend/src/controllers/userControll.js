@@ -5,51 +5,34 @@ const User = require('../models/User');
 const BASE_URI = process.env.BASE_URI
 
 
-
-
-// exports.getAllOrder = async (req, res, next) => {
-//     var srt = 0
-//     var lim = 0
-//     const array = []
-//     let params = new URLSearchParams(req.query);
-//     if (req.query.sort) {
-//         srt = req.query.sort
-//         params.delete('sort')
-//     }
-//     if (req.query.limit) {
-//         lim = req.query.limit
-//         params.delete('limit')
-//     }
-//     for (const [key, value] of (params)) {
-//         var match = {}
-//         match.trait_type = key,
-//             match.value = value
-//         array.push({ attributes: { $elemMatch: match } })
-//     }
-//     try {
-//         var orders = {};
-//         if (array.length > 0) {
-//             orders = await Order.find(
-//                 { $and: array }
-//             )
-//                 .sort(srt || 'price')
-//                 .limit(Number(lim))
-//         } else {
-//             orders = await Order.find(
-//                 {}
-//             )
-//                 .sort(srt)
-//                 .limit(Number(lim))
-//         }
-//         if (!orders) {
-//             return next(new ErrorResponse("Orders Not Found", 404));
-//         }
-//         res.send(orders)
-//     } catch (e) {
-//         next(e);
-//     }
-// }
-
+exports.getAllUsers = async (req, res, next) => {
+  var srt = 0;
+  var lim = 0;
+  const match = {};
+  let params = new URLSearchParams(req.query);
+  if (req.query.sort) {
+      srt = req.query.sort;
+      params.delete('sort');
+  }
+  if (req.query.limit) {
+      lim = req.query.limit;
+      params.delete('limit');
+  }
+  for (const [key, value] of (params)) {
+      match[key] = value;
+  }
+  try {
+      const users = await User.find(match)
+          .sort(srt || 'rank')
+          .limit(Number(lim));
+      if (!users) {
+          return next(new ErrorResponse("Users Not Found", 404));
+      }
+      res.send(users);
+  } catch (e) {
+      next(e);
+  }
+};
 
 
 exports.register = async (req, res, next) => {
@@ -63,21 +46,9 @@ exports.register = async (req, res, next) => {
     } catch (err) {
       next(err);
     }
-  };
+};
 
 
-  exports.getAll = async (req, res, next) => {
-    try {
-      const user = await User.find({})
-      if (!user) {
-        return next(new ErrorResponse("Invalid credentials", 401));
-      };
-      res.status(200).json({ success: true,user});
-    } catch (err) {
-      next(err);
-    }
-  };
-  
 
 
 
@@ -85,7 +56,7 @@ exports.register = async (req, res, next) => {
     const sort={}
     const { address, username } = req.body;
     if (!address) {
-      return next(new ErrorResponse("Please provide an email and password", 400));
+      return next(new ErrorResponse("Please provide valid login credentials", 400));
     }
     if(req.query.sortBy){
       const parts =req.query.sortBy.split(':')
@@ -129,9 +100,6 @@ exports.register = async (req, res, next) => {
       next(err);
     }
   };
-  
-  
-  
 
 
 exports.postHessBought = async (req, res, next) => {
