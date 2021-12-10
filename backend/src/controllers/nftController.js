@@ -32,3 +32,32 @@ exports.postNftMinted = async (req, res, next) => {
   };
 
 
+
+  exports.postNftExchange = async (req, res, next) => {
+    const data  = req.body;
+    if (!data) {
+        return next(new ErrorResponse("Invalid Parameters", 400));
+    }
+    try {
+      const user0 = await User.findOne({
+          address:data.args[1]
+      })
+      const user1 = await User.findOne({
+        address:data.args[2]
+    })
+    if (!user1||user0) {
+          return next(new ErrorResponse("Users Not Found", 404));
+      }
+      await Nft.findOneAndUpdate({ assetId:parseInt(data.args[0].hex) }, {price:parseInt(data.args[3].hex),
+        owner:data.args[1]});
+
+          await user1.addToken(parseInt(data.args[3].hex))
+          await user0.subToken(parseInt(data.args[3].hex))
+          await user1.save();
+          await user0.save()
+
+      res.status(200).json({ sucess: true});
+    } catch (err) {
+      next(err);
+    }
+  };
