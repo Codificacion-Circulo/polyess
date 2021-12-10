@@ -85,40 +85,49 @@ exports.postHessWin = async (req, res, next) => {
     return next(new ErrorResponse("Invalid Parameters", 400));
   }
   try {
-    const user0 = await User.findOne({
-      address: data.args[0]
+    const game =await Game.findOne({
+      gameId:parseInt(data.args[3].hex)
     });
-    const user1 = await User.findOne({
-      address: data.args[1]
-    });
-    if (!user1 || !user0) {
-      return next(new ErrorResponse("Users Not Found", 404));
+    if (!game) {
+      return next(new ErrorResponse("Game Not Found", 404));
     }
+    
     if (data.args[0] === data.args[1]) {
+      const user0 = await User.findOne({
+        address: game.initialPlayer
+      });
+      const user1 = await User.findOne({
+        address: game.finalPlayer
+      });
+      if (!user1 || !user0) {
+        return next(new ErrorResponse("Users Not Found", 404));
+      }
       await user0.draw();
       await user1.draw();
       await user0.save();
       await user1.save();
       res.sendStatus(200);
     } else {
-      const game = await Game.findOneAndUpdate({
-        gameId: parseInt(data.args[3].hex)
-      }, {
-        winner: user0._id,
-        loser: user1._id
+      const user0 = await User.findOne({
+        address: data.args[0]
       });
-      if (!game) {
-        return next(new ErrorResponse("Game Not Found", 404));
+      const user1 = await User.findOne({
+        address: data.args[1]
+      });
+      if (!user1 || !user0) {
+        return next(new ErrorResponse("Users Not Found", 404));
       }
+      game.winner=user0._id;
+      game.loser=user1._id;
       await user0.addToken(parseInt(data.args[2].hex));
       await user1.subToken(parseInt(data.args[2].hex));
       await user0.won();
       await user1.lost();
+      await game.save()
       await user0.save();
       await user1.save();
       res.sendStatus(200);
     }
-
   } catch (err) {
     next(err);
   }
@@ -133,39 +142,48 @@ exports.postNftWin = async (req, res, next) => {
     return next(new ErrorResponse("Invalid Parameters", 400));
   }
   try {
-    const user0 = await User.findOne({
-      address: data.args[0]
+    const game =await Game.findOne({
+      gameId:parseInt(data.args[4].hex)
     });
-    const user1 = await User.findOne({
-      address: data.args[1]
-    });
-    if (!user1 || !user0) {
-      return next(new ErrorResponse("Users Not Found", 404));
+    if (!game) {
+      return next(new ErrorResponse("Game Not Found", 404));
     }
+    
     if (data.args[0] === data.args[1]) {
+      const user0 = await User.findOne({
+        address: game.initialPlayer
+      });
+      const user1 = await User.findOne({
+        address: game.finalPlayer
+      });
+      if (!user1 || !user0) {
+        return next(new ErrorResponse("Users Not Found", 404));
+      }
       await user0.draw();
       await user1.draw();
       await user0.save();
       await user1.save();
       res.sendStatus(200);
     } else {
-      const game = await Game.findOneAndUpdate({
-        gameId: parseInt(data.args[4].hex)
-      }, {
-        winner: user0._id,
-        loser: user1._id
+      const user0 = await User.findOne({
+        address: data.args[0]
       });
-      if (!game) {
-        return next(new ErrorResponse("Game Not Found", 404));
+      const user1 = await User.findOne({
+        address: data.args[1]
+      });
+      if (!user1 || !user0) {
+        return next(new ErrorResponse("Users Not Found", 404));
       }
-      await Nft.findOneAndUpdate({ assetId: parseInt(data.args[0].hex) }, { owner: user0._id });
+      game.winner=user0._id;
+      game.loser=user1._id;
+      await Nft.findOneAndUpdate({ assetId: parseInt(data.args[3].hex) }, { owner: user0._id });
       await user0.won();
       await user1.lost();
+      await game.save()
       await user0.save();
       await user1.save();
       res.sendStatus(200);
     }
-
   } catch (err) {
     next(err);
   }
