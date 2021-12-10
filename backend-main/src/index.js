@@ -1,28 +1,28 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const TrackerState =require('./models/tracker_state');
+const TrackerState = require('./models/tracker_state');
 const connectDB = require('./db/mongoose');
-const nftRoute=require('./route/NftRoute');
-const userRoute=require('./route/UserRoute');
-const gameRoute=require('./route/GameRoute');
+const nftRoute = require('./route/NftRoute');
+const userRoute = require('./route/UserRoute');
+const gameRoute = require('./route/GameRoute');
 const processTokenEvents = require('./services/auctiontracker');
 const errorHandler = require("./middleware/error");
-const connect=()=>{
+const connect = () => {
     const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', async () => {
-    const result = await TrackerState.find({ contractAddress: process.env.CONTRACT_ADDRESS });
-    if (!result.length) {
-      await TrackerState.create({ contractAddress: process.env.CONTRACT_ADDRESS, lastBlockProcessed: 0 });
-    }
-    const trackContractCallback = async () => {
-        const lastBlockRecord = await TrackerState.find({ contractAddress: process.env.CONTRACT_ADDRESS });
-        await processTokenEvents(lastBlockRecord[0].lastBlockProcessed);
-        setTimeout(() => trackContractCallback(), 1000);
-    };
-    await trackContractCallback();
-  });
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', async () => {
+        const result = await TrackerState.find({ contractAddress: process.env.CONTRACT_ADDRESS });
+        if (!result.length) {
+            await TrackerState.create({ contractAddress: process.env.CONTRACT_ADDRESS, lastBlockProcessed: 0 });
+        }
+        const trackContractCallback = async () => {
+            const lastBlockRecord = await TrackerState.find({ contractAddress: process.env.CONTRACT_ADDRESS });
+            await processTokenEvents(lastBlockRecord[0].lastBlockProcessed);
+            setTimeout(() => trackContractCallback(), 1000);
+        };
+        await trackContractCallback();
+    });
 };
 const app = express();
 connectDB();
