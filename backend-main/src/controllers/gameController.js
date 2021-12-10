@@ -123,7 +123,7 @@ exports.postHessWin = async (req, res, next) => {
       await user1.subToken(parseInt(data.args[2].hex));
       await user0.won();
       await user1.lost();
-      await game.save()
+      await game.save();
       await user0.save();
       await user1.save();
       res.sendStatus(200);
@@ -179,7 +179,7 @@ exports.postNftWin = async (req, res, next) => {
       await Nft.findOneAndUpdate({ assetId: parseInt(data.args[3].hex) }, { owner: user0._id });
       await user0.won();
       await user1.lost();
-      await game.save()
+      await game.save();
       await user0.save();
       await user1.save();
       res.sendStatus(200);
