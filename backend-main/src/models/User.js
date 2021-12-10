@@ -64,5 +64,4 @@ UserSchema.methods.draw = async function () {
 };
 
 const User = mongoose.model("User", UserSchema);
-
 module.exports = User;
