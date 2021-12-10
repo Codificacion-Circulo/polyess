@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
   },
   token: {
     type: Number,
-    default:0
+    default:500000
   }
 });
 
