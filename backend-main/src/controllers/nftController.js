@@ -54,8 +54,8 @@ exports.postNftMinted = async (req, res, next) => {
         assetId:parseInt(data.args[1].hex),
         price:parseInt(data.args[2].hex),
       });
-      const tkkn=parseInt(data.args[2].hex);
-      await user.subToken(tkkn);
+      await user.subToken(parseInt(data.args[2].hex));
+      await user.save();
       res.sendStatus(200);
     } catch (err) {
       next(err);
