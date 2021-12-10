@@ -105,7 +105,7 @@ exports.register = async (req, res, next) => {
       if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
       };
-      res.status(200).json({ success: true,loose});
+      res.status(200).json({ success: true,user,nfts,win,loose});
     } catch (err) {
       next(err);
     }
