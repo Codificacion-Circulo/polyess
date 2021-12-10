@@ -1367,7 +1367,7 @@ contract polyhess is ERC1155, Ownable {
           }
           else if(gstatus==2){
              WINNER = GameID[_gameID].P2;
-               LOSER = GameID[_gameID].P2;
+               LOSER = GameID[_gameID].P1;
              safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t1, 1, "0x00");
              safeTransferFrom(address(this), GameID[_gameID].P2, GameID[_gameID].nft_t2, 1, "0x00");
           }
