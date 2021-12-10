@@ -40,13 +40,14 @@ UserSchema.virtual('loose', {
   localField: '_id',
   foreignField: 'loser'
 });
+
 UserSchema.methods.addToken = async function (tkn) {
   this.token += tkn;
 };
+
 UserSchema.methods.subToken = async function (tkn) {
   this.token -= tkn;
 };
-
 
 UserSchema.methods.won = async function () {
   this.rank += 2;
