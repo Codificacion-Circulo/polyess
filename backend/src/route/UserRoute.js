@@ -5,7 +5,9 @@ const {
     register,
     postHessBought,
     postHessDestroyed,
+    getAll,
 } = require("../controllers/userControll");
+router.route("/all").get(getAll)
 router.route("/login").get(login)
 router.route("/register").post(register)
 router.route("/hessBought").post(postHessBought);

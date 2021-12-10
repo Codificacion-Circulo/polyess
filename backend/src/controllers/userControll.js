@@ -66,6 +66,53 @@ exports.register = async (req, res, next) => {
   };
 
 
+  exports.getAll = async (req, res, next) => {
+    const sort={}
+    if(req.query.sortBy){
+      const parts =req.query.sortBy.split(':')
+      sort[parts[0]]= part[1]==='desc'?-1:1
+  }
+    try {
+      const user = await User.find({})
+      .populate({
+        path:'nfts',
+        options:{
+            limit:parseInt(req.query.limit),
+            skip:parseInt(req.query.skip),
+            sort
+        }
+    })
+    .populate({
+      path:'win',
+      options:{
+          limit:parseInt(req.query.limit),
+          skip:parseInt(req.query.skip),
+          sort
+      }
+  })
+  .populate({
+    path:'loose',
+    options:{
+        limit:parseInt(req.query.limit),
+        skip:parseInt(req.query.skip),
+        sort
+    }
+})
+    .exec();
+      const nfts=user.nfts
+      const win=user.win
+      const loose=user.loose
+      if (!user) {
+        return next(new ErrorResponse("Invalid credentials", 401));
+      };
+      res.status(200).json({ success: true,loose});
+    } catch (err) {
+      next(err);
+    }
+  };
+  
+
+
 
   exports.login = async (req, res, next) => {
     const sort={}
