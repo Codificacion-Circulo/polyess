@@ -1262,7 +1262,7 @@ contract polyhess is ERC1155, Ownable {
         require(msg.value>=ethamount,"Not enough token sent");
         uint amt = (msg.value)*5;
         safeTransferFrom(address(this),msg.sender, 0, amt, "" );
-        emit Hess_Buy(ethamount, msg.sender);
+        emit Hess_Buy(amt, msg.sender);
       }
       // To exchange tokens from ethereum
 
@@ -1272,7 +1272,7 @@ contract polyhess is ERC1155, Ownable {
         uint amt = (hesstoken/550);
 
         ((msg.sender).transfer)(amt);
-        emit ex_eth_hess(amt, msg.sender);
+        emit ex_eth_hess(hesstoken, msg.sender);
       }
      // To Set Token URIs
     function uri(uint256 tokenId) override public view returns (string memory) {
@@ -1321,7 +1321,7 @@ contract polyhess is ERC1155, Ownable {
           emit TOKEN_staking( p1, p2, am1, gameID);
       }
       function win_TokenStaking(uint256 _gameID, uint gstatus) public {
-          require(gstatus>0&&gstatus<3, "Wrong status provided");
+          require(gstatus>=0&&gstatus<3, "Wrong status provided");
           address WINNER;
           address LOSER;
            if(gstatus==1){
@@ -1337,7 +1337,7 @@ contract polyhess is ERC1155, Ownable {
           }
           else if (gstatus==0){
               WINNER = 0x0000000000000000000000000000000000000000;
-              LOSER = 0x0000000000000000000000000000000000000000;
+              LOSER =  0x0000000000000000000000000000000000000000;
               safeTransferFrom(address(this), GameID[_gameID].P1, 0, GameID[_gameID].amt, "0x00");
               safeTransferFrom(address(this), GameID[_gameID].P2, 0, GameID[_gameID].amt, "0x00");
           }
@@ -1356,7 +1356,7 @@ contract polyhess is ERC1155, Ownable {
           emit NFT_STAKE( p1, p2, id1, id2, gameID);
       }
       function win_NFTStaking(uint256 _gameID, uint gstatus) public {
-          require(gstatus>0&&gstatus<3, "Wrong status provided");
+          require(gstatus>=0&&gstatus<3, "Wrong status provided");
            address WINNER;
            address LOSER;
            if(gstatus==1){
