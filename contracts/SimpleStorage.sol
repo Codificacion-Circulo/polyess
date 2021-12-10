@@ -1182,7 +1182,7 @@ contract polyhess is ERC1155, Ownable {
      uint8 winner;
      address _owner;
      uint tokencounter;
-     uint maxnft=75;
+     uint maxnft=35;
      uint NFT_Price=10000;
     mapping (uint256 => string) private _uris;
 
@@ -1267,7 +1267,7 @@ contract polyhess is ERC1155, Ownable {
       // To exchange tokens from ethereum
 
     function exchange_eth(uint hesstoken)public payable{
-        require(hesstoken > 1000, " Not sufficient hesstoken sent" );
+        require(hesstoken > 10000, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
         uint amt = (hesstoken/550);
 
@@ -1285,9 +1285,9 @@ contract polyhess is ERC1155, Ownable {
     function NFT_tran(uint256 tokenId, address _to, address _from, uint amt)public{
         require(msg.sender==_from, "You are not the owner of NFT");
         require(balanceOf(_to, 0)>=amt, " Insufficent balance");
-        require(balanceOf(_to, tokenId)==1, " Address does not own this NFT");
-        safeTransferFrom(_to, _from, tokenId, 1, "");
-        safeTransferFrom(_from, _to, 0, amt, "");
+        require(balanceOf(_from, tokenId)==1, " Address does not own this NFT");
+        safeTransferFrom(_from, _to, tokenId, 1, "");
+        safeTransferFrom(_to, _from, 0, amt, "");
         emit ex_NFT(tokenId, _to, _from, amt);
       }
     function minttoken(uint256 Amount) public  onlyOwner{
@@ -1347,7 +1347,7 @@ contract polyhess is ERC1155, Ownable {
 
       function NFT_staking(address p1, address p2, uint id1, uint id2) public {
           safeTransferFrom(p1, address(this), id1, 1, "0x00");
-          safeTransferFrom(p1, address(this), id2, 1, "0x00");
+          safeTransferFrom(p2, address(this), id2, 1, "0x00");
           gameID= gameID+1;
           GameID[gameID].P1 = p1;
           GameID[gameID].P2 = p2;
