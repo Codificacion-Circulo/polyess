@@ -43,7 +43,6 @@ UserSchema.virtual('loose', {
 UserSchema.methods.addToken = async function (tkn) {
   this.token += tkn;
 };
-
 UserSchema.methods.subToken = async function (tkn) {
   this.token -= tkn;
 };
