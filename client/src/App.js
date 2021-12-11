@@ -20,6 +20,8 @@ import Onboard from './integration/onboard/onboard'
 import JoinGame from './integration/onboard/joingame'
 import ChessGame from './components/game/chessUI/chessgame'
 import {ColorContext} from './store/colorcontext'
+import History from "./pages/history/History";
+import Token from "./pages/token/Token";
 
 
 
@@ -85,8 +87,14 @@ function App() {
             <Route path="/leaderboard" exact>
               <Leaderboard />
             </Route>
+            <Route path="/history" exact>
+              <History />
+            </Route>
             <Route path="/market" exact>
               <Market />
+            </Route>
+            <Route path="/token" exact>
+              <Token />
             </Route>
             <Route path="/profile/:id" exact>
               <Profile />
