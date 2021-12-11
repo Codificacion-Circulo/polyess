@@ -21,6 +21,7 @@ import JoinGame from './integration/onboard/joingame'
 import ChessGame from './components/game/chessUI/chessgame'
 import {ColorContext} from './store/colorcontext'
 import History from "./pages/history/History";
+import Token from "./pages/token/Token";
 
 
 
@@ -91,6 +92,9 @@ function App() {
             </Route>
             <Route path="/market" exact>
               <Market />
+            </Route>
+            <Route path="/token" exact>
+              <Token />
             </Route>
             <Route path="/profile/:id" exact>
               <Profile />
