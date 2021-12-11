@@ -5,13 +5,13 @@
 
 /* Home Section  */
 .home {
-  background: url('../../assets/homePage/bg.png') no-repeat center center/cover;
+  background: url('https://cdn.pixabay.com/photo/2021/07/25/03/51/chess-6490816__340.png') no-repeat center center/cover;
 }
 .homeContainer {
   margin: 0 5rem;
   padding-top: 7rem;
   padding-left: 3.5rem;
-  height: 70vh;
+  height: 80vh;
 }
 
 .homeContent {
@@ -112,16 +112,6 @@
 /* Stake Section  */
 
 .stakeContentHeading h1 {
-  color: #fff;
-  margin-bottom: 2rem;
-}
-
-/* Token Section  */
-.tokenContainer {
-  padding: 0 8rem;
-}
-
-.tokenContentHeading h1 {
   color: #fff;
   margin-bottom: 2rem;
 }

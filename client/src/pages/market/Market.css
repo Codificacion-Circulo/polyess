@@ -14,16 +14,9 @@
   
 .market-container {
     position: relative;
-    /* width: 1230px; */
     padding: 2rem;
     margin: 2rem auto;
     margin-top: 2rem;
-    /* margin-left: 25rem !important; */
-    /* background: linear-gradient(
-      95.33deg,
-      rgba(146, 71, 219, 0.2) 0%,
-      rgba(11, 53, 153, 0.2) 103.1%
-    ); */
     border-radius: 14px;
   }
   

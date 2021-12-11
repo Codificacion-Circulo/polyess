@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import freeplay from "../../assets/homePage/freeplay.png";
 import token from "../../assets/homePage/token.png";
 import nftStaking from "../../assets/homePage/nftStaking.png";
-// import nft from "../../assets/homePage/nft.png"
+import nft from "../../assets/homePage/nft.jpeg"
 import { Container, Button, Row, Col } from "react-bootstrap";
 
 import "./Home.css";
@@ -34,7 +34,7 @@ function Home(props) {
 
       <div className="container-fluid modesContainer d-flex flex-column">
         <div className="modesContentHeading text-center">
-          <h1 style={{color: "#06f87f"}}>Our Gaming Modes!!!</h1>
+          <h1 style={{color: "#d1996d"}}>Our Gaming Modes!!!</h1>
         </div>
         <div className="row justify-content-center">
           <div className="scene col-md-4 modesColumns transAll">
@@ -59,10 +59,8 @@ function Home(props) {
               <div className="item back p-3">
                 <h5 className="text-light">
                   Use Native Hess tokens and bet with your friends on who wins
-                  the classic game of Chess. Get ahead of your friends with your
-                  hard tested strategies and genius to get a higher rank on in
-                  game Leaderboard. Remember you each stake an equal amount of
-                  tokens.
+                  the classic game of Chess staking an equal amount of tokens and reflect your 
+                  hard tested strategies on the game Leaderboard.
                 </h5>
               </div>
             </div>
@@ -89,12 +87,12 @@ function Home(props) {
       <div className="container-fluid nftContainer">
         <div className="nftcontent">
           <div className="row">
-            <div className="col nftColumns nftContentHeading">
-              <h1 style={{color: "#06f87f"}}>Nft Marketplace</h1>
+            <div className="col nftColumns nftContentHeading d-flex flex-column justify-content-center">
+              <h1 style={{color: "#d1996d"}}>Nft Marketplace</h1>
               <p className="text-light">Buy NFTs using Hess tokens which you won from your friends or bought with ethers. These NFTs feature the best chess players in India and the world and are all handmade with great details. And it is a pride to have them.</p>
             </div>
             <div className="col nftColumns nftContentImg d-flex justify-content-center">
-              <img src="" alt="" srcset="" />
+              <img src={nft} style={{width: "40%", textAlign: "center"}} alt="" srcset="" />
             </div>
           </div>
         </div>
@@ -104,7 +102,7 @@ function Home(props) {
         <div className="stakeContent">
           <div className="row">
             <div className="col stakeColumns stakeContentHeading">
-              <h1 style={{color: "#06f87f"}}>Stake and Earn</h1>
+              <h1 style={{color: "#d1996d"}}>Stake and Earn</h1>
             </div>
             <div className="col stakeColumns stakeContentImg d-flex justify-content-center">
               ddsg
@@ -115,23 +113,10 @@ function Home(props) {
       <hr />
 
 
-      <div className="container-fluid tokenContainer">
-        <div className="tokenContent">
-          <div className="row">
-            <div className="col tokenColumns tokenContentImg">ddsg</div>
-            <div className="col d-flex justify-content-center tokenColumns tokenContentHeading">
-              <h1 style={{color: "#06f87f"}}>Earn Token</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr />
-
-
       <div className="container-fluid whyUsContainer">
         <div className="whyUsContent">
           <div className="whyUsTitle d-flex justify-content-center">
-            <h1 style={{color: "#06f87f"}}>Why Us</h1>
+            <h1 style={{color: "#d1996d"}}>Why Us</h1>
           </div>
           <div className="row">
             <div className="col whyUsColumns whyUsContentHeading">
