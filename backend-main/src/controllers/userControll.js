@@ -65,28 +65,13 @@ exports.register = async (req, res, next) => {
       const user = await User.findOne({ address })
       .populate({
         path:'nfts',
-        options:{
-            limit:parseInt(req.query.limit),
-            skip:parseInt(req.query.skip),
-            sort
-        }
     })
     .populate({
       path:'win',
-      options:{
-          limit:parseInt(req.query.limit),
-          skip:parseInt(req.query.skip),
-          sort
-      }
-  })
+      })
   .populate({
     path:'loose',
-    options:{
-        limit:parseInt(req.query.limit),
-        skip:parseInt(req.query.skip),
-        sort
-    }
-})
+    })
     .exec();
       const nfts=user.nfts;
       const win=user.win;
