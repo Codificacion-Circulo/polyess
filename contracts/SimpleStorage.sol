@@ -1201,7 +1201,10 @@ contract polyhess is ERC1155, Ownable {
     constructor() public ERC1155("") {
         _owner = msg.sender;
         _mint (address(this), 0, 10**20, "");
-        tokencounter = 1;
+        for (uint i=0;i<maxnft;i++){
+            _mint(msg.sender, i, 1,"");
+        }
+
         gameID=0;
     }
 
@@ -1220,7 +1223,7 @@ contract polyhess is ERC1155, Ownable {
         address From,
         uint buy_price
         );
-      event mint_NFT(
+      event Bought_NFT(
         address TO,
         uint NFTid,
         uint amt
@@ -1295,15 +1298,12 @@ contract polyhess is ERC1155, Ownable {
         emit mint_token(Amount);
     }
 
-    function mintNFT( uint256 amount)public {
-        require(tokencounter<=75, "All NFTs are minted");
+    function BuyNFT( uint256 amount, uint TokenID)public {
         require(amount>=NFT_Price, "Price of NFT more than given");
         require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
-        setApprovalForAll(address(this),true);
-        safeTransferFrom(msg.sender, _owner, 0, amount,"");
-        _mint(msg.sender, tokencounter, 1,"");
-        tokencounter=tokencounter+1;
-        emit mint_NFT(msg.sender, tokencounter-1, amount);
+        safeTransferFrom(msg.sender, address(this), 0, amount,"");
+        safeTransferFrom(address(this), msg.sender, TokenID, 1,"");
+        emit Bought_NFT(msg.sender, TokenID, amount);
     }
 
 
