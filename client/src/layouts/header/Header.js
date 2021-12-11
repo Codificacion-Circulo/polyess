@@ -84,7 +84,7 @@ function Header(props) {
             />{' '}
             polyess
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center bg-info" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="justify-content-center">
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/">Home</Nav.Link>
