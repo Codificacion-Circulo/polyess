@@ -62,16 +62,16 @@ import blue from '../../assets/market/blue.png'
         {props.arrayWin&&props.arrayWin.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{data.initialPlayer}</p>
-            <p>{data.finalPlayer}</p>
+            <p>{`${data.initialPlayer.substring(0, 4)}..${data.initialPlayer.substring(data.initialPlayer.length-3)}`}</p>
+            <p>{`${data.finalPlayer.substring(0, 4)}..${data.finalPlayer.substring(data.finalPlayer.length-3)}`}</p>
             <p>Won</p>
         </div>))}
 
         {props.arrayLost&&props.arrayLost.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{data.initialPlayer}</p>
-            <p>{data.finalPlayer}</p>
+            <p>{`${data.initialPlayer.substring(0, 4)}..${data.initialPlayer.substring(data.initialPlayer.length-3)}`}</p>
+            <p>{`${data.finalPlayer.substring(0, 4)}..${data.finalPlayer.substring(data.finalPlayer.length-3)}`}</p>
             <p>Lost</p>
         </div>))}
        
