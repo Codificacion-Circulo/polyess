@@ -22,7 +22,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
   try {
       const users = await User.find(match)
-          .sort(srt || 'rank')
+          .sort(srt || '-rank')
           .limit(Number(lim));
       if (!users) {
           return next(new ErrorResponse("Users Not Found", 404));

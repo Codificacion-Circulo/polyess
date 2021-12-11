@@ -3,29 +3,8 @@ import {Fragment,useState,useEffect} from 'react'
  import { Tab,Tabs } from 'react-bootstrap';
  import axios from 'axios'
  import { useWeb3React} from '@web3-react/core'
+ import ControlledTabs from '../../components/profile/ControlledTabs'
 
-
- function ControlledTabs() {
-    const [key, setKey] = useState('collection');
-  
-    return (
-     <div className="container text-center">
-          <Tabs
-        id="controlled-tab-example"
-        activeKey={key}
-        onSelect={(k) => setKey(k)}
-        className="mb-3 justify-content-center"
-      >
-        <Tab eventKey="collection" title="NFT Collection">
-          <h1>Change 1</h1>
-        </Tab>
-        <Tab eventKey="history" title="Game History">
-          <h1>Change 2</h1>
-        </Tab>
-      </Tabs>
-     </div>
-    );
-  }
 
 
 
@@ -96,7 +75,7 @@ console.log(result)
                         <div class="col-6 col-lg-3">
                             <div class="count-data text-center">
                                 <h6 class="count h2 text-success" data-to="190" data-speed="190">{UserData.loose && UserData.loose.length}</h6>
-                                <p class="m-0px font-w-600 text-light">Total Games Played</p>
+                                <p class="m-0px font-w-600 text-light">Games Lost</p>
                             </div>
                         </div>
                     </div>
