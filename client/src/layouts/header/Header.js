@@ -72,8 +72,7 @@ function Header(props) {
   return (
     <Fragment>
       {modal && (<ConnectModal onClose={closeModalHandler} open={modal} tried={triedEager} />)}
-      {/* <Navbar sticky="top" style={{ background: "#5e12a533" }} expand="lg"> */}
-      <Navbar sticky="top" style={{ background: "#760cda33" }} expand="lg">
+      <Navbar sticky="top" style={{ background: "none" }} expand="lg">
         <Container>
           <Navbar.Brand href="/home">
             <img
