@@ -99,9 +99,15 @@ exports.postHessWin = async (req, res, next) => {
       const user1 = await User.findOne({
         address: game.finalPlayer
       });
-      if (!user1 || !user0) {
+      const user2 = await User.findOne({
+        address: data.args[0]
+      });
+      if (!user1 || !user0||!user2) {
         return next(new ErrorResponse("Users Not Found", 404));
       }
+      game.winner=user2._id;
+      game.loser=user2._id;
+      await game.save();
       await user0.draw();
       await user1.draw();
       await user0.save();
@@ -148,7 +154,6 @@ exports.postNftWin = async (req, res, next) => {
     if (!game) {
       return next(new ErrorResponse("Game Not Found", 404));
     }
-    
     if (data.args[0] === data.args[1]) {
       const user0 = await User.findOne({
         address: game.initialPlayer
@@ -156,9 +161,15 @@ exports.postNftWin = async (req, res, next) => {
       const user1 = await User.findOne({
         address: game.finalPlayer
       });
-      if (!user1 || !user0) {
+      const user2 = await User.findOne({
+        address: data.args[0]
+      });
+      if (!user1 || !user0||!user2) {
         return next(new ErrorResponse("Users Not Found", 404));
       }
+      game.winner=user2._id;
+      game.loser=user2._id;
+      await game.save();
       await user0.draw();
       await user1.draw();
       await user0.save();
