@@ -87,9 +87,12 @@ function App() {
             <Route path="/leaderboard" exact>
               <Leaderboard />
             </Route>
-            <Route path="/history" exact>
+            <Route path="/history/:id" exact>
               <History />
             </Route>
+            {/* <Route path="/history" exact>
+              <History />
+            </Route> */}
             <Route path="/market" exact>
               <Market />
             </Route>
