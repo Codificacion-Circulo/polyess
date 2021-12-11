@@ -8,7 +8,7 @@ const {
     getAllUsers,
 } = require("../controllers/userControll");
 router.route("/users").get(getAllUsers);
-router.route("/login").get(login);
+router.route("/login").post(login);
 router.route("/register").post(register);
 router.route("/hessBought").post(postHessBought);
 router.route("/hessDestroyed").post(postHessDestroyed);

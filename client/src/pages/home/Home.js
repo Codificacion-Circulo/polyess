@@ -10,7 +10,7 @@ import "./Home.css";
 function Home(props) {
   return (
     <Fragment>
-      <div className="home">
+      <div className="home my-4">
         <div className="container homeContainer">
           <div className="d-flex homeContent">
             <div className="homeContentHeading">
@@ -32,9 +32,10 @@ function Home(props) {
       <hr />
 
 
-      <div className="container-fluid modesContainer d-flex flex-column">
-        <div className="modesContentHeading text-center">
-          <h1 style={{color: "#d1996d"}}>Our Gaming Modes!!!</h1>
+      <div className="container-fluid modesContainer d-flex flex-column mb-4">
+        <div className="modesContentHeading text-center mt-4 mb-4">
+          <h1 style={{color: "#d1996d"}}>Different Game Modes to Play</h1>
+          <p className="text-light ">Buy NFTs using Hess tokens which you won from your friends or bought with ethers. These NFTs feature the best chess players in India and the world and are all handmade with great details. And it is a pride to have them.</p>
         </div>
         <div className="row justify-content-center">
           <div className="scene col-md-4 modesColumns transAll">
@@ -59,7 +60,7 @@ function Home(props) {
               <div className="item back p-3">
                 <h5 className="text-light">
                   Use Native Hess tokens and bet with your friends on who wins
-                  the classic game of Chess staking an equal amount of tokens and reflect your 
+                  the classic game of Chess betting an equal amount of tokens and reflect your 
                   hard tested strategies on the game Leaderboard.
                 </h5>
               </div>
@@ -87,9 +88,9 @@ function Home(props) {
       <div className="container-fluid nftContainer">
         <div className="nftcontent">
           <div className="row">
-            <div className="col nftColumns nftContentHeading d-flex flex-column justify-content-center">
+            <div className="col nftColumns nftContentHeading d-flex flex-column justify-content-center px-4">
               <h1 style={{color: "#d1996d"}}>Nft Marketplace</h1>
-              <p className="text-light">Buy NFTs using Hess tokens which you won from your friends or bought with ethers. These NFTs feature the best chess players in India and the world and are all handmade with great details. And it is a pride to have them.</p>
+              <p className="text-light ">Buy NFTs using Hess tokens which you won from your friends or bought with ethers. These NFTs feature the best chess players in India and the world and are all handmade with great details. And it is a pride to have them.</p>
             </div>
             <div className="col nftColumns nftContentImg d-flex justify-content-center">
               <img src={nft} style={{width: "40%", textAlign: "center"}} alt="" srcset="" />

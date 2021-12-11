@@ -1,6 +1,7 @@
 import {Fragment,useState} from 'react'
  import './Profile.css'
  import { Tab,Tabs } from 'react-bootstrap';
+ import axios from 'axios'
  import { useWeb3React} from '@web3-react/core'
 
 
@@ -25,7 +26,8 @@ import {Fragment,useState} from 'react'
      </div>
     );
   }
-  
+
+
 
 
 
@@ -33,6 +35,28 @@ function Profile(props) {
     const context = useWeb3React()
     const { connector, library, chainId, account, activate, deactivate, active, error } = context
     const userAddr=account
+
+var data = JSON.stringify({
+  "address": "0x596F08aDAa76889161A98c9Bb79869e7f9518C70"
+});
+
+var config = {
+  method: 'post',
+  url: 'http://polyess-listner.herokuapp.com/login',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
     return (
         <section class="section about-section" id="about">
             <div class="container p-4 my-4 profile">
@@ -40,7 +64,7 @@ function Profile(props) {
                     <div class="col-lg-6">
                         <div class="about-text go-to">
                             <h3 class="text-light">userName</h3>
-                            <h6 class="theme-color lead">{userAddr}userAddress</h6>
+                            <h6 class="theme-color lead">{account}</h6>
                         </div>
                     </div>
                 </div>
