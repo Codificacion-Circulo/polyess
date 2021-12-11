@@ -93,7 +93,7 @@ function Header(props) {
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/market">Marketplace</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/faq">Faq</Nav.Link>
-              <button onClick={openModalHandler} className="btn btn-danger text-dark">{account === null
+              <button onClick={openModalHandler} className="btn text-dark" style={{backgroundColor: "#e53935"}}>{account === null
                 ? 'Connect'
                 : account
                   ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
