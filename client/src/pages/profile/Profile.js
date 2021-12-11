@@ -1,8 +1,9 @@
-import {Fragment,useState,useEffect} from 'react'
- import './Profile.css'
- import axios from 'axios'
- import { useWeb3React} from '@web3-react/core'
- import ControlledTabs from '../../components/profile/ControlledTabs'
+import {Fragment,useState,useEffect} from 'react';
+ import './Profile.css';
+ import axios from 'axios';
+ import {useParams} from 'react-router-dom';
+ import { useWeb3React} from '@web3-react/core';
+ import ControlledTabs from '../../components/profile/ControlledTabs';
 
 
 
@@ -13,9 +14,9 @@ function Profile(props) {
     const context = useWeb3React()
     const [UserData, setUserData] = useState({})
     const { connector, library, chainId, account, activate, deactivate, active, error } = context
-    const userAddr=account
+    let { id } = useParams();
     var data = JSON.stringify({
-      "address": "0x596F08aDAa76889161A98c9Bb79869e7f9518C70"
+      "address": id||"0x596F08aDAa76889161A98c9Bb79869e7f9518C70"
     });
     var config = {
       method: 'post',
@@ -47,7 +48,7 @@ console.log(result)
                     <div class="col-lg-6">
                         <div class="about-text go-to">
                             <h3 class="text-light">{UserData.user && UserData.user.username}</h3>
-                            <h6 class="theme-color lead">{account}</h6>
+                            <h6 class="theme-color lead">{UserData.user && UserData.user.address}</h6>
                         </div>
                     </div>
                 </div>

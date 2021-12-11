@@ -88,6 +88,9 @@ function App() {
             <Route path="/market" exact>
               <Market />
             </Route>
+            <Route path="/profile/:id" exact>
+              <Profile />
+            </Route>
             <Route path="/profile" exact>
               <Profile />
             </Route>
