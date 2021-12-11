@@ -62,7 +62,7 @@ import blue from '../../assets/market/blue.png'
         {props.arrayWin&&props.arrayWin.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{data.intialPlayer}</p>
+            <p>{data.initialPlayer}</p>
             <p>{data.finalPlayer}</p>
             <p>Won</p>
         </div>))}

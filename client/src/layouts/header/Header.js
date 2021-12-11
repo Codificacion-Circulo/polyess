@@ -89,6 +89,7 @@ function Header(props) {
             <Nav className="justify-content-center">
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/">Home</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/game">Play</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/history">Games</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/leaderboard">Leaderboard</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/market">Marketplace</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
