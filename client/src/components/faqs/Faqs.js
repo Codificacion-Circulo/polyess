@@ -36,10 +36,10 @@ const data = {
 };
 
 const styles = {
-    rowTitleTextSize: '1.2rem',
+    rowTitleTextSize: '1.1rem',
     rowTitleColor: "blue",
     rowContentColor: 'white',
-    rowContentTextSize: '1.3rem',
+    rowContentTextSize: '1.2rem',
     arrowColor: "#05ffa1",
 };
 
