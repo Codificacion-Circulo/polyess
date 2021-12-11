@@ -4,9 +4,8 @@ import {Fragment,useState,useEffect} from 'react'
 import { propTypes } from 'react-bootstrap/esm/Image';
 
 
- function ControlledTabs() {
+ function ControlledTabs(props) {
     const [key, setKey] = useState('nft');
-  
     return (
      <div className="container profile p-4">
           <Tabs
@@ -19,12 +18,27 @@ import { propTypes } from 'react-bootstrap/esm/Image';
           <h1>Hello</h1>
         </Tab>
         <Tab eventKey="history" title="Game History">
-        {propTypes.array.map((data,index)=>(
+        <div className="farm-leaderboard container px-4">
+
+        <div className="farm-leaderboard__head mx-auto px-auto">
+            <p>GameId</p>
+            <p>Winner</p>
+            <p>Loser</p>
+        </div>
+        {props.arrayWin&&props.arrayWin.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
-            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{index+1}</p>
-            <p>{data.username}</p>
-            <p>{data.rank}</p>
+            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
+            <p>{data.winner}</p>
+            <p>{data.loser}</p>
         </div>))}
+
+        {props.arrayLost&&props.arrayLost.map((data)=>(
+            <div className="farm-leaderboard__content container py-3 px-3 my-4">
+            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
+            <p>{data.winner}</p>
+            <p>{data.loser}</p>
+        </div>))}
+        </div>
         </Tab>
       </Tabs>
      </div>

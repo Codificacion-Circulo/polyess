@@ -1,6 +1,5 @@
 import {Fragment,useState,useEffect} from 'react'
  import './Profile.css'
- import { Tab,Tabs } from 'react-bootstrap';
  import axios from 'axios'
  import { useWeb3React} from '@web3-react/core'
  import ControlledTabs from '../../components/profile/ControlledTabs'
@@ -82,7 +81,7 @@ console.log(result)
                 </div>
             </div>
             <hr class="m-0"/>
-<ControlledTabs/>
+<ControlledTabs arrayWin={UserData.win && UserData.win} arrayLost={UserData.loose && UserData.loose}/>
         </section>
     )
 }
