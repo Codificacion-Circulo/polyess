@@ -54,22 +54,27 @@ import blue from '../../assets/market/blue.png'
 
         <div className="farm-leaderboard__head mx-auto px-auto">
             <p>GameId</p>
-            <p>Winner</p>
-            <p>Loser</p>
+            <p>Player1</p>
+            <p>Player2</p>
+            <p>Status</p>
         </div>
+
         {props.arrayWin&&props.arrayWin.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{data.winner}</p>
-            <p>{data.loser}</p>
+            <p>{data.intialPlayer}</p>
+            <p>{data.finalPlayer}</p>
+            <p>Won</p>
         </div>))}
 
         {props.arrayLost&&props.arrayLost.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{data.winner}</p>
-            <p>{data.loser}</p>
+            <p>{data.initialPlayer}</p>
+            <p>{data.finalPlayer}</p>
+            <p>Lost</p>
         </div>))}
+       
         </div>
         </Tab>
       </Tabs>
