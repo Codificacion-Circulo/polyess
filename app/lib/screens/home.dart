@@ -17,17 +17,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   PageController pageController = PageController();
-  int _index = 0;
+  int _selectedIndex = 0;
 
   void onTapped(int index) {
     setState(() {
-      _index = index;
+      _selectedIndex = index;
     });
+    pageController.jumpToPage(index);
   }
 
   @override
   Widget build(BuildContext context) {
-    final _pageController = PageController();
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
@@ -47,14 +47,14 @@ class _HomeState extends State<Home> {
           ],
           selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.grey,
-          currentIndex: _index,
+          currentIndex: _selectedIndex,
           onTap: onTapped,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
           backgroundColor: barColor,
         ),
         body: PageView(
-          controller: _pageController,
+          controller: pageController,
           children: [
             HomeScreen(addr: widget._addr),
             LeaderBoardSceen(),
