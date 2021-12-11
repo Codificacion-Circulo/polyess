@@ -84,7 +84,7 @@ function Header(props) {
             />{' '}
             polyess
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center bg-info" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center" style={{backgroundColor: "#d1996d"}}/>
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="justify-content-center">
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/">Home</Nav.Link>
@@ -93,7 +93,7 @@ function Header(props) {
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/market">Marketplace</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-3 text-center" href="/faq">Faq</Nav.Link>
-              <button onClick={openModalHandler} className="btn btn-primary">{account === null
+              <button onClick={openModalHandler} className="btn btn-danger text-dark">{account === null
                 ? 'Connect'
                 : account
                   ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
