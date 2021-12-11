@@ -87,14 +87,14 @@ function Header(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center" style={{backgroundColor: "#d1996d"}}/>
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="justify-content-center">
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/">Home</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/game">Play</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/history">Games</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/leaderboard">Leaderboard</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/token">Tokens</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/market">Marketplace</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/faq">Faq</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/">Home</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/game">Play</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/history">Games</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/leaderboard">Leaderboard</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/token">Tokens</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/market">Marketplace</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/profile">Profile</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-2 text-center" href="/faq">Faq</Nav.Link>
               <button onClick={openModalHandler} className="btn text-dark" style={{backgroundColor: "#e53935"}}>{account === null
                 ? 'Connect'
                 : account
