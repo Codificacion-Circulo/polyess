@@ -1,19 +1,17 @@
 import {Fragment,useState,useEffect} from 'react'
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import './History.css'
 export default function History() {
     const params=useParams();
     const [historyData,setHistoryData] = useState([]);
     useEffect(() => {
         const url = `http://polyess-listner.herokuapp.com/games?gameId=${params.id}`;
-        console.log(url)
     
         const fetchData = async () => {
           try {
             const response = await fetch(url);
             const json = await response.json();
             setHistoryData(json)
-            console.log(json);
           } catch (error) {
             console.log("error", error);
           }

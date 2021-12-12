@@ -1,4 +1,4 @@
-import React,{Fragment,useCallback,useEffect,useState} from 'react'
+import React,{Fragment,useEffect,useState} from 'react'
 import { Link } from 'react-router-dom';
 import './Leaderboard.css'
 function Leaderboard(props) {
