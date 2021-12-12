@@ -54,9 +54,12 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                           borderRadius: BorderRadius.circular(10)),
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Image.network(
-                          "https://gateway.pinata.cloud/ipfs/QmPWCagNgzp5P2TigD471JMr2bzjkhsjLEQFHTR4hAqnrg/1.png",
-                          fit: BoxFit.cover,
+                        child: GestureDetector(
+                          onTap: _launchURL,
+                          child: Image.network(
+                            "https://gateway.pinata.cloud/ipfs/QmPWCagNgzp5P2TigD471JMr2bzjkhsjLEQFHTR4hAqnrg/1.png",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
