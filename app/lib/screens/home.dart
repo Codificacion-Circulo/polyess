@@ -60,6 +60,7 @@ class _HomeState extends State<Home> {
             LeaderBoardSceen(),
             MarketPlaceScreen(),
           ],
+          physics: NeverScrollableScrollPhysics(),
         ),
       ),
     );
