@@ -55,7 +55,7 @@ exports.postNftMinted = async (req, res, next) => {
         return next(new ErrorResponse("Profile not found", 404));
     }
     const ID = parseInt(data.args[1].hex);
-    const ipfsRes = await fetch(BASE_URI + ID);
+    const ipfsRes = await fetch(BASE_URI + ID+".json");
     if (!ipfsRes.ok) {
         return next(new ErrorResponse("Request Could not be processed", 500));
     }
@@ -66,7 +66,7 @@ exports.postNftMinted = async (req, res, next) => {
         assetId:parseInt(data.args[1].hex),
         price:parseInt(data.args[2].hex),
         image:json.image,
-        attributes:json.attribuits
+        attributes:json.attributes
       });
       await user.subToken(parseInt(data.args[2].hex));
       await user.save();
