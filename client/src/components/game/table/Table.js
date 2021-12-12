@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap'
 
 function TableDiv(props) {
     return (
-        <Table responsive>
+  <Table responsive className='table table-dark table-hover table align-middle' style={{backgroundColor: "#000", color: "#fff"}}>
   <thead>
     <tr>
       <th>#</th>
@@ -15,19 +15,19 @@ function TableDiv(props) {
   <tbody>
     <tr>
       <td>1</td>
-      {Array.from({ length: 4 }).map((_, index) => (
+      {Array.from({ length: 3 }).map((_, index) => (
         <td key={index}>Table cell {index}</td>
       ))}
     </tr>
     <tr>
       <td>2</td>
-      {Array.from({ length: 4 }).map((_, index) => (
+      {Array.from({ length: 3 }).map((_, index) => (
         <td key={index}>Table cell {index}</td>
       ))}
     </tr>
     <tr>
       <td>3</td>
-      {Array.from({ length: 4 }).map((_, index) => (
+      {Array.from({ length: 3 }).map((_, index) => (
         <td key={index}>Table cell {index}</td>
       ))}
     </tr>
