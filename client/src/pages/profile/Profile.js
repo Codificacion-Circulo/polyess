@@ -48,7 +48,7 @@ console.log(result)
                     <div class="col-lg-6">
                         <div class="about-text go-to">
                             <h3 class="text-light">{UserData.user && UserData.user.username}</h3>
-                            <h6 class="theme-color lead">{UserData.user && `${UserData.user.address.substring(0, 6)}...${UserData.user.address.substring(UserData.user.address.length-6)}`}</h6>
+                            <h6 class="theme-color lead">{UserData.user && `${UserData.user.address.substring(0, 6)}...${UserData.user.address.substring(UserData.user.address.length-4)}`}</h6>
                         </div>
                     </div>
                 </div>

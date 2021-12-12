@@ -17,10 +17,7 @@ class Polyess extends StatelessWidget {
           bodyText1: textStyle1,
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: barColor,
-          elevation: 1,
-          centerTitle: true,
-        ),
+            backgroundColor: barColor, elevation: 1, titleSpacing: 20),
       ),
       home: AuthWrapper(),
     );

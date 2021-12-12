@@ -10,7 +10,7 @@ function Market(props) {
              <div class="container text-center">
 
 <div class="logo my-3">
-      <h1 className="text-light"><b>NFT MarketPlace</b></h1>
+      <h1 style={{color: "#d1996d"}}><b>NFT MarketPlace</b></h1>
 </div>
 
 </div>

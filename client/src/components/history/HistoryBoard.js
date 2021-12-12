@@ -21,8 +21,10 @@ function HistoryBoard(props) {
     return (
         <Fragment>
 
+<div class="logo my-3">
+      <h1 className='text-center' style={{color: "#d1996d"}}><b>History</b></h1>
+</div>
 <div className="farm-leaderboard container px-4">
-
 <div className="farm-leaderboard__head mx-auto px-auto">
     <p>GameId</p>
     <p>Winner</p>

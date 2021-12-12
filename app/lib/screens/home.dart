@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
               label: 'Market Place',
             ),
           ],
-          selectedItemColor: Colors.blue,
+          selectedItemColor: textColor,
           unselectedItemColor: Colors.grey,
           currentIndex: _selectedIndex,
           onTap: onTapped,
@@ -60,6 +60,7 @@ class _HomeState extends State<Home> {
             LeaderBoardSceen(),
             MarketPlaceScreen(),
           ],
+          physics: NeverScrollableScrollPhysics(),
         ),
       ),
     );
