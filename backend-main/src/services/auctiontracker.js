@@ -126,7 +126,7 @@ const processTokenEvents = async (startFromBlock) => {
         console.log(`[PastEvents] Proccesed batch ${runBatch + 1} of ${batches.length}`);
         console.log(`[PastEvents] LastBlockProcessed: ${lastBlockProcessed}`);
         runBatch += 1;
-      }, 5000);
+      }, 8000);
     });
   } catch (err) {
     console.error(err.message);
