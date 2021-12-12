@@ -1,11 +1,14 @@
 class Loses {
   final String? gameid;
+  final String? against;
+  final String loss = 'Lost';
 
-  Loses({this.gameid});
+  Loses({this.gameid, this.against});
 
   factory Loses.fromJson(Map<String, dynamic> json) {
     return Loses(
       gameid: json['gameId'],
+      against: json['finalPlayer']
     );
   }
 }

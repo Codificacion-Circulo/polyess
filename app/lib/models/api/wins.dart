@@ -1,12 +1,12 @@
 class Wins {
   final String? gameid;
+  final String? against;
+  final String win = 'Win';
 
-  Wins({this.gameid});
+  Wins({this.gameid, this.against,});
 
   factory Wins.fromJson(Map<String, dynamic> json) {
-    return Wins(
-      gameid: json['gameId'],
-    );
+    return Wins(gameid: json['gameId'], against: json['finalPlayer'],);
   }
 }
 
