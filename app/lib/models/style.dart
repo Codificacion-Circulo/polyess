@@ -8,5 +8,6 @@ const textStyle1 = TextStyle(
   color: Colors.white,
 );
 
-const bgColor = Color(0xFD141414);
+const bgColor = Colors.black;
 const barColor = Colors.black;
+const textColor = Color(0xFFD1996D);

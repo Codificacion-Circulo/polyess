@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:polyess/models/api/loses.dart';
 import 'package:polyess/models/api/users.dart';
+import 'package:polyess/models/style.dart';
 import 'package:polyess/providers/login_user.dart';
 import 'package:polyess/screens/wallet_connect.dart';
 import 'package:polyess/services/wallet_service.dart';
@@ -40,19 +41,19 @@ class HomeScreen extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Padding(
-                padding: const EdgeInsets.only(top: 15, left: 30, right: 30),
+                padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
                             loginProvider.userDetails?.user?.username ?? '--',
                             style: TextStyle(
-                              color: Colors.amber[100],
+                              color: textColor,
                               fontSize: 50,
                               fontWeight: FontWeight.bold,
                             ),
@@ -60,180 +61,126 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 20,
                       ),
-                      Text(
-                        addr,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Card(
-                        elevation: 0,
-                        color: Color(0xFF242A38),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFD1996D),
+                            borderRadius: BorderRadius.circular(10)),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Pts.',
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        loginProvider.userDetails?.user?.rank
-                                                .toString() ??
-                                            '..',
-                                        style: TextStyle(
-                                          color: Colors.amber[100],
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Wins',
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        loginProvider
-                                                .userDetails?.wins?.wins?.length
-                                                .toString() ??
-                                            '..',
-                                        style: TextStyle(
-                                          color: Colors.amber[100],
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Loses',
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        loginProvider.userDetails?.loses?.loses
-                                                ?.length
-                                                .toString() ??
-                                            '..',
-                                        style: TextStyle(
-                                          color: Colors.amber[100],
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Tokens',
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        loginProvider
-                                                .userDetails?.user?.tokenCount
-                                                .toString() ??
-                                            '..',
-                                        style: TextStyle(
-                                          color: Colors.amber[100],
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'NFTs',
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        loginProvider
-                                                .userDetails?.nfts?.nft?.length
-                                                .toString()
-                                                .toString() ??
-                                            '..',
-                                        style: TextStyle(
-                                          color: Colors.amber[100],
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            addr.substring(0, 5) +
+                                '...' +
+                                addr.substring(addr.length - 4),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 35,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      loginProvider.userDetails?.user?.rank
+                                              .toString() ??
+                                          '..',
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                    Text(
+                                      'Points',
+                                      style: TextStyle(
+                                          color: Colors.white70, fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      (loginProvider.userDetails?.wins?.wins
+                                                  ?.length
+                                                  .toString() ??
+                                              '..') +
+                                          ' / ' +
+                                          (loginProvider.userDetails?.loses
+                                                  ?.loses?.length
+                                                  .toString() ??
+                                              '..'),
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                    Text(
+                                      'Win/Loss',
+                                      style: TextStyle(
+                                          color: Colors.white70, fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      loginProvider
+                                              .userDetails?.user?.tokenCount
+                                              .toString() ??
+                                          '..',
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 1,
+                                    ),
+                                    Text(
+                                      'Tokens',
+                                      style: TextStyle(
+                                          color: Colors.white70, fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'NFTs',
@@ -243,10 +190,21 @@ class HomeScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           ),
+                          Text(
+                            loginProvider.userDetails?.nfts?.nft?.length
+                                    .toString()
+                                    .toString() ??
+                                '..',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 25,
                       ),
                       Container(
                         height: 200,
