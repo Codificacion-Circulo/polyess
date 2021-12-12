@@ -54,12 +54,19 @@ exports.postNftMinted = async (req, res, next) => {
       if (!user) {
         return next(new ErrorResponse("Profile not found", 404));
     }
-
+    const ID = parseInt(data.args[1].hex);
+    const ipfsRes = await fetch(BASE_URI + ID);
+    if (!ipfsRes.ok) {
+        return next(new ErrorResponse("Request Could not be processed", 500));
+    }
+    const json = await ipfsRes.json();
       await Nft.create({
         owner:user._id,
         owner_name:user.username,
         assetId:parseInt(data.args[1].hex),
         price:parseInt(data.args[2].hex),
+        image:json.image,
+        attributes:json.attribuits
       });
       await user.subToken(parseInt(data.args[2].hex));
       await user.save();
