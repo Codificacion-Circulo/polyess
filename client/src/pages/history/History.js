@@ -1,30 +1,49 @@
-import {Fragment} from 'react'
+import {Fragment,useState,useEffect} from 'react'
+import { useParams } from 'react-router-dom';
 import './History.css'
+import winner from "../../assets/game/winner.png"
+import loser from "../../assets/game/loser.png"
+
 export default function History() {
+    const params=useParams();
+    const [historyData,setHistoryData] = useState([]);
+    useEffect(() => {
+        const url = `http://polyess-listner.herokuapp.com/games?gameId=${params.id}`;
+    
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+            const json = await response.json();
+            setHistoryData(json)
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+        fetchData();
+    }, []);
     return (
         <Fragment>
         <div className="container" style={{alignItems: 'center'}}>
-        <div className="container d-flex justify-content-center farm-minning__first p-4 my-4">
-         <div className="container">
+        <div className="container row myrow farm-minning__first pe-4 py-4 my-md-4">
+         <div className="container col-md">
              <h1 className="m-3" >
                  Winner
              </h1>
-             <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2 border border-primary" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
+             <div className="container d-flex flex-row">
+             <img className="mx-2 p-2 border border-warning" src={winner} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>Daily Distribution</p>
+                 <p className="text-right mx-3 my-auto">{historyData[0]&& `${historyData[0].winner_name}`}<br/>{historyData[0]&& `${historyData[0].winner_addr.substring(0, 6)}..${historyData[0].winner_addr.substring(historyData[0].winner_addr.length-4)}`}</p>
              </div>
          </div>
- 
-         <hr style={{ border:"none",borderLeft:"1px solid hsla(200, 10%, 50%,100)",height:"100px",width:"1px"}}/>
-         <div className="container">
+
+         <div className="container col-md">
              <h1 className="m-3" >
                  Loser
              </h1>
              <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2 border border-primary" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
+             <img className="mx-2 p-2 border border-warning" src={loser} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>Daily Distribution</p>
+                 <p className="text-right mx-3 my-auto">{historyData[0]&& `${historyData[0].loser_name}`}<br/>{historyData[0]&&`${historyData[0].loser_addr.substring(0, 6)}..${historyData[0].loser_addr.substring(historyData[0].loser_addr.length-4)}`}</p>
              </div>
          </div>
  
@@ -36,56 +55,43 @@ export default function History() {
  
          <div className="container d-flex justify-content-center farm-minning__first p-4 my-4">
          <div className="container">
-             <p className="m-3" >
-                 Total Hash Power
+             <p className="m-md-3 my-3" >
+                 Game Started by
              </p>
-             <div class="input-group input-group-sm mb-3">
-   <input type="text" class="form-control mx-3 mb-4" placeholder="0" aria-label="Username" aria-describedby="basic-addon1" style={{maxWidth:"450px"}}/>
- </div>
+             <p className="m-3" >{historyData[0]&& `${historyData[0].initialPlayer.substring(0, 6)}..${historyData[0].initialPlayer.substring(historyData[0].initialPlayer.length-4)}`}</p>
+ 
+ <p className="m-md-3 my-3" >
+                 Game Joined by
+             </p>
+             <p className="m-3" >{historyData[0]&&`${historyData[0].finalPlayer.substring(0, 6)}..${historyData[0].finalPlayer.substring(historyData[0].finalPlayer.length-4)}`}</p>
+ 
+         </div>
+         
+        {historyData[0]&&historyData[0].amount?( <div className="container">
+             <p className="m-3" >
+                Bet Amount
+             </p>
+             <p className="m-3" >{historyData[0]&&historyData[0].amount}</p>
  
  <p className="m-3" >
-                 My Hash Power
+                Bet Amount
              </p>
-             <div class="input-group input-group-sm mb-3">
-   <input type="text" class="form-control mx-3 mb-4" placeholder="0" aria-label="Username" aria-describedby="basic-addon1" style={{maxWidth:"450px"}}/>
- </div>
+             <p className="m-3" >{historyData[0]&&historyData[0].amount}</p>
  
-         </div>
-         
-                <div className="container">
-         
+         </div>):(
+            <div className="container">
              <p className="m-3" >
-                 Mining Rate
+                Bet NFT ID-
              </p>
-             <div className=" container d-flex flex-row">
-                 <div className="container farm-minning__third p-3">
-                     <small>100 Hash Power≈0 MBOX/DAY</small><br/>
-                     <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50"/>
-                 <p className="text-left mx-3 my-auto">MBOX</p>
+             <p className="m-3" >{historyData[0]&&historyData[0].initialNftId}</p>
  
-             </div>
+ <p className="m-3" >
+                Bet NFT ID-
+             </p>
+             <p className="m-3" >{historyData[0]&&historyData[0].finalNftId}</p>
  
-             
-                 </div>
- 
-                 <div className=" farm-minning__third container mx-2 p-3">
-                     <small >100 Hash Power≈0 MBOX/DAY</small><br/>
-                     <div className="container  d-flex flex-row ">
-             <img className="mx-2 p-2" src="https://www.mobox.io/momo/img/BANANA.b3d26a33.png" alt="create" height="50"/>
-                 <p className="text-left mx-3 my-auto">MBOX</p>
- 
-             </div>
- 
-             
-                 </div>
-                 
-             </div>
- 
-             <div className="container my-4 farm-minning__third__button">
-             <button className="btn btn-primary m-2 px-4 py-3 text-center">Claim</button>
-             </div>
          </div>
+         )}
  
  
          </div>

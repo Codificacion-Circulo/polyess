@@ -36,7 +36,8 @@
     "use-image": "^1.0.5",
     "use-sound": "^1.0.2",
     "uuid": "^7.0.3",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "web3": "^1.6.1"
   },
   "scripts": {
     "start": "react-scripts start",

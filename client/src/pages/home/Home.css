@@ -116,6 +116,10 @@
   width: 40%;
 }
 
+.nftContentImg img:hover {
+  transform: scale(1.2);
+}
+
 /* Stake Section  */
 .stakeContent{
   padding: 3rem 0;
@@ -128,6 +132,10 @@
 
 .stakeContentImg img {
   width: 40%;
+}
+
+.stakeContentImg img:hover {
+  transform: scale(1.2);
 }
 
 /* WhyUs Container */

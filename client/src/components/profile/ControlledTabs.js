@@ -1,4 +1,5 @@
 import {Fragment,useState,useEffect} from 'react'
+import { Link } from 'react-router-dom';
  import './ControlledTabs.css'
  import { Tab,Tabs } from 'react-bootstrap';
 import blue from '../../assets/market/blue.png'
@@ -54,24 +55,25 @@ import blue from '../../assets/market/blue.png'
 
         <div className="farm-leaderboard__head mx-auto px-auto">
             <p>GameId</p>
-            <p>Player1</p>
-            <p>Player2</p>
+            <p>Winner</p>
+            <p>Loser</p>
             <p>Status</p>
         </div>
 
         {props.arrayWin&&props.arrayWin.map((data)=>(
+            <Link to={"/history/"+data.gameId}>
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{`${data.initialPlayer.substring(0, 4)}..${data.initialPlayer.substring(data.initialPlayer.length-3)}`}</p>
-            <p>{`${data.finalPlayer.substring(0, 4)}..${data.finalPlayer.substring(data.finalPlayer.length-3)}`}</p>
+            <p>{`${data.winner_name}`}</p>
+            <p>{`${data.loser_name}`}</p>
             <p>Won</p>
-        </div>))}
+        </div></Link>))}
 
         {props.arrayLost&&props.arrayLost.map((data)=>(
             <div className="farm-leaderboard__content container py-3 px-3 my-4">
             <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{data.gameId}</p>
-            <p>{`${data.initialPlayer.substring(0, 4)}..${data.initialPlayer.substring(data.initialPlayer.length-3)}`}</p>
-            <p>{`${data.finalPlayer.substring(0, 4)}..${data.finalPlayer.substring(data.finalPlayer.length-3)}`}</p>
+            <p>{`${data.winner_name}`}</p>
+            <p>{`${data.loser_name}`}</p>
             <p>Lost</p>
         </div>))}
        
