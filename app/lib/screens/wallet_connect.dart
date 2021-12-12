@@ -49,8 +49,6 @@ class WalletConnect extends StatelessWidget {
                   child: Text('Connect Wallet'),
                 ),
               ),
-              
-              
             ],
           ),
         ),
