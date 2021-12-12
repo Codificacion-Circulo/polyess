@@ -1,11 +1,11 @@
 class Nft {
-  final String? gameid;
+  final String? image;
 
-  Nft({this.gameid});
+  Nft({this.image});
 
   factory Nft.fromJson(Map<String, dynamic> json) {
     return Nft(
-      gameid: json['gameId'],
+      image: json['image'],
     );
   }
 }

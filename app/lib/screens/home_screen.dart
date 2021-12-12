@@ -253,14 +253,22 @@ class HomeScreen extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount:
-                              loginProvider.userDetails?.wins?.wins?.length ??
-                                  0,
+                              loginProvider.userDetails?.nfts?.nft?.length ?? 0,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: Container(
-                                width: 300,
-                                // child:
+                                //width: 300,
+                                child: loginProvider.userDetails == null
+                                    ? CircularProgressIndicator()
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image.network(loginProvider
+                                                .userDetails!.nfts!.nft
+                                                ?.elementAt(index)
+                                                .image ??
+                                            ''),
+                                      ),
                               ),
                             );
                           },
