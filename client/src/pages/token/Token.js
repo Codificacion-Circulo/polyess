@@ -20,7 +20,7 @@ export default function Token() {
                   <p>Buy Tokens</p>
   
                   <div class="form-floating m-2">
-                    <input type="email" class="form-control input-group-sm mb-3" id="floatingInput"/>
+                    <input type="number" class="form-control input-group-sm mb-3" id="floatingInput"/>
                   </div>
   
   
@@ -33,7 +33,7 @@ export default function Token() {
                   <p>Sell Tokens</p>
   
                   <div class="form-floating m-2">
-                    <input type="email" class="form-control input-group-sm mb-3" id="floatingInput"/>
+                    <input type="number" class="form-control input-group-sm mb-3" id="floatingInput"/>
                   </div>
   
   
