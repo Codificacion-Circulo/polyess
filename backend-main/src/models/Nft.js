@@ -12,12 +12,17 @@ const nft = new Schema({
     type: String,
   },
   attributes: {
-    type: Array,
+    rank:String,
+    country:String,
+    trait:String,
   },
   owner: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
+  },
+  owner_name:{
+    type: String,
   }
 
 });
