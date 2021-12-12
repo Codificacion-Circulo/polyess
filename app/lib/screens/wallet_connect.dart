@@ -84,20 +84,23 @@ class WalletConnect extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              textColor.withOpacity(0.7))),
-                      onPressed: () async {
-                        var address = await WalletService()
-                            .getAddress(_seedController.text);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Home(addr: address)),
-                        );
-                      },
-                      child: Text('Connect Wallet'),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                textColor.withOpacity(0.7))),
+                        onPressed: () async {
+                          var address = await WalletService()
+                              .getAddress(_seedController.text);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Home(addr: address)),
+                          );
+                        },
+                        child: Text('Connect Wallet'),
+                      ),
                     ),
                   ],
                 ),
