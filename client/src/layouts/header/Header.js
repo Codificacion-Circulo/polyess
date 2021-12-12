@@ -72,7 +72,7 @@ function Header(props) {
   return (
     <Fragment>
       {modal && (<ConnectModal onClose={closeModalHandler} open={modal} tried={triedEager} />)}
-      <Navbar sticky="top" style={{ background: "none" }} expand="lg">
+      <Navbar sticky="top" style={{ background: "#000" }} expand="lg">
         <Container>
           <Navbar.Brand href="/home">
             <img
@@ -87,15 +87,15 @@ function Header(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-center align-items-center text-center" style={{backgroundColor: "#d1996d"}}/>
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="justify-content-center">
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/">Home</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/game">Play</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/history">Games</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/leaderboard">Leaderboard</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/token">Tokens</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/market">Marketplace</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/profile">Profile</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-3 text-center" href="/faq">Faq</Nav.Link>
-              <button onClick={openModalHandler} className="btn text-dark" style={{backgroundColor: "#e53935"}}>{account === null
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/">Home</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/game">Play</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/history">Games</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/leaderboard">Leaderboard</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/token">Tokens</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/market">Marketplace</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/profile">Profile</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/faq">Faq</Nav.Link>
+              <button onClick={openModalHandler} className="btn text-dark ms-2" style={{backgroundColor: "#e53935"}}>{account === null
                 ? 'Connect'
                 : account
                   ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
