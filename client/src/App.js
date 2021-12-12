@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+// import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import { Web3ReactProvider} from '@web3-react/core'
 import { Web3Provider } from '@ethersproject/providers'
 import Home from "./pages/home/Home"
@@ -22,7 +22,8 @@ import ChessGame from './components/game/chessUI/chessgame'
 import {ColorContext} from './store/colorcontext'
 import History from "./pages/history/History";
 import Token from "./pages/token/Token";
-
+import HistoryBoard from "./components/history/HistoryBoard";
+import Nft from './components/market/Nft'
 
 
 function App() {
@@ -90,9 +91,9 @@ function App() {
             <Route path="/history/:id" exact>
               <History />
             </Route>
-            {/* <Route path="/history" exact>
-              <History />
-            </Route> */}
+            <Route path="/history" exact>
+              <HistoryBoard />
+            </Route>
             <Route path="/market" exact>
               <Market />
             </Route>
@@ -104,6 +105,9 @@ function App() {
             </Route>
             <Route path="/profile" exact>
               <Profile />
+            </Route>
+            <Route path="/market/:id" exact>
+              <Nft />
             </Route>
             <Route path="/faq" exact>
               <Faqs />
