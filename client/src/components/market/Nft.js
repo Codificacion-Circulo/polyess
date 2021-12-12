@@ -46,7 +46,7 @@ function Nft(props) {
                     </div>
                     <div class="col-lg-6">
                         <div class="about-avatar text-center">
-                            <img src={blue} title="" alt=""/>
+                            <img src={blue} title="" alt="" style={{width: "50%"}}/>
                         </div>
                     </div>
                 </div>
