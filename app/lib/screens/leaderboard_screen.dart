@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:polyess/providers/users.dart';
+import 'package:polyess/screens/wallet_connect.dart';
+import 'package:polyess/services/wallet_service.dart';
 
 class LeaderBoardSceen extends StatelessWidget {
   const LeaderBoardSceen({Key? key}) : super(key: key);
@@ -11,6 +13,22 @@ class LeaderBoardSceen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Polyess'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  WalletService().clearData();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WalletConnect(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ))
+          ],
         ),
         body: FutureBuilder(
             initialData: [],
@@ -20,7 +38,9 @@ class LeaderBoardSceen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: ListView.builder(
-                    itemCount: (userProvider.users?.length ?? 0) ==  0 ? 0 : userProvider.users!.length - 1,
+                    itemCount: (userProvider.users?.length ?? 0) == 0
+                        ? 0
+                        : userProvider.users!.length - 1,
                     itemBuilder: (context, index) {
                       return Card(
                         elevation: 0,
