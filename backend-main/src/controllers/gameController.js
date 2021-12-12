@@ -9,6 +9,7 @@ const User = require('../models/User');
 exports.getAllGames = async (req, res, next) => {
   var srt = 0;
   var lim = 0;
+  var skp = 0;
   const match = {};
   let params = new URLSearchParams(req.query);
   if (req.query.sort) {
@@ -19,13 +20,18 @@ exports.getAllGames = async (req, res, next) => {
     lim = req.query.limit;
     params.delete('limit');
   }
+  if (req.query.skip) {
+    skp = req.query.skip;
+    params.delete('skip');
+}
   for (const [key, value] of (params)) {
     match[key] = value;
   }
   try {
     const games = await Game.find(match)
       .sort(srt || 'gameId')
-      .limit(Number(lim));
+      .limit(Number(lim))
+      .skip(Number(skp));
     if (!games) {
       return next(new ErrorResponse("Games Not Found", 404));
     }
@@ -106,7 +112,11 @@ exports.postHessWin = async (req, res, next) => {
         return next(new ErrorResponse("Users Not Found", 404));
       }
       game.winner=user2._id;
+      game.winner_name=user2.username;
+      game.winner_addr=user2.address;
       game.loser=user2._id;
+      game.loser_name=user2.username;
+      game.loser_addr=user2.address;
       await game.save();
       await user0.draw();
       await user1.draw();
@@ -124,7 +134,11 @@ exports.postHessWin = async (req, res, next) => {
         return next(new ErrorResponse("Users Not Found", 404));
       }
       game.winner=user0._id;
+      game.winner_name=user0.username;
+      game.winner_addr=user0.address;
       game.loser=user1._id;
+      game.loser_name=user1.username;
+      game.loser_addr=user1.address;
       await user0.addToken(parseInt(data.args[2].hex));
       await user1.subToken(parseInt(data.args[2].hex));
       await user0.won();
@@ -168,7 +182,11 @@ exports.postNftWin = async (req, res, next) => {
         return next(new ErrorResponse("Users Not Found", 404));
       }
       game.winner=user2._id;
+      game.winner_name=user2.username;
+      game.winner_addr=user2.address;
       game.loser=user2._id;
+      game.loser_name=user2.username;
+      game.loser_addr=user2.address;
       await game.save();
       await user0.draw();
       await user1.draw();
@@ -186,7 +204,11 @@ exports.postNftWin = async (req, res, next) => {
         return next(new ErrorResponse("Users Not Found", 404));
       }
       game.winner=user0._id;
+      game.winner_name=user0.username;
+      game.winner_addr=user0.address;
       game.loser=user1._id;
+      game.loser_name=user1.username;
+      game.loser_addr=user1.address;
       await Nft.findOneAndUpdate({ assetId: parseInt(data.args[3].hex) }, { owner: user0._id });
       await user0.won();
       await user1.lost();

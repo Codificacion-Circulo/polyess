@@ -12,7 +12,33 @@ function CreateNewGame(props) {
     const inputText=account
     const [didGetUserName,setDidGetUserName]= useState(false);
     const [gameId,setGameId]=useState("");
-
+    const [userData,setUserData] = useState([]);
+    var data = JSON.stringify({
+        "address": account
+      });
+      var config = {
+        method: 'post',
+        url: 'http://polyess-listner.herokuapp.com/search',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      useEffect(() => {
+  
+  const fetchData = async () => {
+    try{
+      const response=await axios(config);
+  const result=await response.data;
+  setUserData(result)
+  console.log(result)
+    }catch(e){
+      console.log(e);
+    }
+  }
+  
+    fetchData();
+  }, []);
     function send(){
         const newGameRoomId = uuid()
         setGameId(newGameRoomId)
@@ -28,12 +54,12 @@ function CreateNewGame(props) {
 
         :
            <div>
-                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}}>Your Username:</h1>
-
-                <h4 style={{marginLeft: String((window.innerWidth / 2) - 120) + "px", width: "240px", marginTop: "62px"}} 
-                      >{inputText}</h4>
+                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}} className="text-white">Your Username: {inputText} </h1>
+                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 8)) + "px"}} className="text-white mb-4">Your Address: {`${account.substring(0, 6)}..${account.substring(account.length-4)}`} </h1>
+                {/* <h4 style={{marginLeft: String((window.innerWidth / 2) - 120) + "px", width: "240px", marginTop: "62px"}} 
+                      >{inputText}</h4> */}
                        
-                <button className="btn btn-primary" 
+                <button className="btn btn-primary mb-4" 
                     style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
                     disabled = {!account} 
                     onClick = {() => {

@@ -103,17 +103,39 @@
 }
 
 /* Nft MarketPlace  */
+.nftContent {
+  padding: 3rem 0;
+}
 
 .nftContentHeading h1 {
   color: #fff;
   margin-bottom: 2rem;
 }
 
+.nftContentImg img {
+  width: 40%;
+}
+
+.nftContentImg img:hover {
+  transform: scale(1.2);
+}
+
 /* Stake Section  */
+.stakeContent{
+  padding: 3rem 0;
+}
 
 .stakeContentHeading h1 {
   color: #fff;
   margin-bottom: 2rem;
+}
+
+.stakeContentImg img {
+  width: 40%;
+}
+
+.stakeContentImg img:hover {
+  transform: scale(1.2);
 }
 
 /* WhyUs Container */
@@ -141,5 +163,23 @@
   }
   .nftContainer, .stakeContainer, .tokenContainer, .whyUsContainer {
     padding: 0 2rem;
-  } 
+  }
+  .stakeContentImg img {
+    width: 60%;
+  }
+  .nftContentImg img {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .stakeContentImg img {
+    width: 60%;
+  }
+  .nftContentImg img {
+    width: 50%;
+  }
+  .nftContentImg, .stakeContentImg {
+    margin: 3rem 0 ;
+  }
 }

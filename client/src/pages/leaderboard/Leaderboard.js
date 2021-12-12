@@ -1,50 +1,46 @@
-import React,{Fragment} from 'react'
+import React,{Fragment,useEffect,useState} from 'react'
+import { Link } from 'react-router-dom';
 import './Leaderboard.css'
-
 function Leaderboard(props) {
+    const [rankData,setRankData] = useState([]);
+    useEffect(() => {
+        const url = "http://polyess-listner.herokuapp.com/users?limit=10";
+    
+        const fetchData = async () => {
+          try {
+            const response = await fetch(url);
+            const json = await response.json();
+            setRankData(json)
+            console.log(json);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+        fetchData();
+    }, []);
+    const resultData = rankData.filter((data) => data.username !== "zero")
     return (
         <Fragment>
-        <div className="farm-leaderboard__outer container d-flex justify-content-center">
-
-<input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked/>
-<label class="btn mx-2 py-3" for="success-outlined">Ranking</label>
-
-<input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off"/>
-<label class="btn mx-2 py-3" for="danger-outlined">Assets</label>
-
-
-        </div>
-
+<div class="logo my-3">
+      <h1 className='text-center' style={{color: "#d1996d"}}><b>Leaderboard</b></h1>
+</div>
     <div className="farm-leaderboard container px-4">
-        
 
         <div className="farm-leaderboard__head mx-auto px-auto">
-            <p>LeaderBoard</p>
-            <p>Matches Won / Played</p>
-        </div>
-        <div className="farm-leaderboard__content container py-3 px-3 my-4">
-            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">001</p>
-            <p>Player One 729</p>
-            <p>200/300
-            </p>
+            <p>Rank</p>
+            <p>Username</p>
+            <p>Points</p>
         </div>
 
-        <div className="farm-leaderboard__content container py-3 px-3 my-4">
-            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">002</p>
-            <p>Player Two Sigma</p>
-            <p>-
-           
-            </p>
+           {resultData.map((data,index)=>(
+            <Link to={"/profile/"+data.address}>
+            <div className="farm-leaderboard__content container py-3 px-3 my-4">
+            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">{index+1}</p>
+            <p>{data.username}</p>
+            <p>{data.rank}</p>
         </div>
-
-        <div className="farm-leaderboard__content container py-3 px-3 my-4">
-            <p className=" farm-leaderboard__content__p1 btn-primary py-1 px-3">232</p>
-            <p>Player Three Beta</p>
-            <p>-
-           
-            </p>
-        </div>
-       
+            </Link>
+            ))}
     </div>
     </Fragment>
     )

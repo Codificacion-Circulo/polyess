@@ -8,6 +8,7 @@ const BASE_URI = process.env.BASE_URI;
 exports.getAllNfts = async (req, res, next) => {
   var srt = 0;
   var lim = 0;
+  var skp = 0;
   const match = {};
   let params = new URLSearchParams(req.query);
   if (req.query.sort) {
@@ -18,13 +19,18 @@ exports.getAllNfts = async (req, res, next) => {
       lim = req.query.limit;
       params.delete('limit');
   }
+  if (req.query.skip) {
+    skp = req.query.skip;
+    params.delete('skip');
+}
   for (const [key, value] of (params)) {
       match[key] = value;
   }
   try {
       const nfts = await Nft.find(match)
-          .sort(srt || 'price')
-          .limit(Number(lim));
+          .sort(srt || '-price')
+          .limit(Number(lim))
+          .skip(Number(skp));
       if (!nfts) {
           return next(new ErrorResponse("Nfts Not Found", 404));
       }
@@ -48,11 +54,21 @@ exports.postNftMinted = async (req, res, next) => {
       if (!user) {
         return next(new ErrorResponse("Profile not found", 404));
     }
-
+    const ID = parseInt(data.args[1].hex);
+    const ipfsRes = await fetch(BASE_URI + ID+".json");
+    if (!ipfsRes.ok) {
+        return next(new ErrorResponse("Request Could not be processed", 500));
+    }
+    const json = await ipfsRes.json();
       await Nft.create({
         owner:user._id,
+        owner_name:user.username,
         assetId:parseInt(data.args[1].hex),
         price:parseInt(data.args[2].hex),
+        image:json.image,
+        attributes:json.attributes,
+        name:json.name,
+        description:json.description
       });
       await user.subToken(parseInt(data.args[2].hex));
       await user.save();
@@ -80,7 +96,7 @@ exports.postNftMinted = async (req, res, next) => {
           return next(new ErrorResponse("Users Not Found", 404));
       }
       const nft=await Nft.findOneAndUpdate({ assetId:parseInt(data.args[0].hex) }, {price:parseInt(data.args[3].hex),
-        owner:user0._id});
+        owner:user0._id,owner_name:user0.username});
       if(!nft){
         return next(new ErrorResponse("Nft Not Found", 404));
       }

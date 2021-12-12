@@ -1,64 +1,75 @@
 import React from "react";
 import Faq from "react-faq-component";
-import './Faqs.css'
+import "./Faqs.css";
 
 const data = {
-    rows: [
-        {
-            title: "Are my files secure with CryptoLock?",
-            content: `They are completely secure as only the owner of the file can grant access or remove access to a file that is already encrypted. All files get stored on IPFS after getting encrypted. So you can be assured that your files are always secured.`,
-        },
-        {
-            title: "What is IPFS?",
-            content:`The data is stored in IPFS which is like a decentralized cloud based system. more about ipfs here.`,
-        },
-        {
-            title: "How is my file encrypted?",
-            content: `Once you upload the file you are required to provide a key(password) to the file which you will also give out to the receiver thus adding another security layer. The standard used to encrypt the file is aes-256-gcm.`,
-        },
-        {
-            title: "How do I share my file with someone?",
-            content: `All you need is a MetaMask connected wallet with some ethers for gas fees which ensure not even us can see your data and also the address of the person who wants to see the file.`,
-        },
-        {
-            title: "Can I revoke access once I have given them access to a person?",
-            content: `Yes, we provide the feature to revoke access from a file if you no longer want to share it.`,
-        },
-        {
-            title: "Why should I use CryptoLock rather than traditional cloud storage?",
-            content: `All the traditional cloud storage are centralized and keep all the data on their server which are prone to hacks and thus making it unreliable, while our idea is completely decentralized and also hack-proof through 3 levels of the system (Blockchain, IPFS, added encryption) thus making it impossible to hack.`,
-        },
-        {
-            title: "What is the file size limit?",
-            content: ` The maximum size of the file is 100MB at the moment due to API limitations.`,
-        }
-    ]
+  rows: [
+    {
+      title: "What can I do around here?",
+      content: `Polyhess is a Chess gameplay website where you can play with your friends. There are 3 modes, Free-to-Play, Token betting, and Nft bets. Free-to-Play as the name suggests does not include any money as sort. While betting needs HT tokens for betting purposes. You and your friend both will stake an equal amount of Hess Tokens and have a game of chess to decide who gets the stake.  NFT staking is the same as token staking but you are playing for NFTs rather than NFTs.`,
+    },
+    {
+      title: "How do I get Hess Tokens?",
+      content: `There are 2 ways to get hess tokens. One you buy the tokens in exchange of ethers or you win from your friends. Each Token costs 10^-12 Ether. And you need at least 10^8 HT tokens to start staking.`,
+    },
+    {
+      title:
+        "What are NFTs? I don't understand all this rocket science GenZ is talking about?",
+      content: `Non-Fungible tokens of NFTs means they are unique and can’t be traded for other NFTs. Like one bitcoin can be exchanged for another bitcoin, NFTs are not like that. Their uniqueness is backed by technology like blockchain and to be honest anything digital can be NFT, picture, mp3 files, books, anything you can imagine. We created NFTs of famous chess players, if you like art, buy it at the marketplace.`,
+    },
+    {
+      title: "Okay! I get it but does these NFTs have any utility?",
+      content: `Yes we got you covered in that. You will be able to play with your friends and bet your NFTs on a game of chess but what is ingenious here is whichever NFT you are gonna stake the king of the Board will take the face on NFT, which looks super awesome does it not?.`,
+    },
+    {
+      title: "How many NFTs are there?",
+      content: `There are 25 NFTs and each costs 10^10 HT tokens or 0.01 Ethers. They can be used to play in NFT staking or can be used to trade in the marketplace.`,
+    },
+    {
+      title: "I have Billions and Trillions of HT tokens. Does it help?",
+      content: `All the traditional cloud storage are centralized and keep all the data on their server which are prone to hacks and thus making it unreliable, while our idea is completely decentralized and also hack-proof through 3 levels of the system (Blockchain, IPFS, added encryption) thus making it impossible to hack.`,
+    },
+    {
+      title: "What about my Profile?",
+      content: `Go to the profile section, Each profile has a user name and wallet ID which is connected. It provides a detail view of Tokens, NFTs, games won and games lost. And also displays what NFTs you have with game history. `,
+    },
+    {
+      title:
+        "I am new to blockchain. Is there any knowledge that I need to have before starting?",
+      content: `You just should know how to use your Metamask Wallet as you will be playing with very much real money and also crypto is a ground for multiple scams so i would like you to be aware about that. You can check how to use metamask here.`,
+    },
+    {
+      title: "How does the leaderboard metrics work?",
+      content: `For each win you get 2 points for each loss you get 1 point and for each draw you get 1.5 points. As we want to promote users to play chess more and more rather than their  The more you play the higher your rank is.`,
+    },
+  ],
 };
 
 const styles = {
-    rowTitleTextSize: '1.2rem',
-    rowTitleColor: "blue",
-    rowContentColor: 'white',
-    rowContentTextSize: '1.3rem',
-    arrowColor: "#05ffa1",
+  rowTitleTextSize: "1.1rem",
+  rowTitleColor: "blue",
+  rowContentColor: "white",
+  rowContentTextSize: "1.2rem",
+  arrowColor: "#05ffa1",
 };
 
 const config = {
-    animate: true,
-    arrowIcon: "V",
-    tabFocus: true
+  animate: true,
+  arrowIcon: "V",
+  tabFocus: true,
 };
 
-const Faqs = props => {
-    return (
-        <div>
-            <Faq
-                data={data}
-                styles={styles}
-                config={config}
-            />
-        </div>
-    );
+const Faqs = (props) => {
+  return (
+    <div>
+      <div class="logo my-3 text-center">
+        <h1 className="text-light">
+          <b>Faqs</b>
+        </h1>
+      </div>
+      <Faq data={data} styles={styles} config={config} />
+    </div>
+  );
 };
 
 export default Faqs;

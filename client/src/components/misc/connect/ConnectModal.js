@@ -79,11 +79,11 @@ function ConnectModal(props) {
       aria-labelledby="example-modal-sizes-title-sm"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className="bg-dark">
         {!!error && <Modal.Title id="example-modal-sizes-title-sm">{getErrorMessage(error)}
         </Modal.Title>}
       </Modal.Header>
-      <Modal.Body className="d-flex justify-content-center flex-column">
+      <Modal.Body className="d-flex justify-content-center flex-column bg-dark text-light">
 
         {Object.keys(connectorsByName).map((name) => {
           const currentConnector = connectorsByName[name]
@@ -105,14 +105,14 @@ function ConnectModal(props) {
               <button
                 disabled={disabled}
                 key={name}
-                className="btn border border-primary my-2"
+                className="btn border border-primary my-2 text-light"
                 onClick={() => {
                   setActivatingConnector(currentConnector)
                   activate(connectorsByName[name])
                 }}
               >
                 {connected && (
-                  <span role="img" aria-label="check">
+                  <span role="img" aria-label="check" className="me-1">
                     ✅ 
                   </span>
                 )}
@@ -132,10 +132,10 @@ function ConnectModal(props) {
 
 
       </Modal.Body>
-      <Modal.Footer className="d-flex justify-content-center">
+      <Modal.Footer className="d-flex justify-content-center bg-dark">
 
         {(active || error) && (
-          <button className="btn border border-secondary mx-2"
+          <button className="btn border border-secondary mx-2 text-danger"
             onClick={() => {
               deactivate()
             }}
@@ -146,7 +146,7 @@ function ConnectModal(props) {
         <div>
           
         </div>
-        <button className="btn border border-secondary mx-2" onClick={props.onClose}>
+        <button className="btn border border-secondary mx-2 text-success" onClick={props.onClose}>
           Close
         </button>
       </Modal.Footer>
