@@ -1182,8 +1182,8 @@ contract polyhess is ERC1155, Ownable {
      uint8 winner;
      address _owner;
      uint tokencounter;
-     uint maxnft=35;
-     uint NFT_Price=10000000000; //0.01 eth
+     uint maxnft=22;
+     uint NFT_Price=1000000; //1 eth
     mapping (uint256 => string) private _uris;
 
     struct game {
@@ -1201,9 +1201,41 @@ contract polyhess is ERC1155, Ownable {
     constructor() public ERC1155("") {
         _owner = msg.sender;
         _mint (address(this), 0, 10**20, "");
-        tokencounter = 1;
+        for (uint i=1;i<=maxnft;i++){
+            _mint(address(this), i, 1,"");
+        }
         gameID=0;
     }
+    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
+        if (_i == 0) {
+            return "0";
+        }
+        uint j = _i;
+        uint len;
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint k = len;
+        while (_i != 0) {
+            k = k-1;
+            uint8 temp = (48 + uint8(_i - _i / 10 * 10));
+            bytes1 b1 = bytes1(temp);
+            bstr[k] = b1;
+            _i /= 10;
+        }
+        return string(bstr);
+    }
+        function uri(uint256 tokenId) override public view returns(string memory){
+          return(
+            string(abi.encodePacked(
+              "https://bafybeihinfdgrb27ezwqyx3ufhceoq2c2asi2ppvhlzakvk4dkim2n7enu.ipfs.dweb.link/",
+              uint2str(tokenId),".json"
+              ))
+
+            );
+        }
 
     // Events
       event Hess_Buy(
@@ -1220,7 +1252,7 @@ contract polyhess is ERC1155, Ownable {
         address From,
         uint buy_price
         );
-      event mint_NFT(
+      event Bought_NFT(
         address TO,
         uint NFTid,
         uint amt
@@ -1260,26 +1292,20 @@ contract polyhess is ERC1155, Ownable {
       // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
         require(msg.value>=ethamount,"Not enough token sent");
-        uint amt = (msg.value)/1000000;
+        uint amt = (ethamount)*1000000;
         safeTransferFrom(address(this),msg.sender, 0, amt, "" );
         emit Hess_Buy(amt, msg.sender);
       }
       // To exchange tokens from ethereum
 
     function exchange_eth(uint hesstoken)public payable{
-        require(hesstoken > 999999999, " Not sufficient hesstoken sent" );
+        require(hesstoken > 99999, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
         uint amt = (hesstoken/11*10);
 
         ((msg.sender).transfer)(amt);
         emit ex_eth_hess(hesstoken, msg.sender);
       }
-     // To Set Token URIs
-    function uri(uint256 tokenId) override public view returns (string memory) {
-        return(_uris[tokenId]);}
-    function setTokenUri(uint256 tokenId, string memory uri) public onlyOwner {
-        require(bytes(_uris[tokenId]).length == 0, "Cannot set uri twice");
-        _uris[tokenId] = uri;}
 
 
     function NFT_tran(uint256 tokenId, address _to, address _from, uint amt)public{
@@ -1295,21 +1321,18 @@ contract polyhess is ERC1155, Ownable {
         emit mint_token(Amount);
     }
 
-    function mintNFT( uint256 amount)public {
-        require(tokencounter<=75, "All NFTs are minted");
+    function BuyNFT( uint256 amount, uint TokenID)public {
         require(amount>=NFT_Price, "Price of NFT more than given");
         require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
-        setApprovalForAll(address(this),true);
-        safeTransferFrom(msg.sender, _owner, 0, amount,"");
-        _mint(msg.sender, tokencounter, 1,"");
-        tokencounter=tokencounter+1;
-        emit mint_NFT(msg.sender, tokencounter-1, amount);
+        safeTransferFrom(msg.sender, address(this), 0, amount,"");
+        safeTransferFrom(address(this), msg.sender, TokenID, 1,"");
+        emit Bought_NFT(msg.sender, TokenID, amount);
     }
 
 
 
       function Token_staking(address p1, address p2, uint am1, uint am2) public {
-          require(am1>9999999&&am2>9999999, "Stake amouunt more than 100");
+          require(am1>999&&am2>999, "Stake amouunt more than 100");
           require( am1== am2,"Both have not staked similar amount");
 
           safeTransferFrom(p1, address(this), 0, am1, "0x00");
