@@ -20,7 +20,7 @@ class LeaderBoardSceen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: ListView.builder(
-                    itemCount: userProvider.users?.length ?? 0,
+                    itemCount: (userProvider.users?.length ?? 0) ==  0 ? 0 : userProvider.users!.length - 1,
                     itemBuilder: (context, index) {
                       return Card(
                         elevation: 0,
