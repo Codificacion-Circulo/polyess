@@ -32,11 +32,10 @@ export default function History() {
              <div className="container d-flex flex-row">
              <img className="mx-2 p-2 border border-warning" src={winner} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&& `${historyData[0].initialPlayer.substring(0, 6)}..${historyData[0].initialPlayer.substring(historyData[0].initialPlayer.length-4)}`}</p>
+                 <p className="text-right mx-3 my-auto">{historyData[0]&& `${historyData[0].winner_name}`}<br/>{historyData[0]&& `${historyData[0].winner_addr.substring(0, 6)}..${historyData[0].winner_addr.substring(historyData[0].winner_addr.length-4)}`}</p>
              </div>
          </div>
- 
-         {/* <hr style={{ border:"none",borderLeft:"1px solid hsla(200, 10%, 50%,100)",height:"100px",width:"1px"}}/> */}
+
          <div className="container col-md">
              <h1 className="m-3" >
                  Loser
@@ -44,7 +43,7 @@ export default function History() {
              <div className="container  d-flex flex-row">
              <img className="mx-2 p-2 border border-warning" src={loser} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&`${historyData[0].finalPlayer.substring(0, 6)}..${historyData[0].finalPlayer.substring(historyData[0].finalPlayer.length-4)}`}</p>
+                 <p className="text-right mx-3 my-auto">{historyData[0]&& `${historyData[0].loser_name}`}<br/>{historyData[0]&&`${historyData[0].loser_addr.substring(0, 6)}..${historyData[0].loser_addr.substring(historyData[0].loser_addr.length-4)}`}</p>
              </div>
          </div>
  
