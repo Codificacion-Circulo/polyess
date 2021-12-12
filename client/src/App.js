@@ -23,6 +23,7 @@ import {ColorContext} from './store/colorcontext'
 import History from "./pages/history/History";
 import Token from "./pages/token/Token";
 import HistoryBoard from "./components/history/HistoryBoard";
+import Nft from './components/market/Nft'
 
 
 function App() {
@@ -104,6 +105,9 @@ function App() {
             </Route>
             <Route path="/profile" exact>
               <Profile />
+            </Route>
+            <Route path="/market/:id" exact>
+              <Nft />
             </Route>
             <Route path="/faq" exact>
               <Faqs />

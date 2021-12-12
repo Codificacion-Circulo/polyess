@@ -18,7 +18,7 @@ const changeNetwork = async () => {
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x1' }],
+        params: [{ chainId: '0x4' }],
       });
     } catch (error) {
       console.error(error);
@@ -89,10 +89,10 @@ function Header(props) {
             <Nav className="justify-content-center">
               <Nav.Link className="hover-underline-animation mx-1 text-center" href="/">Home</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-1 text-center" href="/game">Play</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/history">Games</Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/leaderboard">Leaderboard</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-1 text-center" href="/token">Tokens</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-1 text-center" href="/market">Marketplace</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/history">Games</Nav.Link>
+              <Nav.Link className="hover-underline-animation mx-1 text-center" href="/leaderboard">Leaderboard</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-1 text-center" href="/profile">Profile</Nav.Link>
               <Nav.Link className="hover-underline-animation mx-1 text-center" href="/faq">Faq</Nav.Link>
               <button onClick={openModalHandler} className="btn text-dark ms-2" style={{backgroundColor: "#e53935"}}>{account === null
