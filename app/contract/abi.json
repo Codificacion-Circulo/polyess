@@ -34,31 +34,6 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "TO",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "NFTid",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      }
-    ],
-    "name": "Bought_NFT",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
         "internalType": "uint256",
         "name": "ethAMT",
         "type": "uint256"
@@ -369,6 +344,31 @@
       }
     ],
     "name": "ex_eth_hess",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "TO",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "NFTid",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amt",
+        "type": "uint256"
+      }
+    ],
+    "name": "mint_NFT",
     "type": "event"
   },
   {
