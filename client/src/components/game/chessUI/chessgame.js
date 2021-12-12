@@ -195,7 +195,7 @@ class ChessGame extends React.Component {
         <div style = {{
             backgroundImage: `url(${Board})`,
             width: "720px",
-            height: "720px"}}
+            height: "720px", marginRight: "1rem"}}
         >
             <Stage width = {720} height = {720}>
                 <Layer>
@@ -298,8 +298,8 @@ const ChessGameWrapper = (props) => {
     return (
       <React.Fragment>
         {opponentDidJoinTheGame ? (
-          <div className="container">
-            <h4> Opponent: {opponentUserName} </h4>
+          <div className="container mt-5">
+            <h4 className="text-danger mb-3"> Opponent: {opponentUserName} </h4>
             <div style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
@@ -308,7 +308,7 @@ const ChessGameWrapper = (props) => {
               />
               <TableDiv/>
             </div>
-            <h4> You: {props.myUserName} </h4>
+            <h4 className="text-info mt-4"> You: {props.myUserName} </h4>
           </div>
         ) : gameSessionDoesNotExist ? (
           <div>

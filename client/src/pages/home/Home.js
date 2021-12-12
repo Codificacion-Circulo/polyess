@@ -11,6 +11,8 @@ import "./Home.css";
 function Home(props) {
   return (
     <Fragment>
+    {/* Home Section  */}
+
       <div className="home my-4">
         <div className="container homeContainer">
           <div className="d-flex homeContent">
@@ -31,6 +33,7 @@ function Home(props) {
         </div>
       </div>
 
+    {/* Modes Section  */}
 
       <div className="container-fluid modesContainer d-flex flex-column mb-4">
         <div className="modesContentHeading text-center mt-4 mb-4">
@@ -84,11 +87,13 @@ function Home(props) {
       </div>
 
 
+      {/* Nft Section  */}
+
       <div className="container-fluid nftContainer">
         <div className="nftContent">
           <div className="row">
             <div className="col nftColumns nftContentImg d-flex justify-content-center">
-              <img src={nft} style={{textAlign: "center"}} alt="" srcset="" />
+              <img className="transAll" src={nft} style={{textAlign: "center"}} alt="" srcset="" />
             </div>
             <div className="col-md-6 nftColumns nftContentHeading d-flex flex-column justify-content-center px-4">
               <h1 style={{color: "#d1996d"}}>Nft Marketplace</h1>
@@ -98,6 +103,7 @@ function Home(props) {
         </div>
       </div>
 
+      {/* Stake Section  */}
 
       <div className="container-fluid stakeContainer">
         <div className="stakeContent">
@@ -107,7 +113,7 @@ function Home(props) {
               <p className="text-light ">Play with your friends while betting on your assets and get a chance to buy nfts of most popular players worldwide. Wanna cash-out you can do that anytime you want with an ingame store for real Ethers.</p>
             </div>
             <div className="col stakeColumns stakeContentImg d-flex justify-content-center">
-            <img src={bet} style={{textAlign: "center"}} alt="" srcset="" />
+            <img className="transAll" src={bet} style={{textAlign: "center"}} alt="" srcset="" />
             </div>
           </div>
         </div>
