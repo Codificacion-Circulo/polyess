@@ -32,7 +32,7 @@ export default function History() {
              <div className="container  d-flex flex-row">
              <img className="mx-2 p-2 border border-warning" src={winner} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&historyData[0].initialPlayer}</p>
+                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&& `${historyData[0].initialPlayer.substring(0, 6)}..${historyData[0].initialPlayer.substring(historyData[0].initialPlayer.length-3)}`}</p>
              </div>
          </div>
  
@@ -44,7 +44,7 @@ export default function History() {
              <div className="container  d-flex flex-row">
              <img className="mx-2 p-2 border border-warning" src={loser} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&historyData[0].finalPlayer}</p>
+                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&`${historyData[0].finalPlayer.substring(0, 6)}..${historyData[0].finalPlayer.substring(historyData[0].finalPlayer.length-3)}`}</p>
              </div>
          </div>
  
@@ -59,12 +59,12 @@ export default function History() {
              <p className="m-3" >
                  Game Started by-
              </p>
-             <p className="m-3" >{historyData[0]&&historyData[0].initialPlayer}</p>
+             <p className="m-3" >{historyData[0]&& `${historyData[0].initialPlayer.substring(0, 6)}..${historyData[0].initialPlayer.substring(historyData[0].initialPlayer.length-3)}`}</p>
  
  <p className="m-3" >
                  Game Joined by-
              </p>
-             <p className="m-3" >{historyData[0]&&historyData[0].finalPlayer}</p>
+             <p className="m-3" >{historyData[0]&&`${historyData[0].finalPlayer.substring(0, 6)}..${historyData[0].finalPlayer.substring(historyData[0].finalPlayer.length-3)}`}</p>
  
          </div>
          
