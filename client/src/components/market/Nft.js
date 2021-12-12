@@ -50,34 +50,6 @@ function Nft(props) {
                         </div>
                     </div>
                 </div>
-                <div class="counter my-4">
-                    <div class="row">
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <h6 class="count h2" data-to="500" data-speed="500">500</h6>
-                                <p class="m-0px font-w-600">Tokens Count</p>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <h6 class="count h2" data-to="150" data-speed="150">150</h6>
-                                <p class="m-0px font-w-600">NFT Count</p>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <h6 class="count h2" data-to="850" data-speed="850">850</h6>
-                                <p class="m-0px font-w-600">Games Won</p>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <div class="count-data text-center">
-                                <h6 class="count h2" data-to="190" data-speed="190">190</h6>
-                                <p class="m-0px font-w-600">Total Games Played</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <hr class="m-0"/>
         </section>

@@ -51,7 +51,7 @@ export default function Token() {
               <div className="container d-flex align-items-start flex-column m-sm-3">
                 <div className="farm-mastrey__right__box container farm-mystrey__left d-flex flex-column text-center mb-3 py-3 px-2">
                   <p>Buy Tokens</p>
-  
+                  <p className='fs-6 text-info'>1 Eth = 10<sup>12</sup> &nbsp; Tokens</p>
                   <div class="form-floating m-2">
                     <input type="number" onChange={depositChangeHandler} class="form-control input-group-sm mb-3" id="floatingInput"  placeholder="Amount of Hess Tokens to buy" required={true}/>
                   </div>
@@ -65,7 +65,7 @@ export default function Token() {
   
                 <div className="farm-mastrey__right__box container farm-mystrey__left d-flex flex-column text-center mb-3 py-3 px-2">
                   <p>Sell Tokens</p>
-  
+                  <p className='fs-6 text-info'>1 Eth = 9.09*10<sup>11</sup> &nbsp; Tokens</p>
                   <div class="form-floating m-2">
                     <input type="number" class="form-control input-group-sm mb-3" id="floatingInput"/>
                   </div>

@@ -1,6 +1,9 @@
 import {Fragment,useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import './History.css'
+import winner from "../../assets/game/winner.png"
+import loser from "../../assets/game/loser.png"
+
 export default function History() {
     const params=useParams();
     const [historyData,setHistoryData] = useState([]);
@@ -21,27 +24,26 @@ export default function History() {
     return (
         <Fragment>
         <div className="container" style={{alignItems: 'center'}}>
-        <div className="container d-flex justify-content-center farm-minning__first p-4 my-4">
-         <div className="container">
+        <div className="container row myrow farm-minning__first pe-4 py-4 my-md-4">
+         <div className="container col-md">
              <h1 className="m-3" >
                  Winner
              </h1>
-             <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2 border border-primary" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
+             <div className="container d-flex flex-row">
+             <img className="mx-2 p-2 border border-warning" src={winner} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&historyData[0].initialPlayer}</p>
+                 <p className="text-right mx-3 my-auto">{historyData[0]&& `${historyData[0].winner_name}`}<br/>{historyData[0]&& `${historyData[0].winner_addr.substring(0, 6)}..${historyData[0].winner_addr.substring(historyData[0].winner_addr.length-4)}`}</p>
              </div>
          </div>
- 
-         <hr style={{ border:"none",borderLeft:"1px solid hsla(200, 10%, 50%,100)",height:"100px",width:"1px"}}/>
-         <div className="container">
+
+         <div className="container col-md">
              <h1 className="m-3" >
                  Loser
              </h1>
              <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2 border border-primary" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
+             <img className="mx-2 p-2 border border-warning" src={loser} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
-                 <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&historyData[0].finalPlayer}</p>
+                 <p className="text-right mx-3 my-auto">{historyData[0]&& `${historyData[0].loser_name}`}<br/>{historyData[0]&&`${historyData[0].loser_addr.substring(0, 6)}..${historyData[0].loser_addr.substring(historyData[0].loser_addr.length-4)}`}</p>
              </div>
          </div>
  
@@ -53,15 +55,15 @@ export default function History() {
  
          <div className="container d-flex justify-content-center farm-minning__first p-4 my-4">
          <div className="container">
-             <p className="m-3" >
-                 Game Started by-
+             <p className="m-md-3 my-3" >
+                 Game Started by
              </p>
-             <p className="m-3" >{historyData[0]&&historyData[0].initialPlayer}</p>
+             <p className="m-3" >{historyData[0]&& `${historyData[0].initialPlayer.substring(0, 6)}..${historyData[0].initialPlayer.substring(historyData[0].initialPlayer.length-4)}`}</p>
  
- <p className="m-3" >
-                 Game Joined by-
+ <p className="m-md-3 my-3" >
+                 Game Joined by
              </p>
-             <p className="m-3" >{historyData[0]&&historyData[0].finalPlayer}</p>
+             <p className="m-3" >{historyData[0]&&`${historyData[0].finalPlayer.substring(0, 6)}..${historyData[0].finalPlayer.substring(historyData[0].finalPlayer.length-4)}`}</p>
  
          </div>
          
@@ -72,7 +74,7 @@ export default function History() {
              <p className="m-3" >{historyData[0]&&historyData[0].amount}</p>
  
  <p className="m-3" >
-                Bet Ammount
+                Bet Amount
              </p>
              <p className="m-3" >{historyData[0]&&historyData[0].amount}</p>
  
