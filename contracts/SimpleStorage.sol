@@ -1196,14 +1196,21 @@ contract polyhess is ERC1155, Ownable {
     mapping (uint=>game) public GameID;
     uint gameID;
 
+    event mint_NFT(
+        address TO,
+        uint NFTid,
+        uint amt
+        );
 
 
     constructor() public ERC1155("") {
         _owner = msg.sender;
-        _mint (address(this), 0, 10**20, "");
+        _mint (address(this), 0, 10**10, "");
         for (uint i=1;i<=maxnft;i++){
             _mint(address(this), i, 1,"");
+            emit mint_NFT(address(this), i ,0);
         }
+
         gameID=0;
     }
     function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
@@ -1227,6 +1234,7 @@ contract polyhess is ERC1155, Ownable {
         }
         return string(bstr);
     }
+
         function uri(uint256 tokenId) override public view returns(string memory){
           return(
             string(abi.encodePacked(
@@ -1252,11 +1260,7 @@ contract polyhess is ERC1155, Ownable {
         address From,
         uint buy_price
         );
-      event Bought_NFT(
-        address TO,
-        uint NFTid,
-        uint amt
-        );
+
       event mint_token(
         uint AMT
         );
@@ -1326,7 +1330,7 @@ contract polyhess is ERC1155, Ownable {
         require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
         safeTransferFrom(msg.sender, address(this), 0, amount,"");
         safeTransferFrom(address(this), msg.sender, TokenID, 1,"");
-        emit Bought_NFT(msg.sender, TokenID, amount);
+        emit mint_NFT(msg.sender, TokenID, amount);
     }
 
 
