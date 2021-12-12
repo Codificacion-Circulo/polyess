@@ -1,12 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useWeb3React} from '@web3-react/core'
 import "./Register.css";
 
 const Register = ({ history }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+  const [address, setAddress] = useState("");
+  const [errorData, setErrorData] = useState("");
+
+  const context = useWeb3React()
+  const { connector, library, chainId, account, activate, deactivate, active, error } = context
+  const userAddr=account
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -17,20 +21,20 @@ const Register = ({ history }) => {
       },
     };
 
-    if (!password) {
-      setPassword("");
+    if (!address) {
+      setAddress("");
       setTimeout(() => {
-        setError("");
+        setErrorData("");
       }, 5000);
-      return setError("Please Enter a Password");
+      return setErrorData("Please Enter a Password");
     }
 
     try {
       const { data } = await axios.post(
         "",
         {
-          email,
-          password,
+          username,
+          address,
         },
         config
       );
@@ -39,9 +43,9 @@ const Register = ({ history }) => {
 
       history.push("/login");
     } catch (error) {
-      setError(error.response.data.error);
+      setErrorData(error.response.data.error);
       setTimeout(() => {
-        setError("");
+        setErrorData("");
       }, 5000);
     }
   };
@@ -50,37 +54,33 @@ const Register = ({ history }) => {
     <div className="register-screen">
       <form onSubmit={registerHandler} className="register-screen__form">
         <h3 className="register-screen__title">Register</h3>
-        {error && <span className="error-message">{error}</span>}
+        {errorData && <span className="error-message">{setErrorData}</span>}
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            type="email"
+            type="text"
             required
-            id="email"
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            id="username"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="address">Address:</label>
           <input
             type="password"
             required
-            id="password"
+            id="address"
             autoComplete="true"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Wallet Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
           />
         </div>
         <button type="submit" className="form-btn form-btn-primary">
           Register
         </button>
-
-        <span className="register-screen__subtext">
-          Already have an account? <Link to="/login">Login</Link>
-        </span>
       </form>
     </div>
   );
