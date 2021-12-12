@@ -52,11 +52,11 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
         ),
         body: GridView.count(
           crossAxisCount: 2,
-          children: List.generate(ran.nextInt(22), (index) {
+          children: List.generate(22, (index) {
             return GestureDetector(
               child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.amberAccent.withOpacity(0.1),
+                      color: Colors.white.withOpacity(0.1),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   margin: EdgeInsets.all(10.0),
                   child: Image.network(
