@@ -11,6 +11,12 @@ const nft = new Schema({
   image: {
     type: String,
   },
+  name: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
   attributes: {
     rank:String,
     country:String,

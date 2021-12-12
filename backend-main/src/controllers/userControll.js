@@ -54,6 +54,24 @@ exports.register = async (req, res, next) => {
 };
 
 
+exports.search=async (req, res, next) => {
+  const { username,address } = req.body;
+  try {
+    const user = await User.findOne({
+      username,
+      address
+    });
+    if(!user){
+      res.send({exist:"false"});
+    }else{
+      res.send(user);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 
 
 
