@@ -1,6 +1,9 @@
 import {Fragment,useState,useEffect} from 'react'
 import { useParams } from 'react-router';
 import './History.css'
+import winner from "../../assets/game/winner.png"
+import loser from "../../assets/game/loser.png"
+
 export default function History() {
     const params=useParams();
     const [historyData,setHistoryData] = useState([]);
@@ -29,7 +32,7 @@ export default function History() {
                  Winner
              </h1>
              <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2 border border-primary" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
+             <img className="mx-2 p-2 border border-warning" src={winner} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
                  <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&historyData[0].initialPlayer}</p>
              </div>
@@ -41,7 +44,7 @@ export default function History() {
                  Loser
              </h1>
              <div className="container  d-flex flex-row">
-             <img className="mx-2 p-2 border border-primary" src="https://www.mobox.io/momo/img/MBOX.870623db.png" alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
+             <img className="mx-2 p-2 border border-warning" src={loser} alt="create" height="50" style={{borderRadius:"14px",borderWidth:"4px"}}/>
                  <p className="text-left mx-3 my-auto">User<br/>Address</p>
                  <p className="text-right mx-3 my-auto">0 Box<br/>{historyData[0]&&historyData[0].finalPlayer}</p>
              </div>
