@@ -7,6 +7,7 @@ const BASE_URI = process.env.BASE_URI;
 exports.getAllUsers = async (req, res, next) => {
   var srt = 0;
   var lim = 0;
+  var skp = 0;
   const match = {};
   let params = new URLSearchParams(req.query);
   if (req.query.sort) {
@@ -17,13 +18,18 @@ exports.getAllUsers = async (req, res, next) => {
       lim = req.query.limit;
       params.delete('limit');
   }
+  if (req.query.skip) {
+    skp = req.query.skip;
+    params.delete('skip');
+}
   for (const [key, value] of (params)) {
       match[key] = value;
   }
   try {
       const users = await User.find(match)
           .sort(srt || '-rank')
-          .limit(Number(lim));
+          .limit(Number(lim))
+          .skip(Number(skp));
       if (!users) {
           return next(new ErrorResponse("Users Not Found", 404));
       }
@@ -52,15 +58,10 @@ exports.register = async (req, res, next) => {
 
 
   exports.login = async (req, res, next) => {
-    const sort={};
     const { address, username } = req.body;
     if (!address) {
       return next(new ErrorResponse("Please provide valid login credentials", 400));
     }
-    if(req.query.sortBy){
-      const parts =req.query.sortBy.split(':');
-      sort[parts[0]]= part[1]==='desc'?-1:1;
-  }
     try {
       const user = await User.findOne({ address })
       .populate({

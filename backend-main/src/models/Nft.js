@@ -18,6 +18,9 @@ const nft = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
+  },
+  owner_name:{
+    type: String,
   }
 
 });

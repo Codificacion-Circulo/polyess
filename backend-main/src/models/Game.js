@@ -31,6 +31,18 @@ const game = new Schema({
   loser: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  winner_name:{
+    type: String,
+  },
+  loser_name:{
+    type: String,
+  },
+  winner_addr:{
+    type: String,
+  },
+  loser_addr:{
+    type: String,
   }
 
 });
