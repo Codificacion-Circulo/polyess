@@ -7,6 +7,7 @@ import { Web3Provider } from '@ethersproject/providers'
 import AuthContext from './store/auth-context';
 import Home from "./pages/home/Home"
 import Register from "./pages/register/Register"
+
 import Faqs from "./components/faqs/Faqs"
 import Leaderboard from "./pages/leaderboard/Leaderboard"
 import Profile from "./pages/profile/Profile"
