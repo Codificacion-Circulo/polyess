@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import freeMode from "../../../assets/game/freeMode.jpg"
 import nftMode from "../../../assets/game/nftMode.jpg"
 import tokenMode from "../../../assets/game/tokenMode.jpg"
@@ -16,7 +17,7 @@ function GameModes() {
         <div className="row mt-1 mb-3">
           <div className="col-md-4 col-sm-6">
             <div className="card bg-black border-info text-light">
-              <img src={freeMode} className="card-img-top" alt="..." />
+              <Link to='/game/0'><img src={freeMode} className="card-img-top" alt="..." /></Link>
               <div className="card-body">
                 <p className="card-text text-center">
                     Free to Play
@@ -27,7 +28,7 @@ function GameModes() {
 
           <div className="col-md-4 col-sm-6">
             <div className="card bg-black border-info text-light">
-              <img src={tokenMode} className="card-img-top" alt="..." />
+            <Link to='/game/1'><img src={tokenMode} className="card-img-top" alt="..." /></Link>
               <div className="card-body">
                 <p className="card-text text-center">
                     Token Betting
@@ -38,7 +39,7 @@ function GameModes() {
 
           <div className="col-md-4 col-sm-6">
             <div className="card bg-black border-info text-light">
-              <img src={nftMode} className="card-img-top" alt="..." />
+            <Link to='/game/2'><img src={nftMode} className="card-img-top" alt="..." /></Link>
               <div className="card-body">
                 <p className="card-text text-center">
                     Nft Betting

@@ -23,7 +23,8 @@ import {ColorContext} from './store/colorcontext'
 import History from "./pages/history/History";
 import Token from "./pages/token/Token";
 import HistoryBoard from "./components/history/HistoryBoard";
-import Nft from './components/market/Nft'
+import Nft from './components/market/Nft';
+import GameModes from './components/game/gameModes/GameModes'
 
 
 function App() {
@@ -73,8 +74,11 @@ function App() {
             <Route path="/reset" exact>
               <Reset />
             </Route>
-            <Route path = "/game" exact>
+            <Route path = "/game/:id" exact>
             <Onboard setUserName = {setUserName}/>
+          </Route>
+          <Route path = "/mode" exact>
+            <GameModes/>
           </Route>
           <Route path = "/game/:gameid" exact>
             {didRedirect ? 
@@ -97,7 +101,7 @@ function App() {
             <Route path="/market" exact>
               <Market />
             </Route>
-            <Route path="/token" exact>
+            <Route path="/tokens" exact>
               <Token />
             </Route>
             <Route path="/profile/:id" exact>

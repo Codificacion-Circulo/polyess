@@ -53,7 +53,7 @@ export default function Token() {
                   <p>Buy Tokens</p>
                   <p className='fs-6 text-info'>1 Eth = 10<sup>12</sup> &nbsp; Tokens</p>
                   <div class="form-floating m-2">
-                    <input type="number" onChange={depositChangeHandler} class="form-control input-group-sm mb-3" id="floatingInput"  placeholder="Amount of Hess Tokens to buy" required={true}/>
+                    <input type="number" onChange={depositChangeHandler} class="form-control input-group-sm mb-3" id="floatingInput" required={true}/>
                   </div>
   
   
@@ -71,7 +71,7 @@ export default function Token() {
                   </div>
   
   
-                  <div className="farm-mystrey__button mt-0 my-2"> <button>Deposit</button>
+                  <div className="farm-mystrey__button mt-0 my-2">
                     <button>Withdraw</button></div>
   
                 </div>

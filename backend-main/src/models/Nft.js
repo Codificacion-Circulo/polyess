@@ -29,6 +29,9 @@ const nft = new Schema({
   },
   owner_name:{
     type: String,
+  },
+  owner_addr:{
+    type: String,
   }
 
 });

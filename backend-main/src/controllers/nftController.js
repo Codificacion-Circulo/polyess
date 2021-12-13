@@ -63,6 +63,7 @@ exports.postNftMinted = async (req, res, next) => {
       await Nft.create({
         owner:user._id,
         owner_name:user.username,
+        owner_addr:user.address,
         assetId:parseInt(data.args[1].hex),
         price:parseInt(data.args[2].hex),
         image:json.image,
