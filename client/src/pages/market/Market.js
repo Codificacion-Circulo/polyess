@@ -1,16 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import './Market.css'
+import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner";
 import blue from '../../assets/market/blue.png'
 import red from '../../assets/market/red.png'
 import golden from '../../assets/market/golden.png'
 
 function Market(props) {
+    const [loading, setLoading] = useState(false)
     return (
         <Fragment>
+        {loading&&<LoadingSpinner/>}
              <div class="container text-center">
 
 <div class="logo my-3">
-      <h1 style={{color: "#d1996d"}}><b>NFT MarketPlace</b></h1>
+      <h1 style={{color: "#d1996d"}}><b>NFT Marketplace</b></h1>
 </div>
 
 </div>
