@@ -1,44 +1,47 @@
-import React from 'react'
-import Game from '../../../integration/chess/chess'
-import Square from '../../../integration/chess/square'
+import React from 'react';
+import Game from '../chess/chess';
+import Square from '../chess/square';
 import { Stage, Layer } from 'react-konva';
-import Board from '../../../assets/game/chessBoard.png'
-import useSound from 'use-sound'
-import chessMove from '../../../assets/game/moveSoundEffect.mp3'
-import Piece from './piece'
-import piecemap from './piecemap'
-import TableDiv from '../table/Table'
+import Board from '../../../assets/game/chessBoard.png';
+import useSound from 'use-sound';
+import chessMove from '../../../assets/game/moveSoundEffect.mp3';
+import Piece from './piece';
+import piecemap from './piecemap';
+import TableDiv from '../table/Table';
 
-import { useParams } from 'react-router-dom'
-import { ColorContext } from '../../../store/colorcontext' 
+import { useParams } from 'react-router-dom';
+import { ColorContext } from '../../../store/colorcontext' ;
 // import VideoChatApp from '../../connection/videochat'
-const socket  = require('../../../integration/connection/socket').socket
+const socket  = require('../../../integration/connection/socket').socket;
 
 class ChessGame extends React.Component {
 
     state = {
         gameState: new Game(this.props.color),
-        draggedPieceTargetId: "", // empty string means no piece is being dragged
+        draggedPieceTargetId: "",
         playerTurnToMoveIsWhite: true,
-        whiteKingInCheck: false, 
-        blackKingInCheck: false
+        whiteKingInCheck: false,
+        blackKingInCheck: false,
+        gameid: '',
+        contractAddress: '',
     }
 
 
     componentDidMount() {
-        console.log(this.props.myUserName)
-        console.log(this.props.opponentUserName)
+        console.log(this.props.myUserName);
+        console.log(this.props.opponentUserName);
+        console.log(this.props.contractAddress);
         // register event listeners
         socket.on('opponent move', move => {
             // move == [pieceId, finalPosition]
             // console.log("opponenet's move: " + move.selectedId + ", " + move.finalPosition)
             if (move.playerColorThatJustMovedIsWhite !== this.props.color) {
-                this.movePiece(move.selectedId, move.finalPosition, this.state.gameState, false)
+                this.movePiece(move.selectedId, move.finalPosition, this.state.gameState, false);
                 this.setState({
                     playerTurnToMoveIsWhite: !move.playerColorThatJustMovedIsWhite
-                })
+                });
             }
-        })
+        });
     }
 
     startDragging = (e) => {
@@ -64,25 +67,25 @@ class ChessGame extends React.Component {
             this.revertToPreviousState(selectedId) // pass in selected ID to identify the piece that messed up
             return
         } else if (update === "user tried to capture their own piece") {
-            this.revertToPreviousState(selectedId) 
-            return
+            this.revertToPreviousState(selectedId) ;
+            return;
         } else if (update === "b is in check" || update === "w is in check") { 
             // change the fill of the enemy king or your king based on which side is in check. 
             // play a sound or something
             if (update[0] === "b") {
-                blackKingInCheck = true
+                blackKingInCheck = true;
             } else {
-                whiteKingInCheck = true
+                whiteKingInCheck = true;
             }
         } else if (update === "b has been checkmated" || update === "w has been checkmated") { 
             if (update[0] === "b") {
-                blackCheckmated = true
+                blackCheckmated = true;
             } else {
-                whiteCheckmated = true
+                whiteCheckmated = true;
             }
         } else if (update === "invalid move") {
-            this.revertToPreviousState(selectedId) 
-            return
+            this.revertToPreviousState(selectedId);
+            return;
         } 
 
         // let the server and the other client know your move
@@ -93,11 +96,11 @@ class ChessGame extends React.Component {
                 selectedId: selectedId, 
                 finalPosition: finalPosition,
                 gameId: this.props.gameId
-            })
+            });
         }
         
 
-        this.props.playAudio()   
+        this.props.playAudio();
         
         // sets the new game state. 
         this.setState({
@@ -106,12 +109,12 @@ class ChessGame extends React.Component {
             playerTurnToMoveIsWhite: !this.props.color,
             whiteKingInCheck: whiteKingInCheck,
             blackKingInCheck: blackKingInCheck
-        })
+        });
 
         if (blackCheckmated) {
-            alert("WHITE WON BY CHECKMATE!")
+            alert("WHITE WON BY CHECKMATE!");
         } else if (whiteCheckmated) {
-            alert("BLACK WON BY CHECKMATE!")
+            alert("BLACK WON BY CHECKMATE!");
         }
     }
 

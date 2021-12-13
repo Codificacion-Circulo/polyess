@@ -2,9 +2,9 @@ import {useState,useEffect,Fragment,useContext} from 'react'
 import axios from 'axios';
 import { Redirect,useParams } from 'react-router-dom'
 import uuid from 'uuid/v4'
-import { ColorContext } from '../../store/colorcontext' 
+import { ColorContext } from '../../../store/colorcontext' 
 import { useWeb3React} from '@web3-react/core'
-const socket  = require('../connection/socket').socket
+const socket  = require('../../../integration/connection/socket').socket
 
 
 function CreateNewGame(props) {
