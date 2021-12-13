@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:polyess/models/style.dart';
 import 'wallet_connect.dart';
@@ -56,7 +55,7 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
             return GestureDetector(
               child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.amberAccent.withOpacity(0.1),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   margin: EdgeInsets.all(10.0),
                   child: Image.network(
