@@ -12,16 +12,16 @@ const Piece = (props) => {
 
     const thisWhiteKingInCheck = props.id === "wk1" && props.whiteKingInCheck;
     const thisBlackKingInCheck = props.id === "bk1" && props.blackKingInCheck;
-    return <Image image={image};
-         x = {props.x - 90};
-         y = {props.y - 90};
-         draggable = {canThisPieceEvenBeMovedByThisPlayer && isItThatPlayersTurn};
-         width = {isDragged ? 75 : 60};
-         height = {isDragged ? 75 : 60};
-         onDragStart = {props.onDragStart};
-         onDragEnd = {props.onDragEnd};
-         fill = {(thisWhiteKingInCheck && "red") || (thisBlackKingInCheck && "red")};
-         id = {props.id};
+    return <Image image={image}
+         x = {props.x - 90}
+         y = {props.y - 90}
+         draggable = {canThisPieceEvenBeMovedByThisPlayer && isItThatPlayersTurn}
+         width = {isDragged ? 75 : 60}
+         height = {isDragged ? 75 : 60}
+         onDragStart = {props.onDragStart}
+         onDragEnd = {props.onDragEnd}
+         fill = {(thisWhiteKingInCheck && "red") || (thisBlackKingInCheck && "red")}
+         id = {props.id}
          />;
 };
 

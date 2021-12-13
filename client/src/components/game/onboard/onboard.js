@@ -1,10 +1,14 @@
 import {useState,useEffect,Fragment,useContext} from 'react'
 import axios from 'axios';
-import { Redirect,useParams } from 'react-router-dom'
+import { Redirect,useParams,Link } from 'react-router-dom'
 import uuid from 'uuid/v4'
 import { ColorContext } from '../../../store/colorcontext' 
 import { useWeb3React} from '@web3-react/core'
-const socket  = require('../../../integration/connection/socket').socket
+import freeMode from "../../../assets/game/freeMode.jpg"
+import nftMode from "../../../assets/game/nftMode.jpg"
+import tokenMode from "../../../assets/game/tokenMode.jpg"
+
+const socket  = require('../../../integration/connection/socket').socket;
 
 
 function CreateNewGame(props) {
@@ -54,47 +58,105 @@ function CreateNewGame(props) {
     }
     return (
         <Fragment>
+        
         {account?
             didGetUserName ? 
 
             <Redirect to = {"/game/" + gameId}><button className="btn btn-success" style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px"}}>Start Game</button></Redirect>
 
         :
+        
            <div>
-                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}} className="text-danger">Your Username: {userData&&userData.username} </h1>
-                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 8)) + "px"}} className="text-white mb-4">Your Address: {`${account.substring(0, 6)}..${account.substring(account.length-4)}`} </h1>
-                {/* <h4 style={{marginLeft: String((window.innerWidth / 2) - 120) + "px", width: "240px", marginTop: "62px"}} 
-                      >{inputText}</h4> */}
-                {params.id==='1'&&
-                      <div className="text-center">
-                      <h4 className="text-warning">Amount of Token to Stake</h4>
-                  <input type="number" />
-                      </div>
-                }
-                {params.id==='2'&&
-                      <div className="text-center">
-                      <h4 className="text-warning">NFT id to Stake</h4>
-                 
-<select id="cars" name="cars">
-  {/* <option value="volvo">Volvo XC90</option> */}
-  {optionArray}
+           <div className="container mt-2 gameModesContainer d-flex flex-column">
+        <div className="gameModeContent text-center m-5">
+            <h1 className="text-danger">Gaming Modes</h1>
+            <h3 className="mt-3 text-light">Choose a Mode to Play</h3>
+        </div>
+
+        <div className="row mt-1 mb-3">
+          <div className="col-md-4 col-sm-6">
+            <div className="card bg-black border-info text-light">
+            <img src={freeMode} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <p className="card-text text-center">
+                    Free to Play
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4 col-sm-6">
+            <div className="card bg-black border-info text-light">
+         <img src={tokenMode} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <p className="card-text text-center">
+                    Token Betting
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4 col-sm-6">
+            <div className="card bg-black border-info text-light">
+           <img src={nftMode} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <p className="card-text text-center">
+                    Nft Betting
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div className="register-screen">
+      <form  className="register-screen__form">
+        <h3 className="register-screen__title">Create Game</h3>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            required
+            id="username"
+            placeholder="Username"
+            
+            // onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address">Address:</label>
+          <input
+            type="text"
+            required
+            id="address"
+            autoComplete="true"
+            placeholder="Wallet Address"
+            value={`${account.substring(0, 6)}..${account.substring(account.length-4)}`}
+            // onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="form-btn form-btn-primary">
+          Register
+        </button>
+      </form>
+    </div>
+                {/* <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}} className="text-danger">Your Username: {userData&&userData.username} </h1>
+                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 8)) + "px"}} className="text-white mb-4">Your Address:  </h1>
   
-</select>
-                      </div>
-                }
+
                 <button className="btn btn-primary mb-4" 
                     style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
                     disabled = {!account} 
                     onClick = {() => {
-                        // When the 'Submit' button gets pressed from the username screen,
-                        // We should send a request to the server to create a new room with
-                        // the uuid we generate here.
                         props.didRedirect() 
                         props.setUserName(inputText) 
                         setDidGetUserName(true)
                         send()
-                    }}>Ready</button>
-            </div>:<h1>Connect</h1>
+                    }}>Ready</button> */}
+            </div>
+            :
+            <h1>Connect</h1>
         }
         </Fragment>
     )
