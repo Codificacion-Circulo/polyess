@@ -119,6 +119,11 @@ function Header(props) {
                   Home
                 </Link>
               </Nav.Link>
+              {!ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
+                <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                  Register To Play
+                </Link>
+              </Nav.Link>}
               {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/game"
