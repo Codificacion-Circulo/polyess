@@ -1,6 +1,13 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:polyess/models/style.dart';
+import 'wallet_connect.dart';
+import 'package:polyess/services/wallet_service.dart';
+import 'package:polyess/services/web3.dart';
+import 'package:polyess/services/nfts_api.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:async';
+import 'dart:math';
 
 class MarketPlaceScreen extends StatefulWidget {
   MarketPlaceScreen({Key? key}) : super(key: key);
@@ -20,57 +27,110 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
+  var ran = new Random();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: Padding(
-        padding: const EdgeInsets.only(top: 30, right: 30, left: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'NFT Market',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                children: List.generate(3, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: textColor,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: GestureDetector(
-                          onTap: _launchURL,
-                          child: Image.network(
-                            "https://gateway.pinata.cloud/ipfs/QmPWCagNgzp5P2TigD471JMr2bzjkhsjLEQFHTR4hAqnrg/1.png",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Polyess'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  WalletService().clearData();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WalletConnect(),
                     ),
                   );
-                }),
-              ),
-            ),
+                },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ))
           ],
         ),
-      )),
-    );
+        body: GridView.count(
+          crossAxisCount: 2,
+          children: List.generate(22, (index) {
+            return GestureDetector(
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  margin: EdgeInsets.all(10.0),
+                  child: Image.network(
+                      "https://gateway.pinata.cloud/ipfs/QmUZHKiAWC3ukMYUxEhRdciMx9v3jguUaQ2UfsTNqxLJNG/${index + 1}.png")),
+              onTap: () async {
+                // _launchURL();
+                // log("${await NFTApi().validBuy("61b5d2326f91e091b233e4e7")}");
+                if (await NFTApi().validBuy("61b5d2326f91e091b233e4e7")) {
+                } else {}
+                showModalBottomSheet(
+                  backgroundColor: Colors.grey[900],
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: NFTApi().validBuy("61b5d2a26f91e091b233e4ea")
+                            ? Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    textColor)),
+                                        onPressed: () {
+                                          // ETHHOME()
+                                          //     .buy_sell(0, , to, amt);
+                                        },
+                                        child: Text(
+                                          'Buy',
+                                          style: textStyle1,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Expanded(
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    textColor)),
+                                        onPressed: () {},
+                                        child: Text('Sell',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    minimumSize: Size(75, 75)),
+                                onPressed: null,
+                                child: Text('Owned By Someone',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ));
+                  },
+                );
+              },
+            );
+          }),
+        ));
   }
 }
 
