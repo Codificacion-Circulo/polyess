@@ -1,9 +1,10 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useContext } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
 // import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import { Web3ReactProvider} from '@web3-react/core'
 import { Web3Provider } from '@ethersproject/providers'
+import AuthContext from './store/auth-context';
 import Home from "./pages/home/Home"
 import Register from "./components/auth/Register"
 import Faqs from "./components/faqs/Faqs"
@@ -25,7 +26,7 @@ import GameModes from './components/game/gameModes/GameModes'
 
 
 function App() {
-  
+  const ctx = useContext(AuthContext)
   function getLibrary(provider){
     const library = new Web3Provider(provider)
     library.pollingInterval = 12000
@@ -42,7 +43,6 @@ function App() {
   }, [])
 
   const [userName, setUserName] = React.useState('')
-
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
      <ColorContext.Provider value = {{didRedirect: didRedirect, playerDidRedirect: playerDidRedirect, playerDidNotRedirect: playerDidNotRedirect}}>
@@ -59,50 +59,53 @@ function App() {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/register" exact>
+            {!ctx.registered && <Route path="/register" exact>
               <Register />
-            </Route>
-            <Route path = "/game" exact>
-            <Onboard setUserName = {setUserName}/>
-          </Route>
-          <Route path = "/game/:gameid" exact>
-            {didRedirect ? 
-              <React.Fragment>
-                    <JoinGame userName = {userName} isCreator = {true} />
-                    <ChessGame myUserName = {userName} />
-              </React.Fragment> 
-              :
+            </Route>}
+            {ctx.registered && <Route path = "/game/:id" exact>
+              <Onboard setUserName = {setUserName}/>
+            </Route>}
+            {ctx.registered && <Route path = "/mode" exact>
+              <GameModes/>
+            </Route>}
+            {ctx.registered && <Route path = "/game/:gameid" exact>
+              {didRedirect ? 
+                <React.Fragment>
+                  <JoinGame userName = {userName} isCreator = {true} />
+                  <ChessGame myUserName = {userName} />
+                </React.Fragment> 
+                :
               <JoinRoom />}
-          </Route>
-            <Route path="/leaderboard" exact>
+            </Route>}
+            {ctx.registered && <Route path="/leaderboard" exact>
               <Leaderboard />
-            </Route>
-            <Route path="/history/:id" exact>
+            </Route>}
+            {ctx.registered && <Route path="/history/:id" exact>
               <History />
-            </Route>
-            <Route path="/history" exact>
+            </Route>}
+            {ctx.registered && <Route path="/history" exact>
               <HistoryBoard />
-            </Route>
-            <Route path="/market" exact>
+            </Route>}
+            {ctx.registered && <Route path="/market" exact>
               <Market />
-            </Route>
-            <Route path="/tokens" exact>
+            </Route>}
+            {ctx.registered && <Route path="/tokens" exact>
               <Token />
-            </Route>
-            <Route path="/profile/:id" exact>
+            </Route>}
+            {ctx.registered && <Route path="/profile/:id" exact>
               <Profile />
-            </Route>
-            <Route path="/profile" exact>
+            </Route>}
+            {ctx.registered && <Route path="/profile" exact>
               <Profile />
-            </Route>
-            <Route path="/market/:id" exact>
+            </Route>}
+            {ctx.registered && <Route path="/market/:id" exact>
               <Nft />
-            </Route>
+            </Route>}
             <Route path="/faq" exact>
               <Faqs />
             </Route>
             <Route path="*">
-              <Error />
+              <Home />
             </Route>
           </Switch>
         </Suspense>
