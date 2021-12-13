@@ -8,7 +8,7 @@ import chessMove from '../../../assets/game/moveSoundEffect.mp3';
 import Piece from './piece';
 import piecemap from './piecemap';
 import TableDiv from '../table/Table';
-
+import web3 from 'web3'
 import { useParams } from 'react-router-dom';
 import { ColorContext } from '../../../store/colorcontext' ;
 // import VideoChatApp from '../../connection/videochat'
@@ -113,8 +113,12 @@ class ChessGame extends React.Component {
 
         if (blackCheckmated) {
             alert("WHITE WON BY CHECKMATE!");
+
+            // Integrate web3 here *******************************************
         } else if (whiteCheckmated) {
             alert("BLACK WON BY CHECKMATE!");
+
+            // Integrate web3 here *******************************************
         }
     }
 
@@ -272,9 +276,6 @@ const ChessGameWrapper = (props) => {
                 setUserName(opponentUserName)
                 didJoinGame(true) 
             } else {
-                // in chessGame, pass opponentUserName as a prop and label it as the enemy. 
-                // in chessGame, use reactContext to get your own userName
-                // socket.emit('myUserName')
                 socket.emit('request username', gameid)
             }
         })
