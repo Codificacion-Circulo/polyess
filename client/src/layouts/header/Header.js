@@ -1,8 +1,9 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
 import "./Header.css";
 import logo from "../../assets/header/logo.png";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Nav, Toast, ToastContainer } from "react-bootstrap";
+import AuthContext from "../../store/auth-context";
 import ConnectModal from "../../components/misc/connect/ConnectModal";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { useEagerConnect } from "../../library/hooks";
@@ -58,6 +59,7 @@ function getErrorMessage(error) {
 
 function Header(props) {
   const context = useWeb3React();
+  const ctx = useContext(AuthContext)
   const {
     connector,
     library,
@@ -76,6 +78,7 @@ function Header(props) {
   const openModalHandler = (props) => {
     setModal(true);
   };
+  console.log(ctx.registered);
   return (
     <Fragment>
       {modal && (
@@ -116,62 +119,67 @@ function Header(props) {
                   Home
                 </Link>
               </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              {!ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
+                <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                  Register To Play
+                </Link>
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/game"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Play
                 </Link>
-              </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/tokens"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Tokens
                 </Link>
-              </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/market"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Marketplace
                 </Link>
-              </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/history"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Games
                 </Link>
-              </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/leaderboard"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Leaderboard
                 </Link>
-              </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/profile"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Profile
                 </Link>
-              </Nav.Link>
-              <Nav.Link className="hover-underline-animation mx-1 text-center">
+              </Nav.Link>}
+              {ctx.registered && <Nav.Link className="hover-underline-animation mx-1 text-center">
                 <Link
                   to="/faq"
                   style={{ textDecoration: "none", color: "#fff" }}
                 >
                   Faq
                 </Link>
-              </Nav.Link>
+              </Nav.Link>}
               <button
                 onClick={openModalHandler}
                 className="btn text-dark ms-2"

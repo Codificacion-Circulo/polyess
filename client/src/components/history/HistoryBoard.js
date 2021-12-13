@@ -1,17 +1,21 @@
 import React,{Fragment,useEffect,useState} from 'react'
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../misc/LoadingSpinner/LoadingSpinner';
 import './HistoryBoard.css'
 function HistoryBoard(props) {
     const [rankData,setRankData] = useState([]);
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         const url = "http://polyess-listner.herokuapp.com/games?sort=gameId";
     
         const fetchData = async () => {
           try {
+            setLoading(true)
             const response = await fetch(url);
             const json = await response.json();
             setRankData(json)
             console.log(json);
+            setLoading(false)
           } catch (error) {
             console.log("error", error);
           }
@@ -20,7 +24,7 @@ function HistoryBoard(props) {
     }, []);
     return (
         <Fragment>
-
+{loading&&<LoadingSpinner/>}
 <div class="logo my-3">
       <h1 className='text-center' style={{color: "#d1996d"}}><b>History</b></h1>
 </div>

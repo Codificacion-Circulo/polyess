@@ -1,6 +1,7 @@
 import React, { Fragment,useEffect,useState } from 'react'
 import './Token.css'
 import { contract_addr,contract_abi } from '../../contracts/Contract'
+import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner"
 import Web3 from 'web3'
 import BlueBox from '../../assets/header/logo.png'
 
@@ -8,6 +9,7 @@ export default function Token() {
   const [account, setAccount] = useState('');
   const [contract, setcontract] = useState({});
   const [deposit,setDeposit]=useState('0');
+  const [loading, setLoading] = useState(false)
   const loadBlockhainData=async()=>{
     const web3 = new Web3(Web3.givenProvider || "https://localhost:7545");
     const accounts=await web3.eth.getAccounts()
@@ -22,7 +24,7 @@ export default function Token() {
     }
   }, [account])
   const depositChangeHandler=(event)=>{
-    const dAmount=Web3.utils.fromWei(event.target.value.toString(), 'ether')
+    const dAmount=event.target.value;
     setDeposit(dAmount)
   }
 
@@ -38,6 +40,7 @@ export default function Token() {
 
     return (
         <Fragment>
+        {loading&&<LoadingSpinner/>}
         <div className="farm-mystrey container mt-4 pt-4">
           <div className="row">
             <div className="col-md">

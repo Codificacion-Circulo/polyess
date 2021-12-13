@@ -3,18 +3,22 @@ import { useParams } from "react-router-dom";
 import "./History.css";
 import winner from "../../assets/game/winner.png";
 import loser from "../../assets/game/loser.png";
+import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner";
 
 export default function History() {
   const params = useParams();
   const [historyData, setHistoryData] = useState([]);
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     const url = `http://polyess-listner.herokuapp.com/games?gameId=${params.id}`;
 
     const fetchData = async () => {
       try {
+        setLoading(true)
         const response = await fetch(url);
         const json = await response.json();
         setHistoryData(json);
+        setLoading(false)
       } catch (error) {
         console.log("error", error);
       }
@@ -23,9 +27,10 @@ export default function History() {
   }, []);
   return (
     <Fragment>
+    {loading&&<LoadingSpinner/>}
       <div class="logo my-3 text-center">
         <h1 style={{color: "#d1996d"}}>
-          <b>NFT MarketPlace</b>
+          <b>Game Analytics</b>
         </h1>
       </div>
       <div className="container" style={{ alignItems: "center" }}>
