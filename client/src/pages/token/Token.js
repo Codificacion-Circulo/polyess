@@ -31,9 +31,8 @@ export default function Token() {
   const depositFormSubmission=async(e)=>{
     e.preventDefault();
     try {
-      const recipt=await contract.methods.buy_hess().send({
-        from:account,
-        value:deposit.toString()
+      const recipt=await contract.methods.exchange_eth(deposit).send({
+        from:account
         })
       console.log(recipt)
     } catch (error) {
