@@ -1238,7 +1238,7 @@ contract polyhess is ERC1155, Ownable {
         function uri(uint256 tokenId) override public view returns(string memory){
           return(
             string(abi.encodePacked(
-              "https://bafybeihz3djrs3mmpdmyip4jgk6u3wwxq3doezxztt64xquhokgxe5xx4y.ipfs.dweb.link/",
+              "https://bafybeib5pqn7z4l3shxhjh674xg3tvaipba4jev2jegrumytumwwg2fkqe.ipfs.dweb.link/",
               uint2str(tokenId),".json"
               ))
 
@@ -1305,7 +1305,7 @@ contract polyhess is ERC1155, Ownable {
     function exchange_eth(uint hesstoken)public payable{
         require(hesstoken > 99999, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
-        uint amt = (hesstoken/11*10);
+        uint amt = (hesstoken/11*10)/1000000;
 
         ((msg.sender).transfer)(amt);
         emit ex_eth_hess(hesstoken, msg.sender);
@@ -1324,15 +1324,6 @@ contract polyhess is ERC1155, Ownable {
         _mint(address(this), 0, Amount, "");
         emit mint_token(Amount);
     }
-
-    function BuyNFT( uint256 amount, uint TokenID)public {
-        require(amount>=NFT_Price, "Price of NFT more than given");
-        require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
-        safeTransferFrom(msg.sender, address(this), 0, amount,"");
-        safeTransferFrom(address(this), msg.sender, TokenID, 1,"");
-        emit mint_NFT(msg.sender, TokenID, amount);
-    }
-
 
 
       function Token_staking(address p1, address p2, uint am1, uint am2) public {
@@ -1413,5 +1404,27 @@ contract polyhess is ERC1155, Ownable {
       function Get_My_MONEY() public onlyOwner{
           ((msg.sender).transfer)(address(this).balance);
       }
+
+      function BuyNFT( uint256 amount, uint TokenID)public {
+          require(amount>=NFT_Price, "Price of NFT more than given");
+          require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
+          safeTransferFrom(msg.sender, address(this), 0, amount,"");
+          safeTransferFrom(address(this), msg.sender, TokenID, 1,"");
+          emit mint_NFT(msg.sender, TokenID, amount);
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
