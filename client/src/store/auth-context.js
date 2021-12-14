@@ -5,8 +5,16 @@ import axios from 'axios';
 const AuthContext = React.createContext({
     registered: false,
     loading:true,
-    loginData: {}
+    loginData: {},
+    registerHandler: () => {}
 })
+
+const authInitialState = {
+    registered: false,
+    loading:true,
+    loginData: {},
+    registerHandler: () => {}
+}
 
 const authReducer = (state, action) => {
     const registerResult = state.registered
@@ -16,7 +24,8 @@ const authReducer = (state, action) => {
     return {
         registered: registerResult,
         loading: state.loading,
-        loginData: state.loginData
+        loginData: state.loginData,
+        registerHandler: state.registerHandler
     }
 }
 
@@ -27,8 +36,12 @@ export const AuthContextProvider = (props) => {
     const [isRegistered, setIsRegistered] = useState(false)
     const [isLoading, setIsLoading] = useState(true);
     const [authState, dispatchAuthAction] = useReducer(
-        authReducer, AuthContext
+        authReducer, authInitialState
     )
+
+    const registerStatehandler = () => {
+        dispatchAuthAction({ type: 'CREATE_USER' })
+    }
     var data = JSON.stringify({
         "address": "0x7ffd8A206c64759C54A90F3584e50b3A22b674Da"
     });
@@ -63,7 +76,8 @@ export const AuthContextProvider = (props) => {
         value={{
             registered:isRegistered,
             loading:isLoading,
-            loginData: UserData
+            loginData: UserData,
+            registerHandler: registerStatehandler
         }}
         >
             {props.children}
