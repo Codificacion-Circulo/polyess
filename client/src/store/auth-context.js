@@ -17,16 +17,14 @@ const authInitialState = {
 }
 
 const authReducer = (state, action) => {
-    const registerResult = state.registered
+    // const registerResult = state.registered
     if(action.type === 'CREATE_USER') {
-        const registerResult = !state.registered
+        console.log("dispatch created");
+        state.registered=true
+        window. location. reload()
     }
-    return {
-        registered: registerResult,
-        loading: state.loading,
-        loginData: state.loginData,
-        registerHandler: state.registerHandler
-    }
+    console.log(state);
+    return state;
 }
 
 export const AuthContextProvider = (props) => {
@@ -38,10 +36,13 @@ export const AuthContextProvider = (props) => {
     const [authState, dispatchAuthAction] = useReducer(
         authReducer, authInitialState
     )
+    const [contextState, setContextState] = useState(false)
+
 
     const registerStatehandler = () => {
         dispatchAuthAction({ type: 'CREATE_USER' })
     }
+
     var data = JSON.stringify({
         "address": "0x7ffd8A206c64759C54A90F3584e50b3A22b674Da"
     });
@@ -80,7 +81,7 @@ export const AuthContextProvider = (props) => {
     }
         
     fetchData();
-}, [account]);
+}, [account, isRegistered]);
 
     return (
         <AuthContext.Provider
@@ -88,7 +89,9 @@ export const AuthContextProvider = (props) => {
             registered:isRegistered,
             loading:isLoading,
             loginData: UserData,
-            registerHandler: registerStatehandler
+            registerHandler: registerStatehandler,
+            contextState,
+            setContextState
         }}
         >
             {props.children}

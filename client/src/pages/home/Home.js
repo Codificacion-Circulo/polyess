@@ -12,9 +12,10 @@ import "./Home.css";
 
 function Home(props) {
   const ctx = useContext(AuthContext);
+
   return (
     <Fragment>
-      {ctx.loading&&<LoadingSpinner/>}
+      {ctx.loading&&ctx.registeredactive&&<LoadingSpinner/>}
     {/* Home Section  */}
 
       <div className="home my-4">
