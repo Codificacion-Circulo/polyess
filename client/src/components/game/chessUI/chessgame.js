@@ -246,7 +246,7 @@ const ChessGameWrapper = (props) => {
     // get the gameId from the URL here and pass it to the chessGame component as a prop. 
     const domainName = 'https://polyess.netlify.app'
     const color = React.useContext(ColorContext)
-    const { gameid } = useParams()
+    const { gameid,mode,addr,amount,nft } = useParams()
     const [play] = useSound(chessMove);
     const [opponentSocketId, setOpponentSocketId] = React.useState('')
     const [opponentDidJoinTheGame, didJoinGame] = React.useState(false)
@@ -335,7 +335,7 @@ const ChessGameWrapper = (props) => {
                   console.log('sd')
                   event.target.select()
               }}
-              value = {domainName + "/game/" + gameid}
+              value = {domainName + "/game/" + gameid+"/"+mode+"/"+addr+"/"+amount+"/"+nft}
               type = "text">
               </textarea>
             <br></br>

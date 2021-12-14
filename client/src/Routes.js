@@ -56,7 +56,7 @@ function Routes(){
         {ctx.registered && <Route path = "/game" exact>
           <Onboard setUserName = {setUserName}/>
         </Route>}
-        {ctx.registered && <Route path = "/game/:gameid" exact>
+        {ctx.registered && <Route path = "/game/:gameid/:mode/:addr/:amount/:nft" exact>
           {didRedirect ? 
             <React.Fragment>
               <JoinGame userName = {userName} isCreator = {true} />
