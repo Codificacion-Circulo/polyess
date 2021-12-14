@@ -1183,7 +1183,7 @@ contract polyhess is ERC1155, Ownable {
      address _owner;
      uint tokencounter;
      uint maxnft=35;
-     uint NFTPrice=1000000; //1 eth
+     uint NFTPrice=100000; //0.1 eth
     uint biddingtime = 86400;
     mapping (uint256 => string) private _uris;
 
@@ -1330,9 +1330,10 @@ contract polyhess is ERC1155, Ownable {
     mapping (uint => bool ) public auctionStart;
 
     function cal_Endtime(uint NFTid)public returns(uint){
-        if(auctionStart[NFTid]== false)
+        uint Endtime;
+        if(auctionStart[NFTid]== false) {
             auctionStart[NFTid] = true;
-            uint Endtime = block.timestamp+biddingtime;
+             Endtime = block.timestamp+biddingtime;}
 
             return Endtime;
     }
