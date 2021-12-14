@@ -1,1 +1,0 @@
-Play now an interactive and fun P2P chess  on your browser with your friends, while collecting NFTs that you give rewards backed by crypto-assets returns won from your progress in the Hess universe!

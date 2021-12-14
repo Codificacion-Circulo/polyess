@@ -14,20 +14,21 @@ export const AuthContextProvider = (props) => {
     const [UserData, setUserData] = useState({})
     const [isRegistered, setIsRegistered] = useState(false)
     const [isLoading, setIsLoading] = useState(true);
-    var data = JSON.stringify({
-        "address": "0x7ffd8A206c64759C54A90F3584e50b3A22b674Da"
-    });
-    var config = {
-        method: 'post',
-        url: 'http://polyess-listner.herokuapp.com/login',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-    };
+   
     
     useEffect(() => {
     const fetchData = async () => {
+        var data = JSON.stringify({
+            "address": account
+        });
+        var config = {
+            method: 'post',
+            url: 'http://polyess-listner.herokuapp.com/login',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+        };
         try{
             const response=await axios(config);
             const result=await response.data;
@@ -41,7 +42,7 @@ export const AuthContextProvider = (props) => {
     }
         
     fetchData();
-}, []);
+}, [account]);
 
     return (
         <AuthContext.Provider

@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, useContext } from "react";
+import { Fragment, useState, useContext } from "react";
 import "./Header.css";
 import logo from "../../assets/header/logo.png";
 import { Link } from "react-router-dom";

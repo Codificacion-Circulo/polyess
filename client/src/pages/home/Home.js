@@ -1,16 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useContext } from "react";
 import freeplay from "../../assets/homePage/freeplay.png";
 import token from "../../assets/homePage/token.png";
 import nftStaking from "../../assets/homePage/nftStaking.png";
 import bet from "../../assets/homePage/bet.jpg"
 import nft from "../../assets/homePage/nft.jpeg"
+import AuthContext from '../../store/auth-context';
+import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner";
 import { Container, Button, Row, Col } from "react-bootstrap";
 
 import "./Home.css";
 
 function Home(props) {
+  const ctx = useContext(AuthContext);
   return (
     <Fragment>
+      {ctx.loading&&<LoadingSpinner/>}
     {/* Home Section  */}
 
       <div className="home my-4">

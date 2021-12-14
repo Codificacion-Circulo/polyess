@@ -13,10 +13,10 @@ import {
 import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import classes from './ConnectModal.css';
-import meta from '../../../assets/connectModal/metamask.svg'
-import wltcnct from '../../../assets/connectModal/walletconnect.svg'
-import net from '../../../assets/connectModal/network.svg'
+// import classes from './ConnectModal.css';
+// import meta from '../../../assets/connectModal/metamask.svg'
+// import wltcnct from '../../../assets/connectModal/walletconnect.svg'
+// import net from '../../../assets/connectModal/network.svg'
 
 const ConnectorNames = {
   Injected: 'MetaMask',
