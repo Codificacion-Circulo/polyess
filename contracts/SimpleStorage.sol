@@ -1178,12 +1178,13 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI, IERC1155Rece
 }
 
 contract polyhess is ERC1155, Ownable {
-
+     using SafeMath for uint256;
      uint8 winner;
      address _owner;
      uint tokencounter;
-     uint maxnft=22;
-     uint NFT_Price=1000000; //1 eth
+     uint maxnft=35;
+     uint NFTPrice=1000000; //1 eth
+    uint biddingtime = 86400;
     mapping (uint256 => string) private _uris;
 
     struct game {
@@ -1205,7 +1206,7 @@ contract polyhess is ERC1155, Ownable {
 
     constructor() public ERC1155("") {
         _owner = msg.sender;
-        _mint (address(this), 0, 10**10, "");
+        _mint (address(this), 0, 10**20, "");
         for (uint i=1;i<=maxnft;i++){
             _mint(address(this), i, 1,"");
             emit mint_NFT(address(this), i ,0);
@@ -1246,6 +1247,16 @@ contract polyhess is ERC1155, Ownable {
         }
 
     // Events
+      event bid_change(
+        uint NFTID,
+        uint amt,
+        address Bidder
+    );
+    event NFTowner(
+        uint NFTID,
+        uint buyprice,
+        address NFTowner
+    );
       event Hess_Buy(
         uint ethAMT,
         address recipient
@@ -1294,10 +1305,9 @@ contract polyhess is ERC1155, Ownable {
 
     // Functions
       // To buy tokens from ethereum
-    function buy_hess(uint ethamount)public payable{
-        require(msg.value>=ethamount,"Not enough token sent");
-        uint amt = (ethamount)*1000000;
-        safeTransferFrom(address(this),msg.sender, 0, amt, "" );
+    function buy_hess()public payable{
+        uint amt = SafeMath.div(msg.value,100000000000000);
+        safeTransferFrom(address(this), msg.sender, 0, amt, "" );
         emit Hess_Buy(amt, msg.sender);
       }
       // To exchange tokens from ethereum
@@ -1305,12 +1315,42 @@ contract polyhess is ERC1155, Ownable {
     function exchange_eth(uint hesstoken)public payable{
         require(hesstoken > 99999, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
-        uint amt = (hesstoken/11*10)/1000000;
+        uint amt = SafeMath.mul(SafeMath.div(hesstoken, 11), 10);
 
         ((msg.sender).transfer)(amt);
         emit ex_eth_hess(hesstoken, msg.sender);
       }
 
+    struct HighestBidder{
+    uint amount;
+    address highestbidder;
+   }
+    mapping (uint => HighestBidder) public bidder;
+
+    mapping (uint => bool ) public auctionStart;
+
+    function cal_Endtime(uint NFTid)public returns(uint){
+        if(auctionStart[NFTid]== false)
+            auctionStart[NFTid] = true;
+            uint Endtime = block.timestamp+biddingtime;
+
+            return Endtime;
+    }
+
+    function bid (uint NFTid, uint _amount) public {
+        require(NFTid<36,"Enter a valid tokenID");
+        uint auction_end_time = cal_Endtime(NFTid);
+        if(block.timestamp > auction_end_time){
+            emit NFTowner( NFTid ,bidder[NFTid].amount,bidder[NFTid].highestbidder );
+            revert("Auction for this NFt has ended");
+        }
+        require(NFTPrice< _amount,"Send more than Minimum price");
+        require(bidder[NFTid].amount<_amount, "Bid of equal amount of Greater already present");
+        safeTransferFrom(address(this), msg.sender, 0, _amount, "0x00");
+        bidder[NFTid].highestbidder = msg.sender;
+        bidder[NFTid].amount = _amount;
+        emit bid_change( NFTid, _amount, msg.sender);
+    }
 
     function NFT_tran(uint256 tokenId, address _to, address _from, uint amt)public{
         require(msg.sender==_from, "You are not the owner of NFT");
@@ -1404,24 +1444,6 @@ contract polyhess is ERC1155, Ownable {
       function Get_My_MONEY() public onlyOwner{
           ((msg.sender).transfer)(address(this).balance);
       }
-
-      function BuyNFT( uint256 amount, uint TokenID)public {
-          require(amount>=NFT_Price, "Price of NFT more than given");
-          require(balanceOf(msg.sender,0)>=amount," Insufficent balance in account");
-          safeTransferFrom(msg.sender, address(this), 0, amount,"");
-          safeTransferFrom(address(this), msg.sender, TokenID, 1,"");
-          emit mint_NFT(msg.sender, TokenID, amount);
-      }
-
-
-
-
-
-
-
-
-
-
 
 
 

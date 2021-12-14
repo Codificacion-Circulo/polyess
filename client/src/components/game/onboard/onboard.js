@@ -4,6 +4,7 @@ import { Redirect,useParams,Link } from 'react-router-dom'
 import uuid from 'uuid/v4'
 import { ColorContext } from '../../../store/colorcontext' 
 import { useWeb3React} from '@web3-react/core'
+import AuthContext from '../../../store/auth-context';
 import freeMode from "../../../assets/game/freeMode.jpg"
 import nftMode from "../../../assets/game/nftMode.jpg"
 import tokenMode from "../../../assets/game/tokenMode.jpg"
@@ -13,45 +14,20 @@ const socket  = require('../../../integration/connection/socket').socket;
 
 function CreateNewGame(props) {
     const context = useWeb3React()
+    const ctx = useContext(AuthContext);
     const params=useParams();
     const { connector, library, chainId, account, activate, deactivate, active, error } = context
     const inputText=account
     const [didGetUserName,setDidGetUserName]= useState(false);
     const [gameId,setGameId]=useState("");
-    const [userData,setUserData] = useState([]);
-    var data = JSON.stringify({
-        "address": account||'0x596F08aDAa76889161A98c9Bb79869e7f9518C70'
-      });
-      var config = {
-        method: 'post',
-        url: 'http://polyess-listner.herokuapp.com/login',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      useEffect(() => {
-  
-  const fetchData = async () => {
-    try{
-      const response=await axios(config);
-  const result=await response.data;
-  setUserData(result)
-  console.log(result)
-    }catch(e){
-      console.log(e);
-    }
-  }
-  
-    fetchData();
-  }, []);
+   
     function send(){
         const newGameRoomId = uuid()
         setGameId(newGameRoomId)
         socket.emit('createNewGame', newGameRoomId)
     }
     const optionArray=[]
-    for (const nft in userData.nfts) {
+    for (const nft in ctx.nfts) {
       console.log(nft)
       const arr=(<option value={nft.name}>{nft.name}</option>)
         optionArray.push(arr)
@@ -120,6 +96,7 @@ function CreateNewGame(props) {
             required
             id="username"
             placeholder="Username"
+            value={ctx.registered && ctx.loginData.user && ctx.loginData.user.username}
             
             // onChange={(e) => setUsername(e.target.value)}
           />
@@ -132,28 +109,41 @@ function CreateNewGame(props) {
             id="address"
             autoComplete="true"
             placeholder="Wallet Address"
-            value={`${account.substring(0, 6)}..${account.substring(account.length-4)}`}
+            value={`${account.substring(0, 8)}..${account.substring(account.length-10)}`}
             // onChange={(e) => setAddress(e.target.value)}
           />
         </div>
-        <button type="submit" className="form-btn form-btn-primary">
-          Register
-        </button>
-      </form>
-    </div>
-                {/* <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}} className="text-danger">Your Username: {userData&&userData.username} </h1>
-                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 8)) + "px"}} className="text-white mb-4">Your Address:  </h1>
-  
-
-                <button className="btn btn-primary mb-4" 
-                    style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
-                    disabled = {!account} 
+        <div className="form-group">
+          <label htmlFor="token">Ammount of Token To BET:</label>
+          <input
+            type="text"
+            required
+            id="token"
+            autoComplete="true"
+            placeholder={`${ctx.registered && ctx.loginData.user && ctx.loginData.user.token} Owned`}
+            // value={`${account.substring(0, 6)}..${account.substring(account.length-4)}`}
+            // onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+        <label for="nft">Choose a NFT to BET:</label>
+  <select id="nft" name="nft" class="form-select" >
+  {ctx.registered && ctx.loginData.user && ctx.loginData.nfts.map((data)=>(
+            <option value={data.gameId}>{data.name}</option>))}
+  </select>
+        </div>
+        <button type="submit" 
+                      className="form-btn form-btn-primary"  
+                      disabled = {!account} 
                     onClick = {() => {
                         props.didRedirect() 
                         props.setUserName(inputText) 
                         setDidGetUserName(true)
-                        send()
-                    }}>Ready</button> */}
+                        send()}}>
+          Bet
+        </button>
+      </form>
+    </div>
             </div>
             :
             <h1>Connect</h1>

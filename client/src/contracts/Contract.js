@@ -1,4 +1,4 @@
-export const contract_addr="0x7ffd8A206c64759C54A90F3584e50b3A22b674Da"
+export const contract_addr="0x56F919c43A0dF9cb31ee307974960ca1393252EA"
 export const contract_abi= [
   {
     "inputs": [],
@@ -799,24 +799,6 @@ export const contract_abi= [
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "TokenID",
-        "type": "uint256"
-      }
-    ],
-    "name": "BuyNFT",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "p1",
         "type": "address"
@@ -909,6 +891,24 @@ export const contract_abi= [
   {
     "inputs": [],
     "name": "Get_My_MONEY",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "TokenID",
+        "type": "uint256"
+      }
+    ],
+    "name": "BuyNFT",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

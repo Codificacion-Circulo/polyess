@@ -56,6 +56,17 @@ export const AuthContextProvider = (props) => {
     
     useEffect(() => {
     const fetchData = async () => {
+        var data = JSON.stringify({
+            "address": account
+        });
+        var config = {
+            method: 'post',
+            url: 'http://polyess-listner.herokuapp.com/login',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+        };
         try{
             const response=await axios(config);
             const result=await response.data;
@@ -69,7 +80,7 @@ export const AuthContextProvider = (props) => {
     }
         
     fetchData();
-}, []);
+}, [account]);
 
     return (
         <AuthContext.Provider
