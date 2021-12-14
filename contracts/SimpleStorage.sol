@@ -1206,7 +1206,7 @@ contract polyhess is ERC1155, Ownable {
 
     constructor() public ERC1155("") {
         _owner = msg.sender;
-        _mint (address(this), 0, 10**10, "");
+        _mint (address(this), 0, 10**20, "");
         for (uint i=1;i<=maxnft;i++){
             _mint(address(this), i, 1,"");
             emit mint_NFT(address(this), i ,0);
