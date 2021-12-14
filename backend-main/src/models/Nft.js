@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose');
-
+const Bid = require('./Bid');
 const nft = new Schema({
   assetId: {
     type: String,
@@ -34,6 +34,11 @@ const nft = new Schema({
     type: String,
   }
 
+});
+nft.virtual('bid', {
+  ref: 'Bid',
+  localField: '_id',
+  foreignField: 'assetId'
 });
 
 const Nft = model('Nft', nft);
