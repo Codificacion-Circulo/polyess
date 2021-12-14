@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useWeb3React} from '@web3-react/core'
+import { useWeb3React } from "@web3-react/core";
 import "./Register.css";
 
 const Register = ({ history }) => {
@@ -8,53 +8,48 @@ const Register = ({ history }) => {
   const [address, setAddress] = useState("");
   const [errorData, setErrorData] = useState("");
 
-  const context = useWeb3React()
-  const { connector, library, chainId, account, activate, deactivate, active, error } = context
-  const userAddr=account
+  const context = useWeb3React();
+  const { connector, library, chainId, account, activate, deactivate, active, error } = context;
+  
+  useEffect(() => {
+    setAddress(account)
+  }, account)
+
+  var data = JSON.stringify({
+    "address": account,
+    "username": username
+  });
+
+  var config = {
+    method: 'post',
+    url: 'https://polyess-listner.herokuapp.com/register',
+    header: {
+      "Content-Type": "application/json",
+    },
+    data: data
+  };
 
   const registerHandler = async (e) => {
     e.preventDefault();
-
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    if (!address) {
-      setAddress("");
-      setTimeout(() => {
-        setErrorData("");
-      }, 5000);
-      return setErrorData("Please Enter a Password");
-    }
-
     try {
-      const { data } = await axios.post(
-        "",
-        {
-          username,
-          address,
-        },
-        config
-      );
-
-      localStorage.setItem("authToken", data.token);
-
-      history.push("/login");
-    } catch (error) {
-      setErrorData(error.response.data.error);
-      setTimeout(() => {
-        setErrorData("");
-      }, 5000);
+      const response = await axios(config)
+      const result = await response.data
+      console.log(result);
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
-    <div className="register-screen">
-      <form onSubmit={registerHandler} className="register-screen__form">
+    <div className="register-screen d-flex flex-column justify-content-center align-items-center">
+      <div class="logo my-3 mb-5">
+        <h1 className="text-center" style={{ color: "#d1996d" }}>
+          <b>Enter Details to Play</b>
+        </h1>
+      </div>
+      <form onSubmit={registerHandler} className="register-screen__form mb-5">
         <h3 className="register-screen__title">Register</h3>
-        {errorData && <span className="error-message">{setErrorData}</span>}
+        {/* {errorData && <span className="error-message">{setErrorData}</span>} */}
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
@@ -69,7 +64,7 @@ const Register = ({ history }) => {
         <div className="form-group">
           <label htmlFor="address">Address:</label>
           <input
-            type="password"
+            type="text"
             required
             id="address"
             autoComplete="true"
