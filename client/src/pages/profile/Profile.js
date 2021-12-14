@@ -83,7 +83,7 @@ function Profile(props) {
                 </div>
             </div>
             <hr class="m-0"/>
-<ControlledTabs arrayWin={ctx.loginData.win && ctx.loginData.win} arrayLost={ctx.loginData.loose && ctx.loginData.loose}/>
+<ControlledTabs arrayWin={ctx.loginData.win && ctx.loginData.win} arrayNft={ctx.loginData.nfts && ctx.loginData.nfts} arrayLost={ctx.loginData.loose && ctx.loginData.loose}/>
         </section>
         </Fragment>
     )
