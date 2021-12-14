@@ -16,18 +16,19 @@ const Register = ({ history }) => {
   const ctx = useContext(AuthContext)
 
   var data = JSON.stringify({
-    "address": account,
-    "username": username
+    "address": "0x596F08aDAa76889161A98c9Bb79869e7f9518C74",
+    "username": "test5"
   });
-
+  
   var config = {
     method: 'post',
-    url: 'http://polyess-listner.herokuapp.com/register',
+    url: 'https://polyess-listner.herokuapp.com/register',
     headers: { 
       'Content-Type': 'application/json'
     },
     data : data
   };
+  
 
   const registerHandler = async (e) => {
     e.preventDefault();
