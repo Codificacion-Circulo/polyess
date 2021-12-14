@@ -1178,7 +1178,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI, IERC1155Rece
 }
 
 contract polyhess is ERC1155, Ownable {
-
+     using SafeMath for uint256;
      uint8 winner;
      address _owner;
      uint tokencounter;
@@ -1306,7 +1306,7 @@ contract polyhess is ERC1155, Ownable {
     // Functions
       // To buy tokens from ethereum
     function buy_hess()public payable{
-        uint amt = (msg.value)/1000000;
+        uint amt = SafeMath.mul(msg.value,10000);
         safeTransferFrom(address(this), msg.sender, 0, amt, "" );
         emit Hess_Buy(amt, msg.sender);
       }
@@ -1315,7 +1315,7 @@ contract polyhess is ERC1155, Ownable {
     function exchange_eth(uint hesstoken)public payable{
         require(hesstoken > 99999, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
-        uint amt = (hesstoken/11*10)/1000000;
+        uint amt = SafeMath.mul(SafeMath.div(hesstoken, 11), 10);
 
         ((msg.sender).transfer)(amt);
         emit ex_eth_hess(hesstoken, msg.sender);
