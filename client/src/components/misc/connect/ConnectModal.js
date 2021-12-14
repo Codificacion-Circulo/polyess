@@ -17,6 +17,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 // import meta from '../../../assets/connectModal/metamask.svg'
 // import wltcnct from '../../../assets/connectModal/walletconnect.svg'
 // import net from '../../../assets/connectModal/network.svg'
+import "./ConnectModal.css"
 
 const ConnectorNames = {
   Injected: 'MetaMask',
@@ -79,11 +80,11 @@ function ConnectModal(props) {
       aria-labelledby="example-modal-sizes-title-sm"
       centered
     >
-      <Modal.Header closeButton className="bg-dark">
+      <Modal.Header closeButton style={{backgroundColor: "#000", border: "none", color: "#fff"}}>
         {!!error && <Modal.Title id="example-modal-sizes-title-sm">{getErrorMessage(error)}
         </Modal.Title>}
       </Modal.Header>
-      <Modal.Body className="d-flex justify-content-center flex-column bg-dark text-light">
+      <Modal.Body className="d-flex justify-content-center flex-column text-light" closeButton style={{backgroundColor: "#000"}}>
 
         {Object.keys(connectorsByName).map((name) => {
           const currentConnector = connectorsByName[name]
@@ -105,7 +106,7 @@ function ConnectModal(props) {
               <button
                 disabled={disabled}
                 key={name}
-                className="btn border border-primary my-2 text-light"
+                className="btn border border-danger my-2 text-light"
                 onClick={() => {
                   setActivatingConnector(currentConnector)
                   activate(connectorsByName[name])
@@ -113,7 +114,7 @@ function ConnectModal(props) {
               >
                 {connected && (
                   <span role="img" aria-label="check" className="me-1">
-                    ✅ 
+                    <i class="fas fa-check-circle"></i>
                   </span>
                 )}
                 {name}
@@ -132,10 +133,10 @@ function ConnectModal(props) {
 
 
       </Modal.Body>
-      <Modal.Footer className="d-flex justify-content-center bg-dark">
+      <Modal.Footer className="d-flex justify-content-center" closeButton style={{backgroundColor: "#000", border: "none"}}>
 
         {(active || error) && (
-          <button className="btn border border-secondary mx-2 text-danger"
+          <button className="btn border border-danger mx-2 text-danger"
             onClick={() => {
               deactivate()
             }}
@@ -146,7 +147,7 @@ function ConnectModal(props) {
         <div>
           
         </div>
-        <button className="btn border border-secondary mx-2 text-success" onClick={props.onClose}>
+        <button className="btn border border-success mx-2 text-success" onClick={props.onClose}>
           Close
         </button>
       </Modal.Footer>
