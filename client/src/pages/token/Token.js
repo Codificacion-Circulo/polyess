@@ -9,7 +9,12 @@ export default function Token() {
   const [account, setAccount] = useState('');
   const [contract, setcontract] = useState({});
   const [deposit,setDeposit]=useState('0');
+  const [withdraw,setWithdraw]=useState('0');
   const [loading, setLoading] = useState(false)
+
+
+
+
   const loadBlockhainData=async()=>{
     const web3 = new Web3(Web3.givenProvider || "https://localhost:7545");
     const accounts=await web3.eth.getAccounts()
@@ -23,24 +28,52 @@ export default function Token() {
         loadBlockhainData();
     }
   }, [account])
+
+
+
+
+
   const depositChangeHandler=(event)=>{
     const dAmount=event.target.value;
     setDeposit(dAmount)
   }
 
+  const withdrawChangeHandler=(event)=>{
+    const wamount=event.target.value;
+    setWithdraw(wamount);
+  }
+
   const depositFormSubmission=async(e)=>{
     e.preventDefault();
+    setLoading(true)
     try {
-      console.log(Web3.utils.toWei(deposit, 'ether'),account)
       const recipt=await contract.methods.buy_hess().send({
         from:account,
         value:Web3.utils.toWei(deposit, 'ether')
         })
+       
       console.log(recipt)
     } catch (error) {
       console.log("Something went Wrong", error);
     }
+    setLoading(false);
   }
+
+
+  const withdrawFormSubmission=async(e)=>{
+    e.preventDefault();
+    setLoading(true)
+    try {
+      const recipt=await contract.methods.exchange_eth(withdraw).send({
+        from:account
+        })
+       
+      console.log(recipt);
+    } catch (error) {
+      console.log("Something went Wrong", error);
+    }
+    setLoading(false);
+  };
 
     return (
         <Fragment>
@@ -74,12 +107,12 @@ export default function Token() {
                   <p>Sell Tokens</p>
                   <p className='fs-6 text-info'>1 Eth = 9.09*10<sup>11</sup> &nbsp; Tokens</p>
                   <div class="form-floating m-2">
-                    <input type="number" class="form-control input-group-sm mb-3" id="floatingInput"/>
+                    <input type="number" onChange={withdrawChangeHandler} class="form-control input-group-sm mb-3" id="floatingInput"/>
                   </div>
   
   
                   <div className="farm-mystrey__button mt-0 my-2">
-                    <button>Withdraw</button></div>
+                    <button onClick={withdrawFormSubmission}>Withdraw</button></div>
   
                 </div>
   
