@@ -10,7 +10,7 @@ function Footer() {
 		<div className="row align-items-center mx-3">
 
 			<div className="col-md-7 col-lg-8">
-				<p>	Copyend ©2021 All ends reserved by:
+				<p>	Copyright ©2021 All rights reserved by:
 					<a href="#" style={{ textDecoration: "none"}}>
 						<strong style={{color: "#ff1744"}} > The Blitzkreig</strong>
 					</a></p>

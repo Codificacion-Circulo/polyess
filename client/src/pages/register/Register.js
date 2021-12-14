@@ -54,7 +54,7 @@ const Register = ({ history }) => {
         </h1>
       </div>
       <form onSubmit={registerHandler} className="register-screen__form mb-5">
-        <h3 className="register-screen__title">Register</h3>
+        <h3 className="register-screen__title text-light">Register</h3>
         {/* {errorData && <span className="error-message">{setErrorData}</span>} */}
         <div className="form-group">
           <label htmlFor="username">Username:</label>
@@ -64,6 +64,7 @@ const Register = ({ history }) => {
             id="username"
             placeholder="Username"
             value={username}
+            autocomplete="off"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
