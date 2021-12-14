@@ -15,7 +15,7 @@ function Home(props) {
 
   return (
     <Fragment>
-      {ctx.loading&&ctx.registeredactive&&<LoadingSpinner/>}
+      {ctx.loading&ctx.registeredactive&&<LoadingSpinner/>}
     {/* Home Section  */}
 
       <div className="home my-4">
