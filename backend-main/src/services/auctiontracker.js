@@ -61,6 +61,12 @@ const processTokenEvents = async (startFromBlock) => {
   const handleNftWon = async (event) => {
     return callAPI('nftWon', event);
   };
+  const handleBidCreated = async (event) => {
+    return callAPI('bidCreated', event);
+  };
+  const handleBidEnd = async (event) => {
+    return callAPI('bidEnd', event);
+  };
   async function handleEvents(events) {
     for (const event of events) {
       if (event.event === "Hess_Buy") {
@@ -98,6 +104,14 @@ const processTokenEvents = async (startFromBlock) => {
       if (event.event === "NFT_win") {
         console.log(`[nftWon] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
         await handleNftWon(event);
+      }
+      if (event.event === "bid_change") {
+        console.log(`[bidCreated] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
+        await handleBidCreated(event);
+      }
+      if (event.event === "NFTowner") {
+        console.log(`[bidEnd] tx: ${event.transactionHash}, block: ${event.blockNumber}`);
+        await handleBidEnd(event);
       }
       lastBlockProcessed = event.blockNumber + 1;
     }
