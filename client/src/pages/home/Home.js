@@ -1,4 +1,5 @@
 import React, { Fragment,useContext } from "react";
+import { useWeb3React} from '@web3-react/core'
 import freeplay from "../../assets/homePage/freeplay.png";
 import token from "../../assets/homePage/token.png";
 import nftStaking from "../../assets/homePage/nftStaking.png";
@@ -12,9 +13,12 @@ import "./Home.css";
 
 function Home(props) {
   const ctx = useContext(AuthContext);
+  const context = useWeb3React()
+  const {  account, error,active } = context
+
   return (
     <Fragment>
-      {ctx.loading&&<LoadingSpinner/>}
+      {ctx.loading&active&ctx.registered&&<LoadingSpinner/>}
     {/* Home Section  */}
 
       <div className="home my-4">

@@ -11,23 +11,20 @@ const Register = ({ history }) => {
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
   
-  useEffect(() => {
-    setAddress(account)
-  }, account)
-
   var data = JSON.stringify({
-    "address": account,
-    "username": username
+    "address": "0x596F08aDAa76889161A98c9Bb79869e7f9518C74",
+    "username": "test5"
   });
-
+  
   var config = {
     method: 'post',
     url: 'https://polyess-listner.herokuapp.com/register',
-    header: {
-      "Content-Type": "application/json",
+    headers: { 
+      'Content-Type': 'application/json'
     },
-    data: data
+    data : data
   };
+  
 
   const registerHandler = async (e) => {
     e.preventDefault();

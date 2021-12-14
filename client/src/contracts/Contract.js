@@ -1,4 +1,4 @@
-export const contract_addr="0x56F919c43A0dF9cb31ee307974960ca1393252EA"
+export const contract_addr="0xEb5191c2BA309336f9D332cE1351EAf284c81d9C"
 export const contract_abi= [
   {
     "inputs": [],
@@ -121,6 +121,31 @@ export const contract_abi= [
       }
     ],
     "name": "NFT_win",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "NFTID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "buyprice",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "NFTowner",
+        "type": "address"
+      }
+    ],
+    "name": "NFTowner",
     "type": "event"
   },
   {
@@ -303,6 +328,31 @@ export const contract_abi= [
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "NFTID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "Bidder",
+        "type": "address"
+      }
+    ],
+    "name": "bid_change",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "NFTid",
         "type": "uint256"
       },
@@ -427,6 +477,25 @@ export const contract_abi= [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "auctionStart",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "account",
         "type": "address"
@@ -467,6 +536,30 @@ export const contract_abi= [
         "internalType": "uint256[]",
         "name": "",
         "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "bidder",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "highestbidder",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -730,13 +823,7 @@ export const contract_abi= [
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "ethamount",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [],
     "name": "buy_hess",
     "outputs": [],
     "stateMutability": "payable",
@@ -753,6 +840,43 @@ export const contract_abi= [
     "name": "exchange_eth",
     "outputs": [],
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "NFTid",
+        "type": "uint256"
+      }
+    ],
+    "name": "cal_Endtime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "NFTid",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "bid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -891,24 +1015,6 @@ export const contract_abi= [
   {
     "inputs": [],
     "name": "Get_My_MONEY",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "TokenID",
-        "type": "uint256"
-      }
-    ],
-    "name": "BuyNFT",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
