@@ -31,7 +31,7 @@ export default function Token() {
   const depositFormSubmission=async(e)=>{
     e.preventDefault();
     try {
-      console.log(deposit,account)
+      console.log(Web3.utils.toWei(deposit, 'ether'),account)
       const recipt=await contract.methods.buy_hess().send({
         from:account,
         value:Web3.utils.toWei(deposit, 'ether')
