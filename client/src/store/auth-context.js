@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useReducer } from "react"
 import { useWeb3React} from '@web3-react/core';
 import axios from 'axios';
 
@@ -8,12 +8,27 @@ const AuthContext = React.createContext({
     loginData: {}
 })
 
+const authReducer = (state, action) => {
+    const registerResult = state.registered
+    if(action.type === 'CREATE_USER') {
+        const registerResult = !state.registered
+    }
+    return {
+        registered: registerResult,
+        loading: state.loading,
+        loginData: state.loginData
+    }
+}
+
 export const AuthContextProvider = (props) => {
     const context = useWeb3React()
-    const {  account, error } = context
+    const { account, error } = context
     const [UserData, setUserData] = useState({})
     const [isRegistered, setIsRegistered] = useState(false)
     const [isLoading, setIsLoading] = useState(true);
+    const [authState, dispatchAuthAction] = useReducer(
+        authReducer, AuthContext
+    )
     var data = JSON.stringify({
         "address": "0x7ffd8A206c64759C54A90F3584e50b3A22b674Da"
     });
