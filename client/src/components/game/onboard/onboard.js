@@ -86,9 +86,9 @@ function CreateNewGame(props) {
 
         </div>
       </div>
-      <div className="register-screen">
+      <div className="register-screen d-flex justify-content-center align-items-center my-5">
       <form  className="register-screen__form">
-        <h3 className="register-screen__title">Create Game</h3>
+        <h3 className="register-screen__title text-light">Create Game</h3>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
@@ -127,13 +127,13 @@ function CreateNewGame(props) {
         </div>
         <div className="form-group">
         <label for="nft">Choose a NFT to BET:</label>
-  <select id="nft" name="nft" class="form-select" >
+  <select id="nft" name="nft" class="form-select bg-dark border-danger" >
   {ctx.registered && ctx.loginData.user && ctx.loginData.nfts.map((data)=>(
             <option value={data.gameId}>{data.name}</option>))}
   </select>
         </div>
         <button type="submit" 
-                      className="form-btn form-btn-primary"  
+                      className="form-btn form-btn-primary my-1"  
                       disabled = {!account} 
                     onClick = {() => {
                         props.didRedirect() 
