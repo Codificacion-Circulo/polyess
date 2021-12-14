@@ -2,9 +2,6 @@ import React, { Fragment, useState,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import './Market.css'
 import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner";
-import blue from '../../assets/market/blue.png'
-import red from '../../assets/market/red.png'
-import golden from '../../assets/market/golden.png'
 
 function Market(props) {
     const [nftData,setNftData] = useState([]);
@@ -47,7 +44,7 @@ function Market(props) {
 <Link to={"/market/"+data.assetId}>
    
 
-    <div class="profile-card-6 mx-auto"><img src={data.image} class="img img-responsive"/>
+    <div class="profile-card-6 mx-auto mb-5"><img src={data.image} class="img img-responsive"/>
         <div class="profile-name">{data.name}</div>
         <div class="profile-overview">
             <div class="profile-overview">
