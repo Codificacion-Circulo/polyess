@@ -1296,7 +1296,7 @@ contract polyhess is ERC1155, Ownable {
       // To buy tokens from ethereum
     function buy_hess(uint ethamount)public payable{
         require(msg.value>=ethamount,"Not enough token sent");
-        uint amt = (ethamount)*1000000;
+        uint amt = (ethamount)/1000000000000;
         safeTransferFrom(address(this),msg.sender, 0, amt, "" );
         emit Hess_Buy(amt, msg.sender);
       }
