@@ -17,7 +17,7 @@ function App() {
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-            <AuthContextProvider>
+      <AuthContextProvider>
       <Routes/>
       </AuthContextProvider>
     </Web3ReactProvider>

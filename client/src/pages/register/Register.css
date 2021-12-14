@@ -8,7 +8,10 @@
     width: 380px;
     padding: 1.5rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-    background: #fff;
+    background: #000;
+    border: 2px solid #e55835;
+    border-radius: 20px;
+    color: #fff;
   }
   
   .register-screen__title {
@@ -36,9 +39,10 @@
   padding: 10px 20px;
   border: none;
   border-bottom: 3px solid transparent;
-  background-color: #eee;
+  background-color: #000;
   outline-width: 0;
   font-size: 1rem;
+  color: grey;
 }
 
 .form-group input:focus {

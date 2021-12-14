@@ -72,6 +72,7 @@
 
 .farm-mastrey__right__box {
   max-width: 500px !important;
+  border-radius: 25px;
 }
 
 .form-floating > .form-control {

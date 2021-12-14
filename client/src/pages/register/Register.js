@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useDispatch, Fragment, useContext } from "react";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import "./Register.css";
+import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner";
+import AuthContext from "../../store/auth-context";
 
 const Register = ({ history }) => {
   const [username, setUsername] = useState("");
-  const [address, setAddress] = useState("");
   const [errorData, setErrorData] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const context = useWeb3React();
   const { connector, library, chainId, account, activate, deactivate, active, error } = context;
   
+  const ctx = useContext(AuthContext)
+
   var data = JSON.stringify({
     "address": "0x596F08aDAa76889161A98c9Bb79869e7f9518C74",
     "username": "test5"
@@ -28,16 +32,21 @@ const Register = ({ history }) => {
 
   const registerHandler = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const response = await axios(config)
       const result = await response.data
       console.log(result);
+      ctx.registerHandler()
+      setLoading(false)
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
+    <Fragment>
+    {loading && <LoadingSpinner />}
     <div className="register-screen d-flex flex-column justify-content-center align-items-center">
       <div class="logo my-3 mb-5">
         <h1 className="text-center" style={{ color: "#d1996d" }}>
@@ -45,7 +54,7 @@ const Register = ({ history }) => {
         </h1>
       </div>
       <form onSubmit={registerHandler} className="register-screen__form mb-5">
-        <h3 className="register-screen__title">Register</h3>
+        <h3 className="register-screen__title text-light">Register</h3>
         {/* {errorData && <span className="error-message">{setErrorData}</span>} */}
         <div className="form-group">
           <label htmlFor="username">Username:</label>
@@ -55,6 +64,7 @@ const Register = ({ history }) => {
             id="username"
             placeholder="Username"
             value={username}
+            autocomplete="off"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -66,8 +76,7 @@ const Register = ({ history }) => {
             id="address"
             autoComplete="true"
             placeholder="Wallet Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={account}
           />
         </div>
         <button type="submit" className="form-btn form-btn-primary">
@@ -75,6 +84,7 @@ const Register = ({ history }) => {
         </button>
       </form>
     </div>
+    </Fragment>
   );
 };
 
