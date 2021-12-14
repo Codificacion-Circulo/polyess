@@ -22,13 +22,13 @@ class NFTApi {
   //   }
   // }
 
-  validBuy(String person) async {
+  validBuy(String person) {
     if (person == contract) {
       log("$contract $person can buy");
-      return "canbuy";
+      return true;
     } else {
       log("$contract $person cannot buy");
-      return "cannotbuy";
+      return false;
     }
   }
 }

@@ -1,7 +1,7 @@
-import {Fragment,useState} from 'react'
-import { useWeb3React} from '@web3-react/core'
-import JoinGame from './joingame'
-import ChessGame from '../../components/game/chessUI/chessgame'
+import {Fragment,useState} from 'react';
+import { useWeb3React} from '@web3-react/core';
+import JoinGame from './joingame';
+import ChessGame from '../chessUI/chessgame';
 
 
 

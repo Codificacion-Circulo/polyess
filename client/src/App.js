@@ -14,9 +14,9 @@ import Profile from "./pages/profile/Profile"
 import Market from "./pages/market/Market"
 import Error from "./pages/error/Error"
 import LoadingSpinner from './components/misc/LoadingSpinner/LoadingSpinner'
-import JoinRoom from './integration/onboard/joinroom'
-import Onboard from './integration/onboard/onboard'
-import JoinGame from './integration/onboard/joingame'
+import JoinRoom from './components/game/onboard/joinroom'
+import Onboard from './components/game/onboard/onboard'
+import JoinGame from './components/game/onboard/joingame'
 import ChessGame from './components/game/chessUI/chessgame'
 import {ColorContext} from './store/colorcontext'
 import History from "./pages/history/History";

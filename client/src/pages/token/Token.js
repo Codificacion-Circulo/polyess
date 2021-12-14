@@ -24,7 +24,7 @@ export default function Token() {
     }
   }, [account])
   const depositChangeHandler=(event)=>{
-    const dAmount=Web3.utils.fromWei(event.target.value.toString(), 'ether')
+    const dAmount=event.target.value;
     setDeposit(dAmount)
   }
 
