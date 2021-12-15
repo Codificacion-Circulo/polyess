@@ -1,10 +1,13 @@
 const { model, Schema } = require('mongoose');
 
 const bid = new Schema({
-  assetId: {
+  assetOb: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Nft'
+  },
+  assetId: {
+    type: String,
   },
   price: {
     type: Number,
@@ -15,15 +18,13 @@ const bid = new Schema({
     required: true,
     ref: 'User'
   },
-  owner_name:{
+  bidder_name:{
     type: String,
   },
-  owner_addr:{
+  bidder_addr:{
     type: String,
   }
-
 });
 
 const Bid = model('Bid', bid);
-
 module.exports = Bid;

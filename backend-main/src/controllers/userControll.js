@@ -90,14 +90,18 @@ exports.search=async (req, res, next) => {
   .populate({
     path:'loose',
     })
+    .populate({
+      path:'bid'
+    })
     .exec();
       const nfts=user.nfts;
       const win=user.win;
       const loose=user.loose;
+      const bid=user.bid;
       if (!user) {
         return next(new ErrorResponse("Invalid credentials", 401));
       }
-      res.status(200).json({ success: true,user,nfts,win,loose});
+      res.status(200).json({ success: true,user,nfts,win,loose,bid});
     } catch (err) {
       next(err);
     }

@@ -41,6 +41,26 @@ exports.getAllNfts = async (req, res, next) => {
 };
 
 
+exports.getNft = async (req, res, next) => {
+  const { assetId } = req.body;
+  if (!assetId) {
+    return next(new ErrorResponse("Please provide valid assetId", 400));
+  }
+  try {
+    const nft = await Nft.findOne({ assetId })
+    .populate({
+      path:'bid'
+    })
+  .exec();
+    const bid=nft.bid;
+    if (!nft) {
+      return next(new ErrorResponse("Invalid assetId", 401));
+    }
+    res.status(200).json({ success: true,nft,bid});
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.postNftMinted = async (req, res, next) => {
     const data  = req.body;
