@@ -7,11 +7,11 @@ import useSound from 'use-sound';
 import chessMove from '../../../assets/game/moveSoundEffect.mp3';
 import Piece from './piece';
 import piecemap from './piecemap';
-import TableDiv from '../table/Table';
+// import TableDiv from '../table/Table';
 import web3 from 'web3'
 import { useParams } from 'react-router-dom';
 import { ColorContext } from '../../../store/colorcontext' ;
-// import VideoChatApp from '../../connection/videochat'
+import VideoChatApp from '../../../integration/connection/videochat'
 const socket  = require('../../../integration/connection/socket').socket;
 
 class ChessGame extends React.Component {
@@ -113,11 +113,11 @@ class ChessGame extends React.Component {
         });
 
         if (blackCheckmated) {
-            alert("WHITE WON BY CHECKMATE!");
+            window.alert("WHITE WON BY CHECKMATE!");
 
             // Integrate web3 here *******************************************
         } else if (whiteCheckmated) {
-            alert("BLACK WON BY CHECKMATE!");
+            window.alert("BLACK WON BY CHECKMATE!");
 
             // Integrate web3 here *******************************************
         }
@@ -311,7 +311,12 @@ const ChessGameWrapper = (props) => {
                 gameId={gameid}
                 color={color.didRedirect}
               />
-              <TableDiv/>
+               <VideoChatApp
+                mySocketId={socket.id}
+                opponentSocketId={opponentSocketId}
+                myUserName={props.myUserName}
+                opponentUserName={opponentUserName}
+              />
             </div>
             <h4 className="text-info mt-4"> You: {props.myUserName} </h4>
           </div>
