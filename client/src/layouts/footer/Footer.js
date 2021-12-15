@@ -22,19 +22,19 @@ function Footer() {
 
                 <ul className="list-unstyled list-inline">
 						<li className="list-inline-item">
-							<a href="/game" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i class="fas fa-gamepad"></i></a>
+							<a href="/game" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-gamepad"></i></a>
 						</li>
 						<li className="list-inline-item">
-							<a href="/leaderboard" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i class="fas fa-chart-bar"></i></a>
+							<a href="/leaderboard" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-chart-bar"></i></a>
 						</li>
 						<li className="list-inline-item">
-							<a href="/market" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i class="fas fa-shopping-cart"></i></a>
+							<a href="/market" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-shopping-cart"></i></a>
 						</li>
 						<li className="list-inline-item">
-							<a href="#" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i class="fab fa-app-store-ios"></i></a>
+							<a href="#" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fab fa-app-store-ios"></i></a>
 						</li>
 						<li className="list-inline-item">
-							<a href="/faq" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i class="fas fa-question-circle"></i></a>
+							<a href="/faq" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-question-circle"></i></a>
 						</li>
 					</ul>
 					

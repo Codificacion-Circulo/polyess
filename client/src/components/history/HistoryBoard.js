@@ -25,7 +25,7 @@ function HistoryBoard(props) {
     return (
         <Fragment>
 {loading&&<LoadingSpinner/>}
-<div class="logo my-3">
+<div className="logo my-3">
       <h1 className='text-center' style={{color: "#d1996d"}}><b>History</b></h1>
 </div>
 <div className="farm-leaderboard container px-4">

@@ -114,7 +114,7 @@ function ConnectModal(props) {
               >
                 {connected && (
                   <span role="img" aria-label="check" className="me-1">
-                    <i class="fas fa-check-circle"></i>
+                    <i className="fas fa-check-circle"></i>
                   </span>
                 )}
                 {name}

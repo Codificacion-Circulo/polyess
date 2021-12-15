@@ -83,7 +83,7 @@ export default function Token() {
             <div className="col-md">
               <div className="farm-mystrey__left d-flex flex-column justify-content-center text-center pt-3 m-3 my-2 rounded">
                 <p>Buy / Sell Hess Tokens</p>
-                <img src={BlueBox} class="img-fluid rounded mx-auto my-3 d-block" alt="Responsive image" width="50%" />
+                <img src={BlueBox} className="img-fluid rounded mx-auto my-3 d-block" alt="Responsive image" width="50%" />
          
               </div>
             </div>
@@ -92,8 +92,8 @@ export default function Token() {
                 <div className="farm-mastrey__right__box container farm-mystrey__left d-flex flex-column text-center mb-3 py-3 px-2">
                   <p>Buy Tokens</p>
                   <p className='fs-6 text-info'>1 Eth = 10<sup>12</sup> &nbsp; Tokens</p>
-                  <div class="form-floating m-2">
-                    <input type="number" onChange={depositChangeHandler} class="form-control input-group-sm mb-3" id="floatingInput" required={true}/>
+                  <div className="form-floating m-2">
+                    <input type="number" onChange={depositChangeHandler} className="form-control input-group-sm mb-3" id="floatingInput" required={true}/>
                   </div>
   
   
@@ -106,8 +106,8 @@ export default function Token() {
                 <div className="farm-mastrey__right__box container farm-mystrey__left d-flex flex-column text-center mb-3 py-3 px-2">
                   <p>Sell Tokens</p>
                   <p className='fs-6 text-info'>1 Eth = 9.09*10<sup>11</sup> &nbsp; Tokens</p>
-                  <div class="form-floating m-2">
-                    <input type="number" onChange={withdrawChangeHandler} class="form-control input-group-sm mb-3" id="floatingInput"/>
+                  <div className="form-floating m-2">
+                    <input type="number" onChange={withdrawChangeHandler} className="form-control input-group-sm mb-3" id="floatingInput"/>
                   </div>
   
   

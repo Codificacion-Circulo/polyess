@@ -28,7 +28,7 @@ export default function History() {
   return (
     <Fragment>
     {loading&&<LoadingSpinner/>}
-      <div class="logo my-3 text-center">
+      <div className="logo my-3 text-center">
         <h1 style={{color: "#d1996d"}}>
           <b>Game Analytics</b>
         </h1>

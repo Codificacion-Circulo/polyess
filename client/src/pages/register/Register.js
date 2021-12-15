@@ -48,14 +48,13 @@ const Register = ({ history }) => {
     <Fragment>
     {loading && <LoadingSpinner />}
     <div className="register-screen d-flex flex-column justify-content-center align-items-center">
-      <div class="logo my-3 mb-5">
+      <div className="logo my-3 mb-5">
         <h1 className="text-center" style={{ color: "#d1996d" }}>
           <b>Enter Details to Play</b>
         </h1>
       </div>
       <form onSubmit={registerHandler} className="register-screen__form mb-5">
         <h3 className="register-screen__title text-light">Register</h3>
-        {/* {errorData && <span className="error-message">{setErrorData}</span>} */}
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input

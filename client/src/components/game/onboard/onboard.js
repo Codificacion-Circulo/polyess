@@ -159,7 +159,7 @@ function CreateNewGame(props) {
                 </div>}
                 {mode === 2 && <div className="form-group">
                   <label for="nft">Choose a NFT to BET:</label>
-                  <select id="nft" onChange={nftChangeHandler} name="nft" class="form-select border-danger bg-dark text-light" >
+                  <select id="nft" onChange={nftChangeHandler} name="nft" className="form-select border-danger bg-dark text-light" >
                     {ctx.registered && ctx.loginData.user && ctx.loginData.nfts.map((data) => (
                       <option className="text-light" value={data.assetId}>{data.name}</option>))}
                   </select>
