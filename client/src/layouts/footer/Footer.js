@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
-
+import { Link } from "react-router-dom"
+ 
 function Footer() {
   return (
     <footer className=" text-white pt-5 pb-4 mx-3">
@@ -14,7 +15,6 @@ function Footer() {
 					<a href="#" style={{ textDecoration: "none"}}>
 						<strong style={{color: "#ff1744"}} > The Blitzkreig</strong>
 					</a></p>
-				
 			</div>
 
 			<div className="col-md-5 col-lg-4">
@@ -22,19 +22,19 @@ function Footer() {
 
                 <ul className="list-unstyled list-inline">
 						<li className="list-inline-item">
-							<a href="/game" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-gamepad"></i></a>
+							<Link to="/game" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-gamepad"></i></Link>
 						</li>
 						<li className="list-inline-item">
-							<a href="/leaderboard" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-chart-bar"></i></a>
+							<Link to="/leaderboard" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-chart-bar"></i></Link>
 						</li>
 						<li className="list-inline-item">
-							<a href="/market" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-shopping-cart"></i></a>
+							<Link to="/market" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-shopping-cart"></i></Link>
 						</li>
 						<li className="list-inline-item">
-							<a href="#" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fab fa-app-store-ios"></i></a>
+							<Link to="#" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fab fa-app-store-ios"></i></Link>
 						</li>
 						<li className="list-inline-item">
-							<a href="/faq" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-question-circle"></i></a>
+							<Link to="/faq" className="btn-floating btn-sm text-white" style={{fontSize: "23px"}}><i className="fas fa-question-circle"></i></Link>
 						</li>
 					</ul>
 					
