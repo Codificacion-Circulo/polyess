@@ -1,10 +1,8 @@
 const Nft = require('../models/Nft');
 const Game = require('../models/Game');
 const ErrorResponse = require("../utils/errorResponse");
-// const fetch = require('cross-fetch');
 const User = require('../models/User');
-// const BASE_URI = process.env.BASE_URI
-
+const Bid =require('../models/Bid');
 
 exports.getAllGames = async (req, res, next) => {
   var srt = 0;

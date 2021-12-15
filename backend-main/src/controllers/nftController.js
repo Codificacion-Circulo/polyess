@@ -2,6 +2,7 @@ const Nft = require('../models/Nft');
 const ErrorResponse = require("../utils/errorResponse");
 const fetch = require('cross-fetch');
 const User = require('../models/User');
+const Bid =require('../models/Bid');
 const BASE_URI = process.env.BASE_URI;
 
 

@@ -89,13 +89,12 @@ exports.postBidCreated = async (req, res, next) => {
       const user0 = await User.findOne({
           address:data.args[2]
       });
-      const user1 = await User.findById({
-        address:nft.owner
+      const user1 = await User.findOne({
+        address:nft.owner_addr
     });
     if (!user1||!user0) {
           return next(new ErrorResponse("Users Not Found", 404));
       }
-     
         nft.price=parseInt(data.args[1].hex);
         nft.owner=user0._id;
         nft.owner_name=user0.username;
