@@ -19,8 +19,6 @@ import History from "./pages/history/History";
 import Token from "./pages/token/Token";
 import HistoryBoard from "./components/history/HistoryBoard";
 import Nft from './components/market/Nft';
-import GameModes from './components/game/gameModes/GameModes'
-
 
 function Routes(){
     const ctx = useContext(AuthContext)

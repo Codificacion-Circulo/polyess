@@ -11,25 +11,25 @@ import tokenMode from "../../../assets/game/tokenMode.jpg"
 
 function JoinRoom(props) {
      const context = useWeb3React()
-    const { connector, library, chainId, account, activate, deactivate, active, error } = context
+    const { connector, library, chainId, account, activate, deactivate, active, error } = context;
     const ctx = useContext(AuthContext);
     const params = useParams();
-    const{mode}=params
-    console.log(mode)
-
-    const [disabled, setDisabled] = useState(true)
+    const{mode,gameId,addr}=params;
+    console.log(mode);
+    const [nftt, setNftt] = useState();
+    const [disabled, setDisabled] = useState(true);
     const [didGetUserName,setDidGetUserName]= useState(false);
 
 
-    // const nftChangeHandler=(event)=>{
-    //     const nftId=event.target.value;
-    //     if(nftId>0){
-    //       setNft(event.target.value);
-    //       setDisabled(false)
-    //     }else{
-    //       setDisabled(true)
-    //     }
-    //   }
+    const nftChangeHandler=(event)=>{
+        const nftId=event.target.value;
+        if(nftId>0){
+          setNftt(event.target.value);
+          setDisabled(false)
+        }else{
+          setDisabled(true)
+        }
+ }
     
     return (
         <Fragment>
@@ -43,13 +43,16 @@ function JoinRoom(props) {
            
             <div>
             <div className="container mt-2 gameModesContainer d-flex flex-column">
+
+            <h4 className="text-center mt-4 text-light">{`Hey ${ctx.loginData.user&&ctx.loginData.user.username}, you were invited to play`}</h4>
+                       
               <div className="gameModeContent text-center m-5">
-                <h1 className="text-danger">Gaming Modes</h1>
-                <h3 className="mt-3 text-light">Choose a Mode to Play</h3>
+                <h1 className="text-danger">Gaming Mode</h1>
+                <h3 className="mt-3 text-light">Challenge Mode Selected</h3>
               </div>
 
               <div className="row mt-1 mb-3" >
-               {mode!==0&& <div className="col-md-4 col-sm-6 ">
+               {mode==="0" && <div className="col-md-4 col-sm-6 mx-auto">
                   <div className="card bg-black border-info text-light">
                     <img  src={freeMode}      className="card-img-top" alt="..." />
                     <div className="card-body">
@@ -60,7 +63,7 @@ function JoinRoom(props) {
                   </div>
                 </div>}
 
-                {mode!==1&&<div className="col-md-4 col-sm-6">
+                {mode==="1"&&<div className="col-md-4 col-sm-6 mx-auto">
                   <div className="card bg-black border-info text-light">
                     <img  src={tokenMode} className="card-img-top" alt="..." />
                     <div className="card-body">
@@ -71,7 +74,7 @@ function JoinRoom(props) {
                   </div>
                 </div>}
 
-               {mode!=="2"&& <div className="col-md-4 col-sm-6" >
+               {mode==="2"&& <div className="col-md-4 col-sm-6 mx-auto" >
                   <div className="card bg-black border-info text-light">
                     <img  src={nftMode} className="card-img-top" alt="..." />
                     <div className="card-body">
@@ -87,7 +90,7 @@ function JoinRoom(props) {
             </div>
             <div className="register-screen d-flex justify-content-center align-items-center my-5">
               <form className="register-screen__form">
-                <h3 className="register-screen__title text-light">Create Game</h3>
+                <h3 className="register-screen__title text-light">Join Game</h3>
                 <div className="form-group">
                   <label htmlFor="username">Username:</label>
                   <input
@@ -98,6 +101,7 @@ function JoinRoom(props) {
                     value={ctx.registered && ctx.loginData.user && ctx.loginData.user.username}
                   />
                 </div>
+
                 <div className="form-group">
                   <label htmlFor="address">Address:</label>
                   <input
@@ -109,7 +113,7 @@ function JoinRoom(props) {
                     value={`${account.substring(0, 8)}..${account.substring(account.length - 10)}`}
                   />
                 </div>
-                {mode === 1 && <div className="form-group">
+                {mode === "1" && <div className="form-group">
                   <label htmlFor="token">Ammount of Token To BET:</label>
                   <input
                     type="number"
@@ -120,21 +124,21 @@ function JoinRoom(props) {
                     value={params.amount}
                   />
                 </div>}
-                {/* {mode === 2 && <div className="form-group">
+                {mode === "2" && <div className="form-group">
                   <label for="nft">Choose a NFT to BET:</label>
                   <select id="nft" onChange={nftChangeHandler} name="nft" class="form-select border-danger bg-dark text-light" >
                     {ctx.registered && ctx.loginData.user && ctx.loginData.nfts.map((data) => (
                       <option className="text-light" value={data.assetId}>{data.name}</option>))}
                   </select>
-                </div>} */}
+                </div>}
                 <button type="submit"
                   className="form-btn form-btn-primary my-1"
-                  disabled={!account}
+                  disabled={!account||disabled}
                   onClick={() => {
                    
                     setDidGetUserName(true)
                   }}>
-                  {params.mode === 0 ? "Play" : "Bet"}
+                  {params.mode === "0" ? "Play" : "Bet"}
                 </button>
               </form>
             </div>
@@ -148,22 +152,3 @@ function JoinRoom(props) {
 
 
 export default JoinRoom
-
-
-
-{/* <div>
-                <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}}>Your Username:</h1>
-
-                <h4 style={{marginLeft: String((window.innerWidth / 2) - 120) + "px", width: "240px", marginTop: "62px"}} 
-                      >{inputText}</h4>
-                       
-                       <button className="btn btn-primary" 
-                    style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
-                    disabled = {!account} 
-                    onClick = {() => {
-                        // When the 'Submit' button gets pressed from the username screen,
-                        // We should send a request to the server to create a new room with
-                        // the uuid we generate here.
-                        setDidGetUserName(true)
-                    }}>Submit</button>
-            </div> */}
