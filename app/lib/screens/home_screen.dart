@@ -36,8 +36,7 @@ class HomeScreen extends StatelessWidget {
         ),
         body: FutureBuilder(
           initialData: Users(),
-          future: loginProvider
-              .getMyUser('0x596F08aDAa76889161A98c9Bb79869e7f9518C70'),
+          future: loginProvider.getMyUser(addr),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Padding(

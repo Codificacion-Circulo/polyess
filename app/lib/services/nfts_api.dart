@@ -6,21 +6,54 @@ import 'package:http/http.dart' as http;
 import 'package:polyess/models/constants.dart';
 
 class NFTApi {
-  final url = apiUrl + '/nfts';
-  var data;
-  var contract = '61b5d2a26f91e091b233e4ea';
-  // Future fetchNTFOwner() async {
-  //   final response = await http.get(Uri.parse(url));
+  final url1 = apiUrl + '/nfts';
 
-  //   if (response.statusCode == 200) {
-  //     data = jsonDecode(response.body.toString());
-  //     contract = data[0]["owner"].toString();
-  //     log("$contract");
-  //     return contract;
-  //   } else {
-  //     throw Exception('Failed');
-  //   }
-  // }
+  var data;
+  var response;
+  var contract = '61b5d2a26f91e091b233e4ea';
+  Future getDescription(index) async {
+    final response = await http.get(Uri.parse(url1));
+
+    if (response.statusCode == 200) {
+      data = jsonDecode(response.body.toString());
+      return (" ${data[index]["description"].toString()}");
+    } else {
+      throw Exception('Failed');
+    }
+  }
+
+  Future getName(index) async {
+    final response = await http.get(Uri.parse(url1));
+
+    if (response.statusCode == 200) {
+      data = jsonDecode(response.body.toString());
+      return (" ${data[index]["name"].toString()}");
+    } else {
+      throw Exception('Failed');
+    }
+  }
+
+  Future getRank(index) async {
+    final response = await http.get(Uri.parse(url1));
+
+    if (response.statusCode == 200) {
+      data = jsonDecode(response.body.toString());
+      return (" ${data[index]["attributes"]["rank"].toString()}");
+    } else {
+      throw Exception('Failed');
+    }
+  }
+
+  Future getCountry(index) async {
+    final response = await http.get(Uri.parse(url1));
+
+    if (response.statusCode == 200) {
+      data = jsonDecode(response.body.toString());
+      return (" ${data[index]["attributes"]["country "].toString()}");
+    } else {
+      throw Exception('Failed');
+    }
+  }
 
   validBuy(String person) {
     if (person == contract) {
@@ -31,4 +64,11 @@ class NFTApi {
       return false;
     }
   }
+
+//   Future<String> getDesciption(index) async {
+//     response = await http.get(Uri.parse("${url2}+index"));
+//     data = jsonDecode(response.toString());
+//     return data[0];
+//   }
+// }
 }
