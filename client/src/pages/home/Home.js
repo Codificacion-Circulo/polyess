@@ -26,11 +26,11 @@ function Home(props) {
         <div className="container homeContainer">
           <div className="d-flex homeContent">
             <div className="homeContentHeading">
-              <h1>
-                <span>Live to play</span>
-              </h1>
+              <h2>
+                <span>Got Chess? Got Blockchain?</span>
+              </h2>
               <h4 className="text-light mt-3">
-                First Play to earn Decentralised Chess site{" "}
+                Here comes Polyess{" "}
               </h4>
             </div>
             <div className="homeContentButton">

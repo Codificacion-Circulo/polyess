@@ -22,11 +22,11 @@
   justify-content: center;
 }
 
-.homeContentHeading h1 {
-  font-size: 3rem;
+.homeContentHeading h2 {
+  font-size: 2.2rem;
 }
 
-.homeContentHeading h1 span {
+.homeContentHeading h2 span {
   color: #d1996d;
 }
 
