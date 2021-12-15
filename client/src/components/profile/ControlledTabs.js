@@ -17,25 +17,25 @@ import blue from '../../assets/market/blue.png'
       >
         <Tab eventKey="nft" title="NFT Collection">
           
-<div class="container market-container py-4">
-	<div class="row">
+<div className="container market-container py-4">
+	<div className="row">
 		
     {props.arrayNft&&props.arrayNft.map((data)=>(
-    <div class="col-md">
+    <div className="col-md">
     <Link to={"/market/"+data.assetId}>
    
 
-    <div class="profile-card-6 mx-auto"><img src={data.image} class="img img-responsive"/>
-        <div class="profile-name">{data.name}</div>
-        <div class="profile-overview">
-            <div class="profile-overview">
-                <div class="row text-center">
-                    <div class="col-xs-4">
+    <div className="profile-card-6 mx-auto"><img src={data.image} className="img img-responsive"/>
+        <div className="profile-name">{data.name}</div>
+        <div className="profile-overview">
+            <div className="profile-overview">
+                <div className="row text-center">
+                    <div className="col-xs-4">
                         <h3 className="text-white">{data.attributes.rank}</h3>
                         <p className="text-danger">Rank</p>
                     </div>
                    
-                    <div class="col-xs-4">
+                    <div className="col-xs-4">
                     <h3 className="text-white">{data.attributes.country}</h3>
                         <p className="text-danger">COUNTRY</p>
                     </div>

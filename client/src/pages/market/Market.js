@@ -26,35 +26,35 @@ function Market(props) {
     return (
         <Fragment>
 {loading&&<LoadingSpinner/>}
-             <div class="container text-center">
+             <div className="container text-center">
 
-<div class="logo my-3">
+<div className="logo my-3">
       <h1 style={{color: "#d1996d"}}><b>NFT Marketplace</b></h1>
 </div>
 
 </div>
 
 
-<div class="container">
-  <div class="row">
+<div className="container">
+  <div className="row">
     		
 {nftData&&nftData.map((data)=>(
-    <div class="col-4">
+    <div className="col-4">
 
 <Link to={"/market/"+data.assetId}>
    
 
-    <div class="profile-card-6 mx-auto mb-5"><img src={data.image} class="img img-responsive"/>
-        <div class="profile-name">{data.name}</div>
-        <div class="profile-overview">
-            <div class="profile-overview">
-                <div class="row text-center">
-                    <div class="col-xs-4">
+    <div className="profile-card-6 mx-auto mb-5"><img src={data.image} className="img img-responsive"/>
+        <div className="profile-name">{data.name}</div>
+        <div className="profile-overview">
+            <div className="profile-overview">
+                <div className="row text-center">
+                    <div className="col-xs-4">
                         <h3 className="text-white">{data.attributes.rank}</h3>
                         <p className="text-danger">Rank</p>
                     </div>
                    
-                    <div class="col-xs-4">
+                    <div className="col-xs-4">
                     <h3 className="text-white">{data.attributes.country}</h3>
                         <p className="text-danger">COUNTRY</p>
                     </div>

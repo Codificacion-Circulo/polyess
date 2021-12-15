@@ -72,7 +72,7 @@ const config = {
 const Faqs = (props) => {
   return (
     <div>
-      <div class="logo my-3 text-center" >
+      <div className="logo my-3 text-center" >
         <h1 className="text-center" style={{color: "#d1996d"}}>
           <b>Faqs</b>
         </h1>
