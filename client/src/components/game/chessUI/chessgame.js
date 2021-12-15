@@ -215,7 +215,7 @@ class ChessGame extends React.Component {
                                             <Piece 
                                                 x = {square.getCanvasCoord()[0]}
                                                 y = {square.getCanvasCoord()[1]} 
-                                                imgurls = {piecemap[square.getPiece().name]}
+                                                imgurls = {square.getPiece().name==='king'? (['https://bafybeibjiqatt7wvjlglyljshqcvdnbx5ns54q2hqdopuhyrvuiq2fh5q4.ipfs.dweb.link/1.png','https://bafybeibjiqatt7wvjlglyljshqcvdnbx5ns54q2hqdopuhyrvuiq2fh5q4.ipfs.dweb.link/3.png']) : piecemap[square.getPiece().name]}
                                                 isWhite = {square.getPiece().color === "white"}
                                                 draggedPieceTargetId = {this.state.draggedPieceTargetId}
                                                 onDragStart = {this.startDragging}
