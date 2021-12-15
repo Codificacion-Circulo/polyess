@@ -1178,15 +1178,16 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI, IERC1155Rece
 }
 
 contract polyhess is ERC1155, Ownable {
+
+
      using SafeMath for uint256;
      uint8 winner;
      address _owner;
      uint tokencounter;
      uint maxnft=35;
-     uint NFTPrice=10000; //0.1 eth
-    uint biddingtime = 86400;
+     uint NFTPrice=1000;
+    uint biddingtime = 600;
     mapping (uint256 => string) private _uris;
-
     struct game {
         address P1;
         address P2;
@@ -1326,30 +1327,28 @@ contract polyhess is ERC1155, Ownable {
     address highestbidder;
    }
     mapping (uint => HighestBidder) public bidder;
-
     mapping (uint => bool ) public auctionStart;
     mapping (uint => uint ) public ENDtimeID;
 
-    function cal_Endtime(uint NFTid)public {
-        uint Endtime;
-        if(auctionStart[NFTid]== false) {
-            auctionStart[NFTid] = true;
-             Endtime = block.timestamp+biddingtime;
-             ENDtimeID[NFTid]= Endtime;}
-    }
+
 
     function bid (uint NFTid, uint _amount) public {
         require(NFTid<36,"Enter a valid tokenID");
-         cal_Endtime(NFTid);
-        if(block.timestamp > ENDtimeID[NFTid]){
-            revert("Auction for this NFt has ended");
-        }
+        uint Endtime;
+         if(auctionStart[NFTid]== false) {
+            auctionStart[NFTid] = true;
+            ENDtimeID[NFTid] = block.timestamp+biddingtime;
+            safeTransferFrom(msg.sender, address(this), 0, _amount, "0x00");
+          bidder[NFTid].highestbidder = msg.sender;
+          bidder[NFTid].amount = _amount;}
+         else {
         require(NFTPrice< _amount,"Send more than Minimum price");
-        require(bidder[NFTid].amount<_amount, "Bid of equal amount of Greater already present");
-        safeTransferFrom(address(this), bidder[NFTid].highestbidder, 0, _amount, "0x00");
+        require(bidder[NFTid].amount<_amount, "Bid of equal amount or Greater already present");
+        safeTransferFrom(address(this), bidder[NFTid].highestbidder, 0, bidder[NFTid].amount, "0x00");
+        safeTransferFrom(msg.sender, address(this), 0, _amount, "0x00");
         bidder[NFTid].highestbidder = msg.sender;
         bidder[NFTid].amount = _amount;
-        emit bid_change( NFTid, _amount, msg.sender);
+        emit bid_change( NFTid, _amount, msg.sender);}
     }
     function bidend(uint NFTid) public{
         require(block.timestamp > ENDtimeID[NFTid],"");
