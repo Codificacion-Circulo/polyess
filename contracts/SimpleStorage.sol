@@ -1240,7 +1240,7 @@ contract polyhess is ERC1155, Ownable {
         function uri(uint256 tokenId) override public view returns(string memory){
           return(
             string(abi.encodePacked(
-              "https://bafybeib5pqn7z4l3shxhjh674xg3tvaipba4jev2jegrumytumwwg2fkqe.ipfs.dweb.link/",
+              "bafybeiaadw2y6dk7ojetgllmrg625tjiq2m3wu7xnxkh5en7s4b65kibii.ipfs.dweb.link/",
               uint2str(tokenId),".json"
               ))
 
