@@ -1,5 +1,5 @@
 export const contract_addr="0x89556B67Acfc17DBeB2D140358156c6C926bCc76"
-export const contract_abi= [
+export const contract_abi=[
   {
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -443,6 +443,25 @@ export const contract_abi= [
         "type": "uint256"
       }
     ],
+    "name": "ENDtimeID",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "GameID",
     "outputs": [
       {
@@ -851,13 +870,7 @@ export const contract_abi= [
       }
     ],
     "name": "cal_Endtime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -875,6 +888,19 @@ export const contract_abi= [
       }
     ],
     "name": "bid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "NFTid",
+        "type": "uint256"
+      }
+    ],
+    "name": "bidend",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
