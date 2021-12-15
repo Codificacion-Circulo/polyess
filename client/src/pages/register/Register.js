@@ -16,8 +16,8 @@ const Register = ({ history }) => {
   const ctx = useContext(AuthContext)
 
   var data = JSON.stringify({
-    "address": "0x596F08aDAa76889161A98c9Bb79869e7f9518C74",
-    "username": "test5"
+    "address": account,
+    "username": username
   });
   
   var config = {
