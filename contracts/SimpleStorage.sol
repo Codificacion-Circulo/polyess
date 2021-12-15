@@ -1183,7 +1183,7 @@ contract polyhess is ERC1155, Ownable {
      address _owner;
      uint tokencounter;
      uint maxnft=35;
-     uint NFTPrice=100000; //0.1 eth
+     uint NFTPrice=10000; //0.1 eth
     uint biddingtime = 86400;
     mapping (uint256 => string) private _uris;
 
@@ -1306,14 +1306,14 @@ contract polyhess is ERC1155, Ownable {
     // Functions
       // To buy tokens from ethereum
     function buy_hess()public payable{
-        uint amt = SafeMath.div(msg.value,100000000000000);
+        uint amt = SafeMath.div(msg.value,1000000000000);
         safeTransferFrom(address(this), msg.sender, 0, amt, "" );
         emit Hess_Buy(amt, msg.sender);
       }
       // To exchange tokens from ethereum
 
     function exchange_eth(uint hesstoken)public payable{
-        require(hesstoken > 99999, " Not sufficient hesstoken sent" );
+        require(hesstoken > 9999, " Not sufficient hesstoken sent" );
         safeTransferFrom(msg.sender, address(this), 0, hesstoken, "" );
         uint amt = SafeMath.mul(SafeMath.div(hesstoken, 11), 10);
 
@@ -1328,29 +1328,33 @@ contract polyhess is ERC1155, Ownable {
     mapping (uint => HighestBidder) public bidder;
 
     mapping (uint => bool ) public auctionStart;
+    mapping (uint => uint ) public ENDtimeID;
 
-    function cal_Endtime(uint NFTid)public returns(uint){
+    function cal_Endtime(uint NFTid)public {
         uint Endtime;
         if(auctionStart[NFTid]== false) {
             auctionStart[NFTid] = true;
-             Endtime = block.timestamp+biddingtime;}
-
-            return Endtime;
+             Endtime = block.timestamp+biddingtime;
+             ENDtimeID[NFTid]= Endtime;}
     }
 
     function bid (uint NFTid, uint _amount) public {
         require(NFTid<36,"Enter a valid tokenID");
-        uint auction_end_time = cal_Endtime(NFTid);
-        if(block.timestamp > auction_end_time){
-            emit NFTowner( NFTid ,bidder[NFTid].amount,bidder[NFTid].highestbidder );
+         cal_Endtime(NFTid);
+        if(block.timestamp > ENDtimeID[NFTid]){
             revert("Auction for this NFt has ended");
         }
         require(NFTPrice< _amount,"Send more than Minimum price");
         require(bidder[NFTid].amount<_amount, "Bid of equal amount of Greater already present");
-        safeTransferFrom(address(this), msg.sender, 0, _amount, "0x00");
+        safeTransferFrom(address(this), bidder[NFTid].highestbidder, 0, _amount, "0x00");
         bidder[NFTid].highestbidder = msg.sender;
         bidder[NFTid].amount = _amount;
         emit bid_change( NFTid, _amount, msg.sender);
+    }
+    function bidend(uint NFTid) public{
+        require(block.timestamp > ENDtimeID[NFTid],"");
+        safeTransferFrom(address(this), bidder[NFTid].highestbidder, NFTid, 1, "0x00" );
+        emit NFTowner( NFTid ,bidder[NFTid].amount,bidder[NFTid].highestbidder );
     }
 
     function NFT_tran(uint256 tokenId, address _to, address _from, uint amt)public{
