@@ -8,6 +8,7 @@ import nft from "../../assets/homePage/nft.jpeg"
 import AuthContext from '../../store/auth-context';
 import LoadingSpinner from "../../components/misc/LoadingSpinner/LoadingSpinner";
 import { Container, Button, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom"
 
 import "./Home.css";
 
@@ -34,7 +35,7 @@ function Home(props) {
             </div>
             <div className="homeContentButton">
               <button className={"transAll"}>
-                <i className="fas fa-arrow-circle-right"></i> Play Now
+                <Link to="/game" style={{color: "#000", textDecoration: "none"}}><i className="fas fa-arrow-circle-right"></i> Play Now</Link>
               </button>
             </div>
           </div>
