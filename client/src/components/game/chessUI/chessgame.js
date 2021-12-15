@@ -15,7 +15,7 @@ import { ColorContext } from '../../../store/colorcontext' ;
 const socket  = require('../../../integration/connection/socket').socket;
 
 class ChessGame extends React.Component {
-
+    static contextType
     state = {
         gameState: new Game(this.props.color),
         draggedPieceTargetId: "",
@@ -52,6 +52,7 @@ class ChessGame extends React.Component {
 
 
     movePiece = (selectedId, finalPosition, currentGame, isMyMove) => {
+        console.log(finalPosition)
         /**
          * "update" is the connection between the model and the UI. 
          * This could also be an HTTP request and the "update" could be the server response.

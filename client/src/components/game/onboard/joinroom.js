@@ -133,7 +133,7 @@ function JoinRoom(props) {
                 </div>}
                 <button type="submit"
                   className="form-btn form-btn-primary my-1"
-                  disabled={!account||disabled}
+                  disabled={!account}
                   onClick={() => {
                    
                     setDidGetUserName(true)

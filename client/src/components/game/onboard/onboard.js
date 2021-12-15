@@ -166,7 +166,7 @@ function CreateNewGame(props) {
                 </div>}
                 <button type="submit"
                   className="form-btn form-btn-primary my-1"
-                  disabled={!account||disabled}
+                  disabled={!account}
                   onClick={() => {
                     props.didRedirect()
                     props.setUserName(inputName)
