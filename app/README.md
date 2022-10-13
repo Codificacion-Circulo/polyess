@@ -15,5 +15,5 @@ Some features are:-
  📹🕹Video Chat: While playing you can video chat with your opponent which makes it more fun while playing and gives a better experience. 
 And we haven't even talked about the user experience and graphic experience of the website, android.
 
-![img1](https://user-images.githubusercontent.com/71879116/148653662-8ff5a56a-a3ab-4ff4-852f-4f7f156d9d95.jpeg)
-![img2](https://user-images.githubusercontent.com/71879116/148653667-7ecd4be0-255f-4f7a-9631-068fda661e83.jpeg)
+![img1](https://user-images.githubusercontent.com/71879116/148653662-8ff5a56a-a3ab-4ff4-852f-4f7f156d9d95.jpeg=550x300)
+![img2](https://user-images.githubusercontent.com/71879116/148653667-7ecd4be0-255f-4f7a-9631-068fda661e83.jpeg=550x300)
