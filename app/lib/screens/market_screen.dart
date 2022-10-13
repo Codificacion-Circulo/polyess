@@ -1,12 +1,9 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:polyess/models/style.dart';
 import 'wallet_connect.dart';
 import 'package:polyess/services/wallet_service.dart';
-import 'package:polyess/services/web3.dart';
 import 'package:polyess/services/nfts_api.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:async';
 import 'dart:math';
 
 class MarketPlaceScreen extends StatefulWidget {
@@ -20,9 +17,6 @@ const contract = "61b5d2a26f91e091b233e4ea";
 const String _url = 'https://polyess.netlify.app/';
 
 class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
-  // Future<String> getAdd() async {
-  //   return address = await WalletService().getSavedAddr();
-  // }
   void _launchURL() async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
@@ -62,8 +56,6 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                   child: Image.network(
                       "https://gateway.pinata.cloud/ipfs/QmUZHKiAWC3ukMYUxEhRdciMx9v3jguUaQ2UfsTNqxLJNG/${index + 1}.png")),
               onTap: () async {
-                // _launchURL();
-                // log("${await NFTApi().validBuy("61b5d2326f91e091b233e4e7")}");
                 if (await NFTApi().validBuy("61b5d2326f91e091b233e4e7")) {
                 } else {}
                 showModalBottomSheet(
@@ -85,10 +77,7 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                                             backgroundColor:
                                                 MaterialStateProperty.all(
                                                     textColor)),
-                                        onPressed: () {
-                                          // ETHHOME()
-                                          //     .buy_sell(0, , to, amt);
-                                        },
+                                        onPressed: () {},
                                         child: Text(
                                           'Buy',
                                           style: textStyle1,
@@ -133,51 +122,3 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
         ));
   }
 }
-
-// showModalBottomSheet(
-//               backgroundColor: bgColor,
-//               context: context,
-//               builder: (BuildContext context) {
-//                 return Padding(
-//                   padding: const EdgeInsets.all(15.0),
-//                   child: address == contractAddress
-//                       ? Padding(
-//                           padding: const EdgeInsets.all(15.0),
-//                           child: Row(
-//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                             children: [
-//                               ElevatedButton(
-//                                 style: ElevatedButton.styleFrom(
-//                                     shape: RoundedRectangleBorder(
-//                                         borderRadius:
-//                                             BorderRadius.circular(15)),
-//                                     minimumSize: Size(75, 75)),
-//                                 onPressed: () {},
-//                                 child: Text(
-//                                   'Buy',
-//                                   style: textStyle1,
-//                                 ),
-//                               ),
-//                               ElevatedButton(
-//                                 style: ElevatedButton.styleFrom(
-//                                     shape: RoundedRectangleBorder(
-//                                         borderRadius:
-//                                             BorderRadius.circular(15)),
-//                                     minimumSize: Size(75, 75)),
-//                                 onPressed: () {},
-//                                 child: Text('Sell', style: textStyle1),
-//                               ),
-//                             ],
-//                           ),
-//                         )
-                      // : ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //         shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(15)),
-                      //         minimumSize: Size(75, 75)),
-                      //     onPressed: null,
-                      //     child: Text('Owned By Someone', style: textStyle1),
-                      //   ),
-//                 );
-//               },
-//             );

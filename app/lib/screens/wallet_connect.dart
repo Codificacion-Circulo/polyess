@@ -60,10 +60,6 @@ class WalletConnect extends StatelessWidget {
                       fillColor: textColor.withOpacity(0.3),
                       filled: true,
                       focusColor: Colors.transparent,
-                      // enabledBorder: OutlineInputBorder(
-                      //   borderSide: BorderSide(color: Colors.white),
-                      //   borderRadius: BorderRadius.circular(10),
-                      // ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.transparent),

@@ -9,7 +9,7 @@ const contractAddress = "0x7ffd8A206c64759C54A90F3584e50b3A22b674Da";
 late http.Client webClient = http.Client();
 late Web3Client ethclient = Web3Client(
     "https://rinkeby.infura.io/v3/752e6440e05b49e789eddfb9ca3e5c52", webClient);
-final myAdress = "0x15923Daf6ac663991c5E7Ca41f2cFa67efdB1080";
+const myAdress = "0x15923Daf6ac663991c5E7Ca41f2cFa67efdB1080";
 var mydata;
 
 class ETHHOME {

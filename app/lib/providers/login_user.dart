@@ -1,5 +1,4 @@
 import 'package:polyess/models/api/login.dart';
-import 'package:polyess/models/api/users.dart';
 import 'package:polyess/services/login_api.dart';
 
 class LoginApiProvider {
